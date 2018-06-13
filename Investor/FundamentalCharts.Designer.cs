@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WindowsFormsApp1
+namespace Investor
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     partial class FundamentalCharts : System.Windows.Forms.Form
@@ -41,7 +41,7 @@ namespace WindowsFormsApp1
             this.A_EPS = new SoftwareFX.ChartFX.Chart();
             this.A_Stats = new System.Windows.Forms.DataGridView();
             this.A_Exp = new SoftwareFX.ChartFX.Chart();
-            this.Q_PL = new SoftwareFX.ChartFX.Chart();
+            this.Q_PL_Chart = new SoftwareFX.ChartFX.Chart();
             this.Q_Exp = new SoftwareFX.ChartFX.Chart();
             this.Q_EPS = new SoftwareFX.ChartFX.Chart();
             this.Annual_PL = new SoftwareFX.ChartFX.Chart();
@@ -101,26 +101,26 @@ namespace WindowsFormsApp1
             this.A_Exp.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable2});
             // 
-            // Q_PL
+            // Q_PL_Chart
             // 
-            this.Q_PL.AxisY.LabelsFormat.Decimals = 0;
-            this.Q_PL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
-            this.Q_PL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_PL.Location = new System.Drawing.Point(545, 0);
-            this.Q_PL.Margin = new System.Windows.Forms.Padding(0);
-            this.Q_PL.MarkerSize = ((short)(0));
-            this.Q_PL.Name = "Q_PL";
-            this.Q_PL.NSeries = 3;
-            this.Q_PL.NValues = 10;
-            this.Q_PL.RightGap = 7;
-            this.Q_PL.SerLegBox = true;
-            this.Q_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
-            this.Q_PL.SerLegBoxObj.Docked = SoftwareFX.ChartFX.Docked.Bottom;
-            this.Q_PL.Size = new System.Drawing.Size(529, 309);
-            this.Q_PL.TabIndex = 4;
-            this.Q_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            this.Q_PL_Chart.AxisY.LabelsFormat.Decimals = 0;
+            this.Q_PL_Chart.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.Q_PL_Chart.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Q_PL_Chart.Location = new System.Drawing.Point(545, 0);
+            this.Q_PL_Chart.Margin = new System.Windows.Forms.Padding(0);
+            this.Q_PL_Chart.MarkerSize = ((short)(0));
+            this.Q_PL_Chart.Name = "Q_PL";
+            this.Q_PL_Chart.NSeries = 3;
+            this.Q_PL_Chart.NValues = 10;
+            this.Q_PL_Chart.RightGap = 7;
+            this.Q_PL_Chart.SerLegBox = true;
+            this.Q_PL_Chart.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
+            this.Q_PL_Chart.SerLegBoxObj.Docked = SoftwareFX.ChartFX.Docked.Bottom;
+            this.Q_PL_Chart.Size = new System.Drawing.Size(529, 309);
+            this.Q_PL_Chart.TabIndex = 4;
+            this.Q_PL_Chart.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable3});
-            this.Q_PL.TopGap = 8;
+            this.Q_PL_Chart.TopGap = 8;
             // 
             // Q_Exp
             // 
@@ -183,7 +183,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.Annual_PL);
             this.Controls.Add(this.Q_EPS);
             this.Controls.Add(this.Q_Exp);
-            this.Controls.Add(this.Q_PL);
+            this.Controls.Add(this.Q_PL_Chart);
             this.Controls.Add(this.A_Exp);
             this.Controls.Add(this.A_Stats);
             this.Controls.Add(this.A_EPS);
@@ -194,11 +194,11 @@ namespace WindowsFormsApp1
 
         }
         public System.Windows.Forms.DataGridView A_Stats;
-        public SoftwareFX.ChartFX.Chart A_EPS;
-        private SoftwareFX.ChartFX.Chart A_Exp;
-        private SoftwareFX.ChartFX.Chart Q_PL;
+        private SoftwareFX.ChartFX.Chart Q_PL_Chart;
         private SoftwareFX.ChartFX.Chart Q_Exp;
         private SoftwareFX.ChartFX.Chart Q_EPS;
         private SoftwareFX.ChartFX.Chart Annual_PL;
+        private SoftwareFX.ChartFX.Chart A_EPS;
+        private SoftwareFX.ChartFX.Chart A_Exp;
     }
 }
