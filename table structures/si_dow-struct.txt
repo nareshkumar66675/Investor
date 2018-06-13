@@ -1,0 +1,5 @@
+Name	Type	Width	Decimal	NULL	
+dow_code	Character	2	0	FALSE	dow_code varchar(2) not null
+dow_desc	Character	15	0	FALSE	dow_desc varchar(15) not null
+					
+dow_code varchar(2) not null	dow_desc varchar(15) not null				

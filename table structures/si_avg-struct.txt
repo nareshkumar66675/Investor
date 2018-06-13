@@ -1,0 +1,10 @@
+Name	Type	Width	Decimal	NULL		
+field_name	Character	10	0	FALSE	field_name varchar(10) not null	
+average	Numeric	11	2	FALSE	"average decimal(11,2) not null"	
+high	Numeric	11	2	FALSE	"high decimal(11,2) not null"	
+low	Numeric	11	2	FALSE	"low decimal(11,2) not null"	
+sample	Numeric	5	0	FALSE	"sample decimal(5,0) not null"	
+median	Numeric	11	2	FALSE	"median decimal(11,2) not null"	
+stddev	Numeric	11	2	FALSE	"stddev decimal(11,2) not null"	
+						
+field_name varchar(10) not null	"average decimal(11,2) not null"	"high decimal(11,2) not null"	"low decimal(11,2) not null"	"sample decimal(5,0) not null"	"median decimal(11,2) not null"	"stddev decimal(11,2) not null"

@@ -1,0 +1,5 @@
+Name	Type	Width	Decimal	NULL	
+exchg_code	Character	1	0	FALSE	exchg_code varchar(1) not null
+exchg_desc	Character	20	0	FALSE	exchg_desc varchar(20) not null
+					
+exchg_code varchar(1) not null	exchg_desc varchar(20) not null				

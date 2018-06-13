@@ -1,0 +1,32 @@
+Name	Type	Width	Decimal	NULL																								
+company_id	Character	8	0	FALSE	company_id varchar(8) not null																							
+price_y1	Character	14	0	TRUE	price_y1 varchar(14) null																							
+price_y2	Character	14	0	TRUE	price_y2 varchar(14) null																							
+price_y3	Character	14	0	TRUE	price_y3 varchar(14) null																							
+price_y4	Character	14	0	TRUE	price_y4 varchar(14) null																							
+price_y5	Character	14	0	TRUE	price_y5 varchar(14) null																							
+price_y6	Character	14	0	TRUE	price_y6 varchar(14) null																							
+price_y7	Character	14	0	TRUE	price_y7 varchar(14) null																							
+priceh_y1	Character	14	0	TRUE	priceh_y1 varchar(14) null																							
+priceh_y2	Character	14	0	TRUE	priceh_y2 varchar(14) null																							
+priceh_y3	Character	14	0	TRUE	priceh_y3 varchar(14) null																							
+priceh_y4	Character	14	0	TRUE	priceh_y4 varchar(14) null																							
+priceh_y5	Character	14	0	TRUE	priceh_y5 varchar(14) null																							
+priceh_y6	Character	14	0	TRUE	priceh_y6 varchar(14) null																							
+priceh_y7	Character	14	0	TRUE	priceh_y7 varchar(14) null																							
+pricel_y1	Character	14	0	TRUE	pricel_y1 varchar(14) null																							
+pricel_y2	Character	14	0	TRUE	pricel_y2 varchar(14) null																							
+pricel_y3	Character	14	0	TRUE	pricel_y3 varchar(14) null																							
+pricel_y4	Character	14	0	TRUE	pricel_y4 varchar(14) null																							
+pricel_y5	Character	14	0	TRUE	pricel_y5 varchar(14) null																							
+pricel_y6	Character	14	0	TRUE	pricel_y6 varchar(14) null																							
+pricel_y7	Character	14	0	TRUE	pricel_y7 varchar(14) null																							
+pricev_y1	Character	13	0	TRUE	pricev_y1 varchar(13) null																							
+pricev_y2	Character	13	0	TRUE	pricev_y2 varchar(13) null																							
+pricev_y3	Character	13	0	TRUE	pricev_y3 varchar(13) null																							
+pricev_y4	Character	13	0	TRUE	pricev_y4 varchar(13) null																							
+pricev_y5	Character	13	0	TRUE	pricev_y5 varchar(13) null																							
+pricev_y6	Character	13	0	TRUE	pricev_y6 varchar(13) null																							
+pricev_y7	Character	13	0	TRUE	pricev_y7 varchar(13) null																							
+																												
+company_id varchar(8) not null	price_y1 varchar(14) null	price_y2 varchar(14) null	price_y3 varchar(14) null	price_y4 varchar(14) null	price_y5 varchar(14) null	price_y6 varchar(14) null	price_y7 varchar(14) null	priceh_y1 varchar(14) null	priceh_y2 varchar(14) null	priceh_y3 varchar(14) null	priceh_y4 varchar(14) null	priceh_y5 varchar(14) null	priceh_y6 varchar(14) null	priceh_y7 varchar(14) null	pricel_y1 varchar(14) null	pricel_y2 varchar(14) null	pricel_y3 varchar(14) null	pricel_y4 varchar(14) null	pricel_y5 varchar(14) null	pricel_y6 varchar(14) null	pricel_y7 varchar(14) null	pricev_y1 varchar(13) null	pricev_y2 varchar(13) null	pricev_y3 varchar(13) null	pricev_y4 varchar(13) null	pricev_y5 varchar(13) null	pricev_y6 varchar(13) null	pricev_y7 varchar(13) null

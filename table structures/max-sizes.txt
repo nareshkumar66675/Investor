@@ -1,0 +1,5 @@
+max size varchar = 60
+max size date = 8
+max size decimal = 11,2
+max size bit = 1
+max size text = 4

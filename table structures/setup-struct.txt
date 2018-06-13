@@ -1,0 +1,6 @@
+Name	Type	Width	Decimal	NULL	
+monthdate	Date	8	0	FALSE	monthdate date not null
+weekdate	Date	8	0	FALSE	weekdate date not null
+splitdate	Date	8	0	FALSE	splitdate date not null
+					
+monthdate date not null	weekdate date not null	splitdate date not null			

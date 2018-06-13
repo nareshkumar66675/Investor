@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1366D69-1860-465C-8986-B2C8BAECBD60}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>investor_net4._6._1_vs2015.My.MyApplication</StartupObject>
+    <RootNamespace>investor_net4._6._1_vs2015</RootNamespace>
+    <AssemblyName>investor_net4.6.1_vs2015</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>investor_net4.6.1_vs2015.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>investor_net4.6.1_vs2015.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChartFX, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Annotation, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Annotation.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Base, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Borders, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Borders.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.CategBar.Server, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.CategBar.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.CategBar.WinForms, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.CategBar.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Data, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Designer, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Financial.Designer, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Financial.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Financial.Server, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Financial.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Financial.WinForms, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Financial.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Internet, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Internet.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Map.Designer, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Map.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Map.Server, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Map.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Map.WinForms, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Map.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Olap.Server, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Olap.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Olap.WinForms, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Olap.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Polar, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Polar.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Sampler, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Sampler.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Statistical.Designer, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Statistical.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Statistical.Server, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Statistical.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Statistical.WinForms, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Statistical.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Wizard, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Wizard.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Writer.Accessibility, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Writer.Accessibility.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Writer.Flash, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Writer.Flash.dll</HintPath>
+    </Reference>
+    <Reference Include="ChartFX.Writer.SVG, Version=6.2.1342.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\ChartFX.Writer.SVG.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ADOMD, Version=2.7.0.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Chart FX DevStudio\ChartFX for .NET\bin\Interop.ADOMD.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareFX.ZLib.Compressor, Version=6.0.839.0, Culture=neutral, PublicKeyToken=a1878e2052c08dce">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\ChartFX for .NET 6.2\bin\SoftwareFX.ZLib.Compressor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChartForm.designer.vb">
+      <DependentUpon>ChartForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ChartForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FundamentalCharts.designer.vb">
+      <DependentUpon>FundamentalCharts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FundamentalCharts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QueryForm.designer.vb">
+      <DependentUpon>QueryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QueryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChartForm.resx">
+      <DependentUpon>ChartForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FundamentalCharts.resx">
+      <DependentUpon>FundamentalCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryForm.resx">
+      <DependentUpon>QueryForm.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

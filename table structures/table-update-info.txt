@@ -1,0 +1,39 @@
+company-specific tables:
+	si_bsa with lastmod, updated, repno
+	si_bsq with lastmod, updated, repno
+	si_cfa with lastmod, updated, repno
+	si_cfq with lastmod, updated, repno
+	si_ci with lastmod, repno
+	si_date with updated and repno
+	si_ee with qs_date and sq_date
+	si_gr with repno and reg
+	si_isa with lastmod, updated, repno
+	si_isq with lastmod, update, repno
+	si_mlt with repno
+	si_perc
+	si_psd with split_date, price_date, repno, lastmod, updated
+	si_psda
+	si_psdc
+	si_psdd
+	si_psdh
+	si_psdl
+	si_psdv
+	si_rat with repno
+	si_udf
+	si_val with repno
+	
+non-company-specific tables:
+	drps
+	setup
+	si_avg
+	SI_DOW
+	SI_EXCHG
+	si_mgav2
+	si_mgavg
+	SI_MGDSC
+	si_ptyp
+	si_sp
+	si_utyp
+	STDVIEW
+	
+	

@@ -1,0 +1,66 @@
+Name	Type	Width	Decimal	NULL																																																										
+company_id	Character	8	0	FALSE	company_id varchar(8) not null																																																									
+perend_y1	Date	8	0	TRUE	perend_y1 date null																																																									
+perend_y2	Date	8	0	TRUE	perend_y2 date null																																																									
+perend_y3	Date	8	0	TRUE	perend_y3 date null																																																									
+perend_y4	Date	8	0	TRUE	perend_y4 date null																																																									
+perend_y5	Date	8	0	TRUE	perend_y5 date null																																																									
+perend_y6	Date	8	0	TRUE	perend_y6 date null																																																									
+perend_y7	Date	8	0	TRUE	perend_y7 date null																																																									
+perend_q1	Date	8	0	TRUE	perend_q1 date null																																																									
+perend_q2	Date	8	0	TRUE	perend_q2 date null																																																									
+perend_q3	Date	8	0	TRUE	perend_q3 date null																																																									
+perend_q4	Date	8	0	TRUE	perend_q4 date null																																																									
+perend_q5	Date	8	0	TRUE	perend_q5 date null																																																									
+perend_q6	Date	8	0	TRUE	perend_q6 date null																																																									
+perend_q7	Date	8	0	TRUE	perend_q7 date null																																																									
+perend_q8	Date	8	0	TRUE	perend_q8 date null																																																									
+perlen_y1	Character	3	0	TRUE	perlen_y1 varchar(3) null																																																									
+perlen_y2	Character	3	0	TRUE	perlen_y2 varchar(3) null																																																									
+perlen_y3	Character	3	0	TRUE	perlen_y3 varchar(3) null																																																									
+perlen_y4	Character	3	0	TRUE	perlen_y4 varchar(3) null																																																									
+perlen_y5	Character	3	0	TRUE	perlen_y5 varchar(3) null																																																									
+perlen_y6	Character	3	0	TRUE	perlen_y6 varchar(3) null																																																									
+perlen_y7	Character	3	0	TRUE	perlen_y7 varchar(3) null																																																									
+perlen_q1	Character	3	0	TRUE	perlen_q1 varchar(3) null																																																									
+perlen_q2	Character	3	0	TRUE	perlen_q2 varchar(3) null																																																									
+perlen_q3	Character	3	0	TRUE	perlen_q3 varchar(3) null																																																									
+perlen_q4	Character	3	0	TRUE	perlen_q4 varchar(3) null																																																									
+perlen_q5	Character	3	0	TRUE	perlen_q5 varchar(3) null																																																									
+perlen_q6	Character	3	0	TRUE	perlen_q6 varchar(3) null																																																									
+perlen_q7	Character	3	0	TRUE	perlen_q7 varchar(3) null																																																									
+perlen_q8	Character	3	0	TRUE	perlen_q8 varchar(3) null																																																									
+repno	Character	5	0	FALSE	repno varchar(5) not null																																																									
+updated	Logical	1	0	TRUE	updated bit null																																																									
+pertyp_y1	Character	1	0	TRUE	pertyp_y1 varchar(1) null																																																									
+pertyp_y2	Character	1	0	TRUE	pertyp_y2 varchar(1) null																																																									
+pertyp_y3	Character	1	0	TRUE	pertyp_y3 varchar(1) null																																																									
+pertyp_y4	Character	1	0	TRUE	pertyp_y4 varchar(1) null																																																									
+pertyp_y5	Character	1	0	TRUE	pertyp_y5 varchar(1) null																																																									
+pertyp_y6	Character	1	0	TRUE	pertyp_y6 varchar(1) null																																																									
+pertyp_y7	Character	1	0	TRUE	pertyp_y7 varchar(1) null																																																									
+pertyp_q1	Character	1	0	TRUE	pertyp_q1 varchar(1) null																																																									
+pertyp_q2	Character	1	0	TRUE	pertyp_q2 varchar(1) null																																																									
+pertyp_q3	Character	1	0	TRUE	pertyp_q3 varchar(1) null																																																									
+pertyp_q4	Character	1	0	TRUE	pertyp_q4 varchar(1) null																																																									
+pertyp_q5	Character	1	0	TRUE	pertyp_q5 varchar(1) null																																																									
+pertyp_q6	Character	1	0	TRUE	pertyp_q6 varchar(1) null																																																									
+pertyp_q7	Character	1	0	TRUE	pertyp_q7 varchar(1) null																																																									
+pertyp_q8	Character	1	0	TRUE	pertyp_q8 varchar(1) null																																																									
+updtyp_y1	Character	3	0	TRUE	updtyp_y1 varchar(3) null																																																									
+updtyp_y2	Character	3	0	TRUE	updtyp_y2 varchar(3) null																																																									
+updtyp_y3	Character	3	0	TRUE	updtyp_y3 varchar(3) null																																																									
+updtyp_y4	Character	3	0	TRUE	updtyp_y4 varchar(3) null																																																									
+updtyp_y5	Character	3	0	TRUE	updtyp_y5 varchar(3) null																																																									
+updtyp_y6	Character	3	0	TRUE	updtyp_y6 varchar(3) null																																																									
+updtyp_y7	Character	3	0	TRUE	updtyp_y7 varchar(3) null																																																									
+updtyp_q1	Character	3	0	TRUE	updtyp_q1 varchar(3) null																																																									
+updtyp_q2	Character	3	0	TRUE	updtyp_q2 varchar(3) null																																																									
+updtyp_q3	Character	3	0	TRUE	updtyp_q3 varchar(3) null																																																									
+updtyp_q4	Character	3	0	TRUE	updtyp_q4 varchar(3) null																																																									
+updtyp_q5	Character	3	0	TRUE	updtyp_q5 varchar(3) null																																																									
+updtyp_q6	Character	3	0	TRUE	updtyp_q6 varchar(3) null																																																									
+updtyp_q7	Character	3	0	TRUE	updtyp_q7 varchar(3) null																																																									
+updtyp_q8	Character	3	0	TRUE	updtyp_q8 varchar(3) null																																																									
+																																																														
+company_id varchar(8) not null	perend_y1 date null	perend_y2 date null	perend_y3 date null	perend_y4 date null	perend_y5 date null	perend_y6 date null	perend_y7 date null	perend_q1 date null	perend_q2 date null	perend_q3 date null	perend_q4 date null	perend_q5 date null	perend_q6 date null	perend_q7 date null	perend_q8 date null	perlen_y1 varchar(3) null	perlen_y2 varchar(3) null	perlen_y3 varchar(3) null	perlen_y4 varchar(3) null	perlen_y5 varchar(3) null	perlen_y6 varchar(3) null	perlen_y7 varchar(3) null	perlen_q1 varchar(3) null	perlen_q2 varchar(3) null	perlen_q3 varchar(3) null	perlen_q4 varchar(3) null	perlen_q5 varchar(3) null	perlen_q6 varchar(3) null	perlen_q7 varchar(3) null	perlen_q8 varchar(3) null	repno varchar(5) not null	updated bit null	pertyp_y1 varchar(1) null	pertyp_y2 varchar(1) null	pertyp_y3 varchar(1) null	pertyp_y4 varchar(1) null	pertyp_y5 varchar(1) null	pertyp_y6 varchar(1) null	pertyp_y7 varchar(1) null	pertyp_q1 varchar(1) null	pertyp_q2 varchar(1) null	pertyp_q3 varchar(1) null	pertyp_q4 varchar(1) null	pertyp_q5 varchar(1) null	pertyp_q6 varchar(1) null	pertyp_q7 varchar(1) null	pertyp_q8 varchar(1) null	updtyp_y1 varchar(3) null	updtyp_y2 varchar(3) null	updtyp_y3 varchar(3) null	updtyp_y4 varchar(3) null	updtyp_y5 varchar(3) null	updtyp_y6 varchar(3) null	updtyp_y7 varchar(3) null	updtyp_q1 varchar(3) null	updtyp_q2 varchar(3) null	updtyp_q3 varchar(3) null	updtyp_q4 varchar(3) null	updtyp_q5 varchar(3) null	updtyp_q6 varchar(3) null	updtyp_q7 varchar(3) null	updtyp_q8 varchar(3) null

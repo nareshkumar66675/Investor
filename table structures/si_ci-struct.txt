@@ -1,0 +1,27 @@
+Name	Type	Width	Decimal	NULL																			
+company_id	Character	8	0	FALSE	company_id varchar(8) not null																		
+company	Character	30	0	TRUE	company varchar(30) null																		
+ticker	Character	6	0	TRUE	ticker varchar(6) null																		
+exchange	Character	1	0	TRUE	exchange varchar(1) null																		
+street	Character	60	0	TRUE	street varchar(60) null																		
+city	Character	30	0	TRUE	city varchar(30) null																		
+state	Character	2	0	TRUE	state varchar(2) null																		
+zip	Character	10	0	TRUE	zip varchar(10) null																		
+country	Character	20	0	TRUE	country varchar(20) null																		
+phone	Character	14	0	TRUE	phone varchar(14) null																		
+web_addr	Character	60	0	FALSE	web_addr varchar(60) not null																		
+business	Memo	4	0	TRUE	business text null																		
+analyst_fn	Memo	4	0	TRUE	analyst_fn text null																		
+ind_2_dig	Character	3	0	TRUE	ind_2_dig varchar(3) null																		
+ind_3_dig	Character	4	0	TRUE	ind_3_dig varchar(4) null																		
+sic	Character	4	0	TRUE	sic varchar(4) null																		
+drp_avail	Logical	1	0	TRUE	drp_avail bit null																		
+sp	Character	3	0	TRUE	sp varchar(3) null																		
+dow	Character	2	0	TRUE	dow varchar(2) null																		
+adr	Logical	1	0	TRUE	adr bit null																		
+employees	Character	9	0	TRUE	employees varchar(9) null																		
+optionable	Logical	1	0	TRUE	optionable bit null																		
+repno	Character	5	0	FALSE	repno varchar(5) not null																		
+lastmod	Date	8	0	FALSE	lastmod date not null																		
+																							
+company_id varchar(8) not null	company varchar(30) null	ticker varchar(6) null	exchange varchar(1) null	street varchar(60) null	city varchar(30) null	state varchar(2) null	zip varchar(10) null	country varchar(20) null	phone varchar(14) null	web_addr varchar(60) not null	business text null	analyst_fn text null	ind_2_dig varchar(3) null	ind_3_dig varchar(4) null	sic varchar(4) null	drp_avail bit null	sp varchar(3) null	dow varchar(2) null	adr bit null	employees varchar(9) null	optionable bit null	repno varchar(5) not null	lastmod date not null

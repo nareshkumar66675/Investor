@@ -1,0 +1,5 @@
+Name,Type,Width,Decimal,NULL,
+type_code,Character,1,0,FALSE,"""varchar(1) not null"""
+type_descr,Character,6,0,FALSE,"""varchar(6) not null"""
+,,,,,
+"""varchar(1) not null""","""varchar(6) not null""",,,,

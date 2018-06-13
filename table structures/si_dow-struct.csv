@@ -1,0 +1,5 @@
+Name,Type,Width,Decimal,NULL,
+dow_code,Character,2,0,FALSE,"""varchar(2) not null"""
+dow_desc,Character,15,0,FALSE,"""varchar(15) not null"""
+,,,,,
+"""varchar(2) not null""","""varchar(15) not null""",,,,

@@ -1,0 +1,5 @@
+Name,Type,Width,Decimal,NULL,
+mg_code,Character,4,0,FALSE,"""varchar(4) not null"""
+mg_desc,Character,40,0,FALSE,"""varchar(40) not null"""
+,,,,,
+"""varchar(4) not null""","""varchar(40) not null""",,,,

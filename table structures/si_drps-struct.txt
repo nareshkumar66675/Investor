@@ -1,0 +1,21 @@
+Name	Type	Width	Decimal	NULL													
+ticker	Character	6	0	FALSE	ticker varchar(6) not null												
+phone	Character	25	0	FALSE	phone varchar(25) not null												
+drp	Logical	1	0	FALSE	drp bit not null												
+partopt	Logical	1	0	FALSE	partopt bit not null												
+cashopt	Logical	1	0	FALSE	cashopt bit not null												
+caplusopt	Logical	1	0	FALSE	caplusopt bit not null												
+direct	Logical	1	0	FALSE	direct bit not null												
+directmin	Character	50	0	FALSE	directmin varchar(50) not null												
+cash	Logical	1	0	FALSE	cash bit not null												
+cashfreq	Character	40	0	FALSE	cashfreq varchar(40) not null												
+cashmax	Character	20	0	FALSE	cashmax varchar(20) not null												
+cashmin	Character	20	0	FALSE	cashmin varchar(20) not null												
+broker	Logical	1	0	FALSE	broker bit not null												
+servchrg	Logical	1	0	FALSE	servchrg bit not null												
+discount	Logical	1	0	FALSE	discount bit not null												
+phoneagent	Logical	1	0	FALSE	phoneagent bit not null												
+invest	Logical	1	0	FALSE	invest bit not null												
+qualify	Character	40	0	FALSE	qualify varchar(40) not null												
+																	
+ticker varchar(6) not null	phone varchar(25) not null	drp bit not null	partopt bit not null	cashopt bit not null	caplusopt bit not null	direct bit not null	directmin varchar(50) not null	cash bit not null	cashfreq varchar(40) not null	cashmax varchar(20) not null	cashmin varchar(20) not null	broker bit not null	servchrg bit not null	discount bit not null	phoneagent bit not null	invest bit not null	qualify varchar(40) not null

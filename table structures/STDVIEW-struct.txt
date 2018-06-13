@@ -1,0 +1,6 @@
+Name	Type	Width	Decimal	NULL	
+rptid	Numeric	5	0	FALSE	"rptid decimal(5,0) not null"
+fld_order	Numeric	3	0	FALSE	"fld_order decimal(3,0) not null"
+field_name	Character	19	0	FALSE	field_name varchar(19) not null
+					
+"rptid decimal(5,0) not null"	"fld_order decimal(3,0) not null"	field_name varchar(19) not null			

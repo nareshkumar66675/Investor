@@ -1,0 +1,6 @@
+Name	Type	Width	Decimal	NULL	
+type_code	Character	3	0	FALSE	type_code varchar(3) not null
+type_descr	Character	25	0	FALSE	type_descr varchar(25) not null
+type_short	Character	25	0	FALSE	type_short varchar(25) not null
+					
+type_code varchar(3) not null	type_descr varchar(25) not null	type_short varchar(25) not null			

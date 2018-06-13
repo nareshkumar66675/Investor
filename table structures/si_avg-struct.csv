@@ -1,0 +1,10 @@
+Name,Type,Width,Decimal,NULL,,
+field_name,Character,10,0,FALSE,"""varchar(10) not null""",
+average,Numeric,11,2,FALSE,"""decimal(11,2) not null""",
+high,Numeric,11,2,FALSE,"""decimal(11,2) not null""",
+low,Numeric,11,2,FALSE,"""decimal(11,2) not null""",
+sample,Numeric,5,0,FALSE,"""decimal(5,0) not null""",
+median,Numeric,11,2,FALSE,"""decimal(11,2) not null""",
+stddev,Numeric,11,2,FALSE,"""decimal(11,2) not null""",
+,,,,,,
+"""varchar(10) not null""","""decimal(11,2) not null""","""decimal(11,2) not null""","""decimal(11,2) not null""","""decimal(5,0) not null""","""decimal(11,2) not null""","""decimal(11,2) not null"""

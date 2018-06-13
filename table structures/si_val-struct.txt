@@ -1,0 +1,31 @@
+Name	Type	Width	Decimal	NULL																							
+company_id	Character	8	0	TRUE	company_id varchar(8) null																						
+sps_val	Character	8	0	TRUE	sps_val varchar(8) null																						
+eps_val	Character	8	0	TRUE	eps_val varchar(8) null																						
+cfps_val	Character	8	0	TRUE	cfps_val varchar(8) null																						
+fcfps_val	Character	8	0	TRUE	fcfps_val varchar(8) null																						
+dps_val	Character	8	0	TRUE	dps_val varchar(8) null																						
+pspsa_val	Character	8	0	TRUE	pspsa_val varchar(8) null																						
+pea_val	Character	8	0	TRUE	pea_val varchar(8) null																						
+pcfpsa_val	Character	8	0	TRUE	pcfpsa_val varchar(8) null																						
+pfcpsa_val	Character	8	0	TRUE	pfcpsa_val varchar(8) null																						
+yielda_val	Character	8	0	TRUE	yielda_val varchar(8) null																						
+eps_eval	Character	8	0	TRUE	eps_eval varchar(8) null																						
+pea_eval	Character	8	0	TRUE	pea_eval varchar(8) null																						
+bpg_eps	Character	6	0	TRUE	bpg_eps varchar(6) null																						
+bpg_sus	Character	6	0	TRUE	bpg_sus varchar(6) null																						
+iw_ee	Character	8	0	TRUE	iw_ee varchar(8) null																						
+iw_eph	Character	9	0	TRUE	iw_eph varchar(9) null																						
+iw_epl	Character	9	0	TRUE	iw_epl varchar(9) null																						
+iw_pbuy	Character	9	0	TRUE	iw_pbuy varchar(9) null																						
+iw_plh	Character	9	0	TRUE	iw_plh varchar(9) null																						
+iw_tr	Character	8	0	TRUE	iw_tr varchar(8) null																						
+iw_par	Character	8	0	TRUE	iw_par varchar(8) null																						
+r1grth	Character	8	0	TRUE	r1grth varchar(8) null																						
+r1pe	Character	8	0	TRUE	r1pe varchar(8) null																						
+r1ecg10e	Character	11	0	TRUE	r1ecg10e varchar(11) null																						
+r1fmktpr	Character	13	0	TRUE	r1fmktpr varchar(13) null																						
+r1sprice	Character	13	0	TRUE	r1sprice varchar(13) null																						
+repno	Character	5	0	FALSE	repno varchar(5) not null																						
+																											
+company_id varchar(8) null	sps_val varchar(8) null	eps_val varchar(8) null	cfps_val varchar(8) null	fcfps_val varchar(8) null	dps_val varchar(8) null	pspsa_val varchar(8) null	pea_val varchar(8) null	pcfpsa_val varchar(8) null	pfcpsa_val varchar(8) null	yielda_val varchar(8) null	eps_eval varchar(8) null	pea_eval varchar(8) null	bpg_eps varchar(6) null	bpg_sus varchar(6) null	iw_ee varchar(8) null	iw_eph varchar(9) null	iw_epl varchar(9) null	iw_pbuy varchar(9) null	iw_plh varchar(9) null	iw_tr varchar(8) null	iw_par varchar(8) null	r1grth varchar(8) null	r1pe varchar(8) null	r1ecg10e varchar(11) null	r1fmktpr varchar(13) null	r1sprice varchar(13) null	repno varchar(5) not null

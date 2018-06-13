@@ -1,0 +1,5 @@
+Name,Type,Width,Decimal,NULL,
+sp_code,Character,3,0,FALSE,"""varchar(3) not null"""
+sp_desc,Character,20,0,FALSE,"""varchar(20) not null"""
+,,,,,
+"""varchar(3) not null""","""varchar(20) not null""",,,,

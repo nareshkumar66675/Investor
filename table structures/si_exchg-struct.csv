@@ -1,0 +1,5 @@
+Name,Type,Width,Decimal,NULL,
+exchg_code,Character,1,0,FALSE,"""varchar(1) not null"""
+exchg_desc,Character,20,0,FALSE,"""varchar(20) not null"""
+,,,,,
+"""varchar(1) not null""","""varchar(20) not null""",,,,

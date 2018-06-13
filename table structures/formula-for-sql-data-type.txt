@@ -1,0 +1,1 @@
+=CONCAT(A2," ",IF(B2="Numeric",CONCAT("decimal(",C2,",",D2,")"),IF(B2="Character",CONCAT("varchar(",C2,")"),IF(B2="Memo","text",IF(B2="Logical","bit",IF(B2="Date","date",""))))),IF(E2=TRUE," null"," not null"))
