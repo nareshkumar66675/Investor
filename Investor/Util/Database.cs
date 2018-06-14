@@ -13,7 +13,7 @@ namespace Investor.Util
     {
         public static DataTable GetValuesByTicker(string ticker)
         {
-            SqlConnection sqlConn = new SqlConnection(Const.ConnectionString);
+            SqlConnection sqlConn ;
             SqlDataAdapter sqlAdapter;
             DataSet dataSet;
             string qString;
@@ -69,11 +69,28 @@ namespace Investor.Util
                             + " where si_ci.ticker ='"+ticker
                         + "' order by si_ci.ticker";
 
-            sqlAdapter = new SqlDataAdapter(qString, sqlConn);
-            dataSet = new DataSet();
-            sqlAdapter.Fill(dataSet);
+            using (sqlConn = new SqlConnection(Const.ConnectionString))
+            {
+                sqlAdapter = new SqlDataAdapter(qString, sqlConn);
+                dataSet = new DataSet();
+                sqlAdapter.Fill(dataSet);
+            }
 
             return dataSet.Tables[0];
+        }
+
+        public static DataTable GetTickers()
+        {
+            DataSet tickerDS;
+            using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
+            {
+                string tickerQuery = "select LTRIM(RTRIM(ticker)) as ticker from si_ci order by ticker";
+                SqlDataAdapter sqlAdapter = new SqlDataAdapter(tickerQuery, sqlConn);
+                tickerDS = new DataSet();
+                sqlAdapter.Fill(tickerDS);
+            }
+
+            return tickerDS.Tables[0];
         }
     }
 }

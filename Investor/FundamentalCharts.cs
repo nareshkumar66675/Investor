@@ -9,7 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using WindowsFormsApp1;
+using WindowsFormsApp1.Util;
 
 namespace Investor
 {
@@ -17,7 +18,7 @@ namespace Investor
     {
         public const int nYears = 7;
         public const int nQuarters = 8;
-        public SoftwareFX.ChartFX.Chart Q_PL;
+        public Chart Q_PL;
         public FundamentalCharts()
         {
             InitializeComponent();
@@ -68,9 +69,17 @@ namespace Investor
             
         }
 
+        public void SetChartTitle(Chart chart,string title)
+        {
+            chart.Titles.Add(new TitleDockable());
+            chart.Titles[0].Text = title;
+            chart.Titles[0].Font = new Font("Arial", 12);
+            chart.Titles[0].Alignment = StringAlignment.Center;
+        }
+
         public void ShowChart(string ticker)
         {
-            CharttInfo charttinfo = new CharttInfo();
+            ChartInfo charttinfo = new ChartInfo();
             charttinfo.colName = new string[12];
             charttinfo.legend = new string[12];
             charttinfo.rgb = new int[12, 4];
@@ -216,6 +225,7 @@ namespace Investor
             Annual_PL.AxisX.TickMark = TickMark.Outside;
             //FundamentalCharts.Annual_PL.AxisX.LabelAngle = 45
             Annual_PL.MarkerShape = MarkerShape.None;
+            SetChartTitle(Annual_PL, "Annual - PL");
 
             //set annualChart x-axis labels
             for (int i = nYears; i >= 1; i += -1)
@@ -331,7 +341,7 @@ namespace Investor
             Q_PL.AxisY.LabelsFormat.Format = AxisFormat.Currency;
             Q_PL.AxisX.TickMark = TickMark.Outside;
             Q_PL.AxisX.LabelAngle = 45;
-
+            SetChartTitle(Q_PL, "Quarterly - PL");
             //set quarterlyChart x-axis labels
 
             for (int i = nQuarters; i >= 1; i += -1)
@@ -546,6 +556,7 @@ namespace Investor
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
             PlotChart(selectedRows, A_Exp, charttinfo);
+            SetChartTitle(A_Exp, "Annual - Exp");
             A_Exp.CloseData(COD.Values);
 
             //Plot Annual EPS
@@ -596,6 +607,7 @@ namespace Investor
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
             PlotChart(selectedRows, A_EPS, charttinfo);
+            SetChartTitle(A_EPS, "Annual - EPS");
             A_EPS.CloseData(COD.Values);
 
             //Plot Quarterly EPS
@@ -646,12 +658,13 @@ namespace Investor
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
             PlotChart(selectedRows, Q_EPS, charttinfo);
+            SetChartTitle(Q_EPS, "Quarterly - EPS");
             Q_EPS.CloseData(COD.Values);
 
             Q_PL.CloseData(COD.Values);
         }
 
-        private void PlotChart(DataRow[] selectedRows, SoftwareFX.ChartFX.Chart chart, CharttInfo charttinfo)
+        private void PlotChart(DataRow[] selectedRows, SoftwareFX.ChartFX.Chart chart, ChartInfo charttinfo)
         {
             // Dim selectedrows As DataRow
             object item = null;
@@ -659,8 +672,8 @@ namespace Investor
             int iii = 0;
             int j = 0;
 
-            string file_name = @"C:\Naresh\Projects\investor-2015\test.txt";
-            using (System.IO.StreamWriter objwriter = new System.IO.StreamWriter(file_name))
+            //string file_name = @"C:\Naresh\Projects\investor-2015\test.txt";
+            //using (System.IO.StreamWriter objwriter = new System.IO.StreamWriter(file_name))
             {
                 ii = charttinfo.nvalues;
                 iii = charttinfo.nSeries;
@@ -696,14 +709,14 @@ namespace Investor
                         if (((!object.ReferenceEquals(item, DBNull.Value))))
                         {
                             chart.Value[j, 0 + (ii - i)] = Convert.ToDouble(item);
-                            objwriter.Write(item);
+                            //objwriter.Write(item);
                         }
                         else
                         {
                             chart.Value[j, 0 + (ii - i)] = 0; // null;
                         }
                     }
-                    objwriter.Write(Environment.NewLine);
+                    //objwriter.Write(Environment.NewLine);
                     chart.Series[j].LineWidth = 3;
                     chart.Series[j].Color = System.Drawing.Color.FromArgb(charttinfo.rgb[j, 0], charttinfo.rgb[j, 1], charttinfo.rgb[j, 2], charttinfo.rgb[j, 3]);
                     chart.Series[j].Legend = charttinfo.legend[j];
@@ -711,13 +724,6 @@ namespace Investor
             }
 
         }
-        private void Annual_EPS_Load(System.Object sender, System.EventArgs e)
-        {
-        }
 
-        private void A_EPS_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Investor
+﻿namespace WindowsFormsApp1
 {
     partial class MainForm
     {
@@ -300,4 +300,3 @@
         internal System.Windows.Forms.GroupBox updateTableGroup;
     }
 }
-

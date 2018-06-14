@@ -38,6 +38,7 @@ namespace Investor
             SoftwareFX.ChartFX.TitleDockable titleDockable4 = new SoftwareFX.ChartFX.TitleDockable();
             SoftwareFX.ChartFX.TitleDockable titleDockable5 = new SoftwareFX.ChartFX.TitleDockable();
             SoftwareFX.ChartFX.TitleDockable titleDockable6 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable7 = new SoftwareFX.ChartFX.TitleDockable();
             this.A_EPS = new SoftwareFX.ChartFX.Chart();
             this.A_Stats = new System.Windows.Forms.DataGridView();
             this.A_Exp = new SoftwareFX.ChartFX.Chart();
@@ -45,6 +46,7 @@ namespace Investor
             this.Q_Exp = new SoftwareFX.ChartFX.Chart();
             this.Q_EPS = new SoftwareFX.ChartFX.Chart();
             this.Annual_PL = new SoftwareFX.ChartFX.Chart();
+            this.Q_CF = new SoftwareFX.ChartFX.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.A_Stats)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +77,7 @@ namespace Investor
             this.A_Stats.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.A_Stats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.A_Stats.ColumnHeadersVisible = false;
-            this.A_Stats.Location = new System.Drawing.Point(611, 820);
+            this.A_Stats.Location = new System.Drawing.Point(692, 820);
             this.A_Stats.Name = "A_Stats";
             this.A_Stats.RowHeadersVisible = false;
             this.A_Stats.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -175,11 +177,29 @@ namespace Investor
             this.Annual_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable6});
             // 
+            // Q_CF
+            // 
+            this.Q_CF.AxisY.LabelsFormat.Decimals = 0;
+            this.Q_CF.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.Q_CF.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Q_CF.Location = new System.Drawing.Point(0, 0);
+            this.Q_CF.MarkerSize = ((short)(0));
+            this.Q_CF.Name = "Q_CF";
+            this.Q_CF.NSeries = 3;
+            this.Q_CF.NValues = 10;
+            this.Q_CF.SerLegBox = true;
+            this.Q_CF.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Spread;
+            this.Q_CF.SerLegBoxObj.Docked = SoftwareFX.ChartFX.Docked.Bottom;
+            this.Q_CF.Size = new System.Drawing.Size(542, 306);
+            this.Q_CF.TabIndex = 8;
+            this.Q_CF.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            titleDockable7});
+            // 
             // FundamentalCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 931);
+            this.ClientSize = new System.Drawing.Size(1074, 962);
             this.Controls.Add(this.Annual_PL);
             this.Controls.Add(this.Q_EPS);
             this.Controls.Add(this.Q_Exp);
@@ -200,5 +220,6 @@ namespace Investor
         private SoftwareFX.ChartFX.Chart Annual_PL;
         private SoftwareFX.ChartFX.Chart A_EPS;
         private SoftwareFX.ChartFX.Chart A_Exp;
+        private SoftwareFX.ChartFX.Chart Q_CF;
     }
 }

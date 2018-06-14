@@ -1,8 +1,8 @@
-﻿
+﻿using Investor;
+using Investor.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -12,22 +12,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic.FileIO;
-using SoftwareFX.ChartFX;
-using Investor.Util;
 
-namespace Investor
+namespace WindowsFormsApp1
 {
-    public class CharttInfo
-    {
-        public int nSeries;
-        public int nvalues; // # of values in easch series
-        public string[] colName;
-        public string[] legend;
-        public int[] linewidth;
-        public int[,] rgb;
-        public string perend;
-    }
     public partial class MainForm : Form
     {
         // dbf connection members
@@ -38,14 +25,7 @@ namespace Investor
 
         public const string dbfConnPre = "Provider=vfpoledb.1; Data Source=";
 
-        // sql connection members
-        public string sqlConnStr;
-        public SqlConnection sqlConn;
-        public SqlDataAdapter sqlAdapter;
-        public DataSet dataSet;
-
-        // query constants
-        public const string tickerQuery = "select LTRIM(RTRIM(ticker)) as ticker from si_ci order by ticker";
+        // query constant
 
         // consts
         public const int nYears = 7;
@@ -53,8 +33,8 @@ namespace Investor
         public const int TABLE_NAME_IND = 0;
         public const int PK_NAME_IND = 1;
         public const int COLSPEC_IND = 2;
-
-
+        public string sqlConnStr;
+        public SqlDataAdapter sqlAdapter;
 
         // md5 hash object
         public MD5 md5;
@@ -62,69 +42,12 @@ namespace Investor
         {
             InitializeComponent();
             // initialize sql db connection
-            //sqlConnStr = "Data Source=" + Environment.MachineName + @"\SQLEXPRESS;Initial Catalog=Investor;Integrated Security=True";
-            sqlConnStr = Const.ConnectionString; //string.Format(ConfigurationManager.ConnectionStrings["Investor"].ConnectionString, Environment.MachineName);
-            sqlConn = new SqlConnection(sqlConnStr);
-            try
-            {
-                sqlConn.Open();
-            }
-            catch (Exception ex)
-            {
-                //sqlConnStr = "Server=" + Interaction.InputBox("Enter server name/address:") + "; Database=Investor; User Id=" + Interaction.InputBox("Enter user name:") + "; Password=" + Interaction.InputBox("Enter password:") + ";";
-                //try
-                //{
-                //    sqlConn = new SqlConnection(sqlConnStr);
-                //    sqlConn.Open();
-                //}
-                //catch (InvalidOperationException exc)
-                //{
-                //    Interaction.MsgBox("Unable to connect to given server, please restart the program");
-                //    return;
-                //}
-                //catch (SqlException exc)
-                //{
-                //    Interaction.MsgBox("Entered an invalid password or it needs to be reset. Do this and restart the program.");
-                //    return;
-                //}
-                //catch (Exception exc)
-                //{
-                //    Interaction.MsgBox("Unknown error. Please try again.");
-                //}
-                throw ex;
-            }
+            sqlConnStr = "Data Source=" + Environment.MachineName + @"\SQLEXPRESS;Initial Catalog=Investor;Integrated Security=True";
 
-            // initialize the dbf directory names
-            dbfDirs[0] = dbfDir + @"Static\";
-            dbfDirs[1] = dbfDir + @"Dbfs\";
-
-            // initialize the dbfToTableDict which holds an association between the dbf filename, table name, table primary key name, and SQL types for each column
-            dbfToTableDict = new Dictionary<string, string[]>();
-
-            foreach (var line in System.IO.File.ReadAllLines(@"overallstructure.txt"))
-            {
-                string[] cols = line.Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                dbfToTableDict.Add(cols[0], new List<string>(cols).GetRange(1, cols.Length - 1).ToArray());
-            }
-
-            // initialize md5
-            md5 = MD5.Create();
-
-
-
-            // initialize the ticker combobox with ticker symbols queried from the DB with the sqlAdapter
-            sqlAdapter = new SqlDataAdapter(tickerQuery, sqlConn);
-            DataSet tickerDS;
-            tickerDS = new DataSet();
-            sqlAdapter.Fill(tickerDS);
-
-            tickerComboBox.DataSource = tickerDS.Tables[0];
+            var tickers = Database.GetTickers();
+            tickerComboBox.DataSource = tickers;
             tickerComboBox.ValueMember = "ticker";
             tickerComboBox.DisplayMember = "ticker";
-
-
-            // close sqlconn
-            sqlConn.Close();
         }
 
         private byte[] getHashForRow(DataRow row) // returns the computed hash value for the datarow, returns a 128-bit (16-byte) byte array
@@ -322,66 +245,6 @@ namespace Investor
             fundamentalCharts.ShowChart(tickerComboBox.Text);
 
             fundamentalCharts.Show();
-        }
-        private void PlotChart(DataRow[] selectedRows, SoftwareFX.ChartFX.Chart chart, CharttInfo charttinfo)
-        {
-            // Dim selectedrows As DataRow
-            object item = null;
-            int ii = 0;
-            int iii = 0;
-            int j = 0;
-
-            string file_name = @"C:\Naresh\Projects\investor-2015\test.txt";
-            using (System.IO.StreamWriter objwriter = new System.IO.StreamWriter(file_name))
-            {
-                ii = charttinfo.nvalues;
-                iii = charttinfo.nSeries;
-                j = 1;
-
-                //set x-axis labels
-                for (int i = ii; i >= 1; i += -1)
-                {
-                    item = selectedRows[0][charttinfo.perend + i.ToString()];
-                    if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
-                    {
-                        chart.AxisX.Label[0 + (ii - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
-                    }
-                    else
-                    {
-                        chart.AxisX.Label[0 + (ii - i)] = "";
-                    }
-                }
-                chart.AxisY.LabelsFormat.Format = AxisFormat.Currency;
-                chart.AxisX.TickMark = TickMark.Outside;
-                chart.AxisX.LabelAngle = 0;
-
-
-
-                //charttinfo.nSeries Step -1 'charttinfo.nSeries - 1  ' 2 To 2  '1 To charttinfo.nSeries
-                for (j = 0; j <= (iii - 1); j++)
-                {
-                    //quarterly totextp
-                    for (int i = ii; i >= 1; i += -1)
-                    {
-                        //stringg = charttinfo.colName(j)
-                        item = selectedRows[0][charttinfo.colName[j] + i.ToString()];
-                        if (((!object.ReferenceEquals(item, DBNull.Value))))
-                        {
-                            chart.Value[j, 0 + (ii - i)] = Convert.ToDouble(item);
-                            objwriter.Write(item);
-                        }
-                        else
-                        {
-                            chart.Value[j, 0 + (ii - i)] = 0; // null;
-                        }
-                    }
-                    objwriter.Write(Environment.NewLine);
-                    chart.Series[j].LineWidth = 3;
-                    chart.Series[j].Color = System.Drawing.Color.FromArgb(charttinfo.rgb[j, 0], charttinfo.rgb[j, 1], charttinfo.rgb[j, 2], charttinfo.rgb[j, 3]);
-                    chart.Series[j].Legend = charttinfo.legend[j];
-                }
-            }
-            
         }
 
         private void searchButton_Click(object sender, EventArgs e)
