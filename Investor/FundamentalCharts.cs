@@ -662,6 +662,67 @@ namespace Investor
             Q_EPS.CloseData(COD.Values);
 
             Q_PL.CloseData(COD.Values);
+
+
+            //Plot Quarterly CFL
+            Q_CFL.OpenData(COD.Values, 7, 7);
+            charttinfo.nSeries = 7;
+            charttinfo.nvalues = 7;
+            charttinfo.perend = "perend_Q";
+            charttinfo.colName[0] = "tco_q";
+            charttinfo.colName[1] = "tci_q";
+            charttinfo.colName[2] = "tcf_q";
+            charttinfo.colName[3] = "dep_cf_q";
+            charttinfo.colName[4] = "ce_q";
+            charttinfo.colName[5] = "cfps_q";
+            charttinfo.colName[6] = "fcfps_q";
+            charttinfo.colors.Insert(0, Color.Green);
+            charttinfo.colors.Insert(1, Color.LightGreen);
+            charttinfo.colors.Insert(2, Color.DarkGreen);
+            charttinfo.colors.Insert(3, Color.Red);
+            charttinfo.colors.Insert(4, Color.DarkRed);
+            charttinfo.colors.Insert(5, Color.Blue);
+            charttinfo.colors.Insert(6, Color.DeepSkyBlue);
+            charttinfo.legend[0] = "tco";
+            charttinfo.legend[1] = "tci";
+            charttinfo.legend[2] = "tcf";
+            charttinfo.legend[3] = "dep";
+            charttinfo.legend[4] = "ce";
+            charttinfo.legend[5] = "cfps";
+            charttinfo.legend[6] = "fcfps";
+            PlotChart(selectedRows, Q_CFL, charttinfo);
+            SetChartTitle(Q_CFL, "Quarterly - Cashflow");
+            Q_CFL.CloseData(COD.Values);
+
+            //Plot annual CFL
+            A_CF.OpenData(COD.Values, 7, 7);
+            charttinfo.nSeries = 7;
+            charttinfo.nvalues = 7;
+            charttinfo.perend = "perend_y";
+            charttinfo.colName[0] = "tco_y";
+            charttinfo.colName[1] = "tci_y";
+            charttinfo.colName[2] = "tcf_y";
+            charttinfo.colName[3] = "dep_cf_y";
+            charttinfo.colName[4] = "ce_y";
+            charttinfo.colName[5] = "cfps_y";
+            charttinfo.colName[6] = "fcfps_y";
+            charttinfo.colors.Insert(0, Color.Green);
+            charttinfo.colors.Insert(1, Color.LightGreen);
+            charttinfo.colors.Insert(2, Color.DarkGreen);
+            charttinfo.colors.Insert(3, Color.Red);
+            charttinfo.colors.Insert(4, Color.DarkRed);
+            charttinfo.colors.Insert(5, Color.Blue);
+            charttinfo.colors.Insert(6, Color.DeepSkyBlue);
+            charttinfo.legend[0] = "tco";
+            charttinfo.legend[1] = "tci";
+            charttinfo.legend[2] = "tcf";
+            charttinfo.legend[3] = "dep";
+            charttinfo.legend[4] = "ce";
+            charttinfo.legend[5] = "cfps";
+            charttinfo.legend[6] = "fcfps";
+            PlotChart(selectedRows, A_CF, charttinfo);
+            SetChartTitle(A_CF, "Annual - Cashflow");
+            A_CF.CloseData(COD.Values);
         }
 
         private void PlotChart(DataRow[] selectedRows, Chart chart, ChartInfo charttinfo)
@@ -719,9 +780,22 @@ namespace Investor
                     }
                     //objwriter.Write(Environment.NewLine);
                     chart.Series[j].LineWidth = 3;
+                if (charttinfo.colors.Count<=0)
                     chart.Series[j].Color = System.Drawing.Color.FromArgb(charttinfo.rgb[j, 0], charttinfo.rgb[j, 1], charttinfo.rgb[j, 2], charttinfo.rgb[j, 3]);
+                else
+                    chart.Series[j].Color = charttinfo.colors[j];
                     chart.Series[j].Legend = charttinfo.legend[j];
                 }
+
+            }
+
+        private void A_EPS_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FundamentalCharts_Load(object sender, EventArgs e)
+        {
 
         }
 

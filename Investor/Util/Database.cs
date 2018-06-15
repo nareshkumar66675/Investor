@@ -61,11 +61,14 @@ namespace Investor.Util
                             + "si_isa.intno_y1, si_isa.intno_y2, si_isa.intno_y3, si_isa.intno_y4, si_isa.intno_y5, si_isa.intno_y6, si_isa.intno_y7,"
                             + "si_isa.inctax_y1, si_isa.inctax_y2, si_isa.inctax_y3, si_isa.inctax_y4, si_isa.inctax_y5, si_isa.inctax_y6, si_isa.inctax_y7,"
                             + "si_isa.adjust_y1, si_isa.adjust_y2, si_isa.adjust_y3, si_isa.adjust_y4, si_isa.adjust_y5, si_isa.adjust_y6, si_isa.adjust_y7,"
-                           + "si_isa.xord_y1, si_isa.xord_y2, si_isa.xord_y3, si_isa.xord_y4, si_isa.xord_y5, si_isa.xord_y6, si_isa.xord_y7 "
-                           + "from "
+                            + "si_isa.xord_y1, si_isa.xord_y2, si_isa.xord_y3, si_isa.xord_y4, si_isa.xord_y5, si_isa.xord_y6, si_isa.xord_y7 "
+                            + " ,si_cfq.*,si_cfa.* "
+                            + "from "
                             + "si_ci join si_isq on si_ci.company_id = si_isq.company_id join "
                             + "si_isa on si_isq.company_id = si_isa.company_id join "
                             + "si_date on si_isa.company_id = si_date.company_id "
+                            +"join si_cfq on si_isa.company_id = si_cfq.company_id "
+                            +"join si_cfa on si_isa.company_id = si_cfa.company_id "
                             + " where si_ci.ticker ='"+ticker
                         + "' order by si_ci.ticker";
 
