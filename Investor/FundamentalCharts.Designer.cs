@@ -49,7 +49,7 @@ namespace Investor
             this.Q_EPS = new SoftwareFX.ChartFX.Chart();
             this.A_EPS = new SoftwareFX.ChartFX.Chart();
             this.Annual_PL = new SoftwareFX.ChartFX.Chart();
-            this.Q_PL_Chart = new SoftwareFX.ChartFX.Chart();
+            this.Q_PL = new SoftwareFX.ChartFX.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.A_Stats)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -120,7 +120,7 @@ namespace Investor
             this.tableLayoutPanel1.Controls.Add(this.Annual_PL, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Q_Exp, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.A_Exp, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.Q_PL_Chart, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Q_PL, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -217,26 +217,26 @@ namespace Investor
             this.Annual_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable7});
             // 
-            // Q_PL_Chart
+            // Q_PL
             // 
-            this.Q_PL_Chart.AxisY.LabelsFormat.Decimals = 0;
-            this.Q_PL_Chart.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
-            this.Q_PL_Chart.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_PL_Chart.Location = new System.Drawing.Point(528, 0);
-            this.Q_PL_Chart.Margin = new System.Windows.Forms.Padding(0);
-            this.Q_PL_Chart.MarkerSize = ((short)(0));
-            this.Q_PL_Chart.Name = "Q_PL_Chart";
-            this.Q_PL_Chart.NSeries = 3;
-            this.Q_PL_Chart.NValues = 10;
-            this.Q_PL_Chart.RightGap = 7;
-            this.Q_PL_Chart.SerLegBox = true;
-            this.Q_PL_Chart.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
-            this.Q_PL_Chart.SerLegBoxObj.Docked = SoftwareFX.ChartFX.Docked.Bottom;
-            this.Q_PL_Chart.Size = new System.Drawing.Size(528, 214);
-            this.Q_PL_Chart.TabIndex = 9;
-            this.Q_PL_Chart.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            this.Q_PL.AxisY.LabelsFormat.Decimals = 0;
+            this.Q_PL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.Q_PL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Q_PL.Location = new System.Drawing.Point(528, 0);
+            this.Q_PL.Margin = new System.Windows.Forms.Padding(0);
+            this.Q_PL.MarkerSize = ((short)(0));
+            this.Q_PL.Name = "Q_PL_Chart";
+            this.Q_PL.NSeries = 3;
+            this.Q_PL.NValues = 10;
+            this.Q_PL.RightGap = 7;
+            this.Q_PL.SerLegBox = true;
+            this.Q_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
+            this.Q_PL.SerLegBoxObj.Docked = SoftwareFX.ChartFX.Docked.Bottom;
+            this.Q_PL.Size = new System.Drawing.Size(528, 214);
+            this.Q_PL.TabIndex = 9;
+            this.Q_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable8});
-            this.Q_PL_Chart.TopGap = 8;
+            this.Q_PL.TopGap = 8;
             // 
             // FundamentalCharts
             // 
@@ -247,7 +247,6 @@ namespace Investor
             this.Controls.Add(this.A_Stats);
             this.Name = "FundamentalCharts";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.FundamentalCharts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.A_Stats)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -258,7 +257,7 @@ namespace Investor
         private SoftwareFX.ChartFX.Chart A_Exp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private SoftwareFX.ChartFX.Chart Annual_PL;
-        private SoftwareFX.ChartFX.Chart Q_PL_Chart;
+        private SoftwareFX.ChartFX.Chart Q_PL;
         private SoftwareFX.ChartFX.Chart A_EPS;
         private SoftwareFX.ChartFX.Chart Q_EPS;
         private SoftwareFX.ChartFX.Chart Q_CFL;

@@ -18,12 +18,9 @@ namespace Investor
     {
         public const int nYears = 7;
         public const int nQuarters = 8;
-        public Chart Q_PL;
         public FundamentalCharts()
         {
             InitializeComponent();
-            this.Q_PL = Q_PL_Chart;
-            //Me.ReportViewer1.RefreshReport()
             DataTable dt = new DataTable();
             DataRow dr = null;
             string[,] info = new string[5, 3];
@@ -87,7 +84,6 @@ namespace Investor
             var dataTable = Database.GetValuesByTicker(ticker);
 
             //create the chartview form
-            //var FundamentalCharts = new FundamentalCharts();
             //populate charts with data from the dataset
             DataRow[] selectedRows = null;
             //array of rows which will hold the row(s) selected
@@ -95,348 +91,15 @@ namespace Investor
             object item = null;
 
             //get the dataset row with the given ticker
-            selectedRows = dataTable.Select(); //dataSet.Tables[0].Select("ticker = '" + tickerComboBox.Text + "'");
+            selectedRows = dataTable.Select();
 
             //   Start ChartForm ------------------------------------------------------------------------------------
-            ////goto EndChartForm;mmcmc
-            //    ChartForm chartForm = new ChartForm();
-
-            //    chartForm.quarterlyChart.OpenData(COD.Values, 5, nYears);
-            //    //set annual sales chart properties
-            //    chartForm.quarterlyChart.Series[0].Legend = "Sales";
-            //    chartForm.quarterlyChart.Series[1].Legend = "CGS";
-            //    chartForm.quarterlyChart.Series[2].Legend = "TotOpExp";
-            //    chartForm.quarterlyChart.Series[3].Legend = "EBit";
-            //    chartForm.quarterlyChart.Series[4].Legend = "NetInc";
-            //    chartForm.quarterlyChart.AxisY.LabelsFormat.Format = AxisFormat.Currency;
-            //    chartForm.quarterlyChart.AxisX.TickMark = TickMark.Outside;
-            //    // 'chartForm.QuarterlyChart.AxisX.LabelAngle = 45
-
-            //    //set annualChart x-axis labels
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["perend_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
-            //        {
-            //            chartForm.quarterlyChart.AxisX.Label[0 + (nYears - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.AxisX.Label[0 + (nYears - i)] = "";
-            //        }
-            //    }
-
-            //    // get sales
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["sales_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //        {
-            //            chartForm.quarterlyChart.Value[0, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //            chartForm.quarterlyChart.Series[0].LineWidth = 3;
-            //            chartForm.quarterlyChart.Series[0].Color = System.Drawing.Color.FromArgb(50, 255, 0, 0);
-            //            chartForm.quarterlyChart.Series[0].LineWidth = 3;
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.Value[0, 0 + (nYears - i)] = 0; //null;
-            //        }
-            //    }
-
-            //    //now get the annual cgs
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["cgs_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //        {
-            //            chartForm.quarterlyChart.Value[1, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //            chartForm.quarterlyChart.Series[1].Color = System.Drawing.Color.Yellow;
-            //            chartForm.quarterlyChart.Series[1].LineWidth = 4;
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.Value[1, 0 + (nYears - i)] = 0;// null;
-            //        }
-            //    }
-
-            //    //next the annual totextp
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["totexp_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //        {
-            //            chartForm.quarterlyChart.Value[2, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //            chartForm.quarterlyChart.Series[2].LineWidth = 5;
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.Value[2, 0 + (nYears - i)] = 0;// null;
-            //        }
-            //    }
-
-            //    //next the Net Income
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["ebit_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //        {
-            //            chartForm.quarterlyChart.Value[3, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //            chartForm.quarterlyChart.Series[3].LineWidth = 6;
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.Value[3, 0 + (nYears - i)] = 0;//; null;
-            //        }
-            //    }
-
-            //    //next the Net Income
-            //    for (int i = nYears; i >= 1; i += -1)
-            //    {
-            //        item = selectedRows[0]["netinc_y" + i.ToString()];
-            //        if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //        {
-            //            chartForm.quarterlyChart.Value[4, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //            chartForm.quarterlyChart.Series[4].LineWidth = 6;
-            //        }
-            //        else
-            //        {
-            //            chartForm.quarterlyChart.Value[4, 0 + (nYears - i)] = 0; //;null;
-            //        }
-            //    }
-            //    chartForm.quarterlyChart.CloseData(COD.Values);
-            //EndChartForm:
-
-            // End ChartForm --------------------------------------------------------------------------------------------
-
-
-            // Start Annual ------------------------------------------------------------------------
-            //Dim FundamentalCharts As New FundamentalCharts
-
-            //Annual_PL.OpenData(COD.Values, 5, nYears);
-
-            ////  goto skipAnnual;
-            ////set annual sales chart properties
-            //Annual_PL.Series[0].Legend = "Sales";
-            //Annual_PL.Series[1].Legend = "CGS";
-            //Annual_PL.Series[2].Legend = "TotOpExp";
-            //Annual_PL.Series[3].Legend = "EBit";
-            //Annual_PL.Series[4].Legend = "NetInc";
-            //Annual_PL.AxisY.LabelsFormat.Format = AxisFormat.Currency;
-            //Annual_PL.AxisX.TickMark = TickMark.Outside;
-            ////FundamentalCharts.Annual_PL.AxisX.LabelAngle = 45
-            //Annual_PL.MarkerShape = MarkerShape.None;
-            SetChartTitle(Annual_PL, "Annual - PL");
-
-            ////set annualChart x-axis labels
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["perend_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
-            //    {
-            //        Annual_PL.AxisX.Label[0 + (nYears - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.AxisX.Label[0 + (nYears - i)] = "";
-            //    }
-            //}
-
-            //// get sales
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["sales_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Annual_PL.Value[0, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //        Annual_PL.Series[0].LineWidth = 3;
-            //        Annual_PL.Series[0].Color = System.Drawing.Color.FromArgb(50, 255, 0, 0);
-            //        Annual_PL.Series[0].LineWidth = 3;
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.Value[0, 0 + (nYears - i)] = 0; // null;
-            //    }
-            //}
-
-            ////now get the annual cgs
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["cgs_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Annual_PL.Value[1, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //        Annual_PL.Series[1].Color = System.Drawing.Color.Yellow;
-            //        Annual_PL.Series[1].LineWidth = 4;
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.Value[1, 0 + (nYears - i)] = 0; // null;
-            //    }
-            //}
-
-            ////next the annual totextp
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["totexp_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Annual_PL.Value[2, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //        Annual_PL.Series[2].LineWidth = 5;
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.Value[2, 0 + (nYears - i)] = 0; // null;
-            //    }
-            //}
-
-            ////next the Net Income
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["ebit_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Annual_PL.Value[3, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //        Annual_PL.Series[3].LineWidth = 6;
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.Value[3, 0 + (nYears - i)] = 0; // null;
-            //    }
-            //}
-
-            ////next the Net Income
-            //for (int i = nYears; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["netinc_y" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Annual_PL.Value[4, 0 + (nYears - i)] = Convert.ToDouble(item);
-            //        Annual_PL.Series[4].LineWidth = 6;
-            //    }
-            //    else
-            //    {
-            //        Annual_PL.Value[4, 0 + (nYears - i)] = 0; // null;
-            //    }
-            //}
-            //Annual_PL.CloseData(COD.Values);
-            ////skipAnnual:
-
-
-            ////End Annual ------------------------------------------------------------------------------------------------
-
-
-
-            ////Now start Quarterly Charts --------------------------------------------------------------------------------
-            //Q_PL.OpenData(COD.Values, 5, nQuarters);
-
-            ////goto skipp;
-
-            ////quarterly chart properties
-            //Q_PL.Series[0].Legend = "Sales";
-            //Q_PL.Series[1].Legend = "CGS";
-            //Q_PL.Series[2].Legend = "Totexp";
-            //Q_PL.Series[3].Legend = "ebit";
-            //Q_PL.Series[4].Legend = "netinc";
-
-            //Q_PL.AxisY.LabelsFormat.Format = AxisFormat.Currency;
-            //Q_PL.AxisX.TickMark = TickMark.Outside;
-            //Q_PL.AxisX.LabelAngle = 45;
-            SetChartTitle(Q_PL, "Quarterly - PL");
-            ////set quarterlyChart x-axis labels
-
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["perend_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value)) && (i % 2 == 0)))
-            //    {
-            //        Q_PL.AxisX.Label[0 + (nQuarters - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yyyy");
-            //    }
-            //    else
-            //    {
-            //        Q_PL.AxisX.Label[0 + (nQuarters - i)] = "";
-            //    }
-            //}
-
-            ////quarterly sales
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["sales_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Q_PL.Value[0, 0 + (nQuarters - i)] = Convert.ToDouble(item);
-            //    }
-            //    else
-            //    {
-            //        Q_PL.Value[0, 0 + (nQuarters - i)] = 0; // null;
-            //    }
-            //}
-
-            ////quarterly cgs
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["cgs_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Q_PL.Value[1, 0 + (nQuarters - i)] = Convert.ToDouble(item);
-            //    }
-            //    else
-            //    {
-            //        Q_PL.Value[1, 0 + (nQuarters - i)] = 0; // null;
-            //    }
-            //}
-
-            ////  quarterly totextp
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["totexp_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Q_PL.Value[2, 0 + (nQuarters - i)] = Convert.ToDouble(item);
-            //    }
-            //    else
-            //    {
-            //        Q_PL.Value[2, 0 + (nQuarters - i)] = 0; // null;
-            //    }
-            //}
-
-            ////  quarterly ebit
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["ebit_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Q_PL.Value[3, 0 + (nQuarters - i)] = Convert.ToDouble(item);
-            //    }
-            //    else
-            //    {
-            //        Q_PL.Value[3, 0 + (nQuarters - i)] = 0; // null;
-            //    }
-            //}
-
-            ////  quarterly netinc
-            //for (int i = nQuarters; i >= 1; i += -1)
-            //{
-            //    item = selectedRows[0]["netinc_q" + i.ToString()];
-            //    if (((!object.ReferenceEquals(item, DBNull.Value))))
-            //    {
-            //        Q_PL.Value[4, 0 + (nQuarters - i)] = Convert.ToDouble(item);
-            //    }
-            //    else
-            //    {
-            //        Q_PL.Value[4, 0 + (nQuarters - i)] = 0; // null;
-            //    }
-            //}
-            //skipp:
-
-            // FundamentalCharts.Q_PL.CloseData(COD.Values)
 
             //set form title and label
             Text = ticker;
-            // FundamentalCharts.tickerLabel.Text = Trim(selectedRows(0).Item("company").ToString()) & " - " & tickerComboBox.Text
 
-            //
-            //goTo temp
             //Plot Quarterly
+            #region Q_PL
             charttinfo.nSeries = 5;
             charttinfo.nvalues = 8;
             charttinfo.perend = "perend_q";
@@ -471,8 +134,11 @@ namespace Investor
             charttinfo.legend[3] = "EBIT";
             charttinfo.legend[4] = "NetInc";
             PlotChart(selectedRows, Q_PL, charttinfo);
-
+            SetChartTitle(Q_PL, "Quarterly - PL");
+            Q_PL.CloseData(COD.Values);
+            #endregion
             //Plot Annual
+            #region A_PL
             charttinfo.nSeries = 5;
             charttinfo.nvalues = 7;
             charttinfo.perend = "perend_y";
@@ -507,12 +173,68 @@ namespace Investor
             charttinfo.legend[3] = "EBIT";
             charttinfo.legend[4] = "NetInc";
             PlotChart(selectedRows, Annual_PL, charttinfo);
-            //temp:
+            SetChartTitle(Annual_PL, "Annual - PL");
+            #endregion
+
             //Plot Annual Expenses
+            #region A_EXP
             A_Exp.OpenData(COD.Values, 10, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
             charttinfo.perend = "perend_y";
+            charttinfo.colName[0] = "eps_y";
+            charttinfo.colName[1] = "epscon_y";
+            charttinfo.colName[2] = "epsd_y";
+            charttinfo.colName[3] = "epsdc_y";
+            charttinfo.colName[4] = "epsnd_y";
+            charttinfo.colName[5] = "dps_y";
+            charttinfo.colName[6] = "dpst_y";
+            charttinfo.rgb[0, 0] = 255;
+            charttinfo.rgb[0, 1] = 4;
+            charttinfo.rgb[0, 2] = 114;
+            charttinfo.rgb[0, 3] = 30;
+            charttinfo.rgb[1, 0] = 50;
+            charttinfo.rgb[1, 1] = 7;
+            charttinfo.rgb[1, 2] = 177;
+            charttinfo.rgb[1, 3] = 47;
+            charttinfo.rgb[2, 0] = 255;
+            charttinfo.rgb[2, 1] = 10;
+            charttinfo.rgb[2, 2] = 246;
+            charttinfo.rgb[2, 3] = 66;
+            charttinfo.rgb[3, 0] = 50;
+            charttinfo.rgb[3, 1] = 59;
+            charttinfo.rgb[3, 2] = 247;
+            charttinfo.rgb[3, 3] = 104;
+            charttinfo.rgb[4, 0] = 255;
+            charttinfo.rgb[4, 1] = 130;
+            charttinfo.rgb[4, 2] = 250;
+            charttinfo.rgb[4, 3] = 159;
+            charttinfo.rgb[5, 0] = 50;
+            charttinfo.rgb[5, 1] = 0;
+            charttinfo.rgb[5, 2] = 0;
+            charttinfo.rgb[5, 3] = 255;
+            charttinfo.rgb[6, 0] = 255;
+            charttinfo.rgb[6, 1] = 48;
+            charttinfo.rgb[6, 2] = 142;
+            charttinfo.rgb[6, 3] = 206;
+            charttinfo.legend[0] = "eps";
+            charttinfo.legend[1] = "epsC";
+            charttinfo.legend[2] = "epsD";
+            charttinfo.legend[3] = "espDC";
+            charttinfo.legend[4] = "espDN";
+            charttinfo.legend[5] = "divT";
+            charttinfo.legend[6] = "divNS";
+            PlotChart(selectedRows, A_Exp, charttinfo);
+            SetChartTitle(A_Exp, "Annual - Expenses");
+            A_Exp.CloseData(COD.Values);
+            #endregion
+
+            //Plot Quarterly Expenses
+            #region Q_EXP
+            Q_Exp.OpenData(COD.Values, 7, 7);
+            charttinfo.nSeries = 7;
+            charttinfo.nvalues = 7;
+            charttinfo.perend = "perend_q";
             charttinfo.colName[0] = "eps_q";
             charttinfo.colName[1] = "epscon_q";
             charttinfo.colName[2] = "epsd_q";
@@ -555,11 +277,13 @@ namespace Investor
             charttinfo.legend[4] = "espDN";
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, A_Exp, charttinfo);
-            SetChartTitle(A_Exp, "Annual - Exp");
-            A_Exp.CloseData(COD.Values);
+            PlotChart(selectedRows, Q_Exp, charttinfo);
+            SetChartTitle(Q_Exp, "Quarterly - Expenses");
+            Q_Exp.CloseData(COD.Values);
+            #endregion
 
             //Plot Annual EPS
+            #region A_EPS
             A_EPS.OpenData(COD.Values, 7, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
@@ -609,8 +333,10 @@ namespace Investor
             PlotChart(selectedRows, A_EPS, charttinfo);
             SetChartTitle(A_EPS, "Annual - EPS");
             A_EPS.CloseData(COD.Values);
+            #endregion
 
             //Plot Quarterly EPS
+            #region Q_EPS
             Q_EPS.OpenData(COD.Values, 7, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
@@ -660,41 +386,10 @@ namespace Investor
             PlotChart(selectedRows, Q_EPS, charttinfo);
             SetChartTitle(Q_EPS, "Quarterly - EPS");
             Q_EPS.CloseData(COD.Values);
-
-            Q_PL.CloseData(COD.Values);
-
-
-            //Plot Quarterly CFL
-            Q_CFL.OpenData(COD.Values, 7, 7);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 7;
-            charttinfo.perend = "perend_Q";
-            charttinfo.colName[0] = "tco_q";
-            charttinfo.colName[1] = "tci_q";
-            charttinfo.colName[2] = "tcf_q";
-            charttinfo.colName[3] = "dep_cf_q";
-            charttinfo.colName[4] = "ce_q";
-            charttinfo.colName[5] = "cfps_q";
-            charttinfo.colName[6] = "fcfps_q";
-            charttinfo.colors.Insert(0, Color.Green);
-            charttinfo.colors.Insert(1, Color.LightGreen);
-            charttinfo.colors.Insert(2, Color.DarkGreen);
-            charttinfo.colors.Insert(3, Color.Red);
-            charttinfo.colors.Insert(4, Color.DarkRed);
-            charttinfo.colors.Insert(5, Color.Blue);
-            charttinfo.colors.Insert(6, Color.DeepSkyBlue);
-            charttinfo.legend[0] = "tco";
-            charttinfo.legend[1] = "tci";
-            charttinfo.legend[2] = "tcf";
-            charttinfo.legend[3] = "dep";
-            charttinfo.legend[4] = "ce";
-            charttinfo.legend[5] = "cfps";
-            charttinfo.legend[6] = "fcfps";
-            PlotChart(selectedRows, Q_CFL, charttinfo);
-            SetChartTitle(Q_CFL, "Quarterly - Cashflow");
-            Q_CFL.CloseData(COD.Values);
+            #endregion
 
             //Plot annual CFL
+            #region A_CF
             A_CF.OpenData(COD.Values, 7, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
@@ -723,18 +418,47 @@ namespace Investor
             PlotChart(selectedRows, A_CF, charttinfo);
             SetChartTitle(A_CF, "Annual - Cashflow");
             A_CF.CloseData(COD.Values);
+            #endregion
+
+            //Plot Quarterly CFL
+            #region Q_CFL
+            Q_CFL.OpenData(COD.Values, 7, 7);
+            charttinfo.nSeries = 7;
+            charttinfo.nvalues = 7;
+            charttinfo.perend = "perend_Q";
+            charttinfo.colName[0] = "tco_q";
+            charttinfo.colName[1] = "tci_q";
+            charttinfo.colName[2] = "tcf_q";
+            charttinfo.colName[3] = "dep_cf_q";
+            charttinfo.colName[4] = "ce_q";
+            charttinfo.colName[5] = "cfps_q";
+            charttinfo.colName[6] = "fcfps_q";
+            charttinfo.colors.Insert(0, Color.Green);
+            charttinfo.colors.Insert(1, Color.LightGreen);
+            charttinfo.colors.Insert(2, Color.DarkGreen);
+            charttinfo.colors.Insert(3, Color.Red);
+            charttinfo.colors.Insert(4, Color.DarkRed);
+            charttinfo.colors.Insert(5, Color.Blue);
+            charttinfo.colors.Insert(6, Color.DeepSkyBlue);
+            charttinfo.legend[0] = "tco";
+            charttinfo.legend[1] = "tci";
+            charttinfo.legend[2] = "tcf";
+            charttinfo.legend[3] = "dep";
+            charttinfo.legend[4] = "ce";
+            charttinfo.legend[5] = "cfps";
+            charttinfo.legend[6] = "fcfps";
+            PlotChart(selectedRows, Q_CFL, charttinfo);
+            SetChartTitle(Q_CFL, "Quarterly - Cashflow");
+            Q_CFL.CloseData(COD.Values); 
+            #endregion
         }
 
         private void PlotChart(DataRow[] selectedRows, Chart chart, ChartInfo charttinfo)
         {
-            // Dim selectedrows As DataRow
             object item = null;
             int ii = 0;
             int iii = 0;
             int j = 0;
-
-            //string file_name = @"C:\Naresh\Projects\investor-2015\test.txt";
-            //using (System.IO.StreamWriter objwriter = new System.IO.StreamWriter(file_name))
             
                 ii = charttinfo.nvalues;
                 iii = charttinfo.nSeries;
@@ -778,26 +502,16 @@ namespace Investor
                         
                         }
                     }
-                    //objwriter.Write(Environment.NewLine);
-                    chart.Series[j].LineWidth = 3;
+                    chart.Series[j].LineWidth = 2;
                 if (charttinfo.colors.Count<=0)
                     chart.Series[j].Color = System.Drawing.Color.FromArgb(charttinfo.rgb[j, 0], charttinfo.rgb[j, 1], charttinfo.rgb[j, 2], charttinfo.rgb[j, 3]);
                 else
                     chart.Series[j].Color = charttinfo.colors[j];
+
                     chart.Series[j].Legend = charttinfo.legend[j];
                 }
 
             }
-
-        private void A_EPS_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FundamentalCharts_Load(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }
