@@ -71,7 +71,7 @@ namespace Investor
         {
             chart.Titles.Add(new TitleDockable());
             chart.Titles[0].Text = title;
-            chart.Titles[0].Font = new Font("Arial", 12);
+            chart.Titles[0].Font = new Font("Arial", 10);
             chart.Titles[0].Alignment = StringAlignment.Center;
         }
 
@@ -404,6 +404,59 @@ namespace Investor
             SetChartTitle(A_Ast, "Annual - asset");
             A_Ast.CloseData(COD.Values);
             #endregion
+
+            //Plot Annual Liability
+            #region A_Liab
+            ChartInfo liabInfo = new ChartInfo();
+            A_Liab.OpenData(COD.Values, 8, 7);
+            liabInfo.nSeries = 8;
+            liabInfo.nvalues = 7;
+            liabInfo.perend = "perend_y";
+            liabInfo.colName[0] = "ap_y";
+            liabInfo.colName[1] = "stdebt_y";
+            liabInfo.colName[2] = "ocl_y";
+            liabInfo.colName[3] = "ltdebt_y";
+            liabInfo.colName[4] = "oltl_y";
+            liabInfo.colName[5] = "pref_y";
+            liabInfo.colName[6] = "retearn_y";
+            liabInfo.colName[7] = "equity_y";
+            liabInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
+            liabInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
+            liabInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dot));
+            liabInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
+            liabInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
+            liabInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
+            liabInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
+            liabInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
+            liabInfo.legend[0] = "accPy";
+            liabInfo.legend[1] = "stDbt";
+            liabInfo.legend[2] = "otCrLi";
+            liabInfo.legend[3] = "ltDbt";
+            liabInfo.legend[4] = "otLtLi";
+            liabInfo.legend[5] = "prefSt";
+            liabInfo.legend[6] = "retEa";
+            liabInfo.legend[7] = "csEq";
+            PlotChart(balanceRows, A_Liab, liabInfo);
+            SetChartTitle(A_Liab, "Annual - Liability");
+            A_Liab.CloseData(COD.Values);
+            #endregion
+
+            //Plot Annual Book Value
+            #region A_Book
+            ChartInfo aBookInfo = new ChartInfo();
+            A_Book.OpenData(COD.Values, 1, 7);
+            aBookInfo.nSeries = 1;
+            aBookInfo.nvalues = 7;
+            aBookInfo.perend = "perend_y";
+            aBookInfo.colName[0] = "bvps_y";
+            aBookInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
+            A_Book.LegendBox = false;
+            PlotChart(balanceRows, A_Book, aBookInfo);
+            SetChartTitle(A_Book, "Annual - Book Value");
+            A_Book.SerLegBox = false;
+            A_Book.CloseData(COD.Values);
+            #endregion
+
         }
 
         private void PlotChart(DataRow[] selectedRows, Chart chart, ChartInfo charttinfo)
@@ -431,6 +484,7 @@ namespace Investor
                         chart.AxisX.Label[0 + (ii - i)] = "";
                     }
                 }
+                chart.AxisY.ForceZero = false;
                 chart.AxisY.LabelsFormat.Format = AxisFormat.Currency;
                 chart.AxisX.TickMark = TickMark.Outside;
                 chart.AxisX.LabelAngle = 0;
