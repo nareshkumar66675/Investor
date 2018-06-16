@@ -19,9 +19,11 @@ namespace Investor
     {
         public const int nYears = 7;
         public const int nQuarters = 8;
+        BackgroundWorker backgroundWorker = new BackgroundWorker();
         public FundamentalCharts()
         {
             InitializeComponent();
+            this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             DataTable dt = new DataTable();
             DataRow dr = null;
             string[,] info = new string[5, 3];
@@ -65,6 +67,11 @@ namespace Investor
             A_Stats.Width = dt.Columns.Count * A_Stats.Columns[0].Width;
             A_Stats.Height = dt.Rows.Count * A_Stats.Rows[0].Height;
             
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetChartTitle(Chart chart,string title)
@@ -400,7 +407,8 @@ namespace Investor
             astInfo.legend[6] = "longInv";
             astInfo.legend[7] = "good";
             astInfo.legend[8] = "longAst";
-            PlotChart(balanceRows, A_Ast, astInfo);
+            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Ast, astInfo));
+            //PlotChart(balanceRows, A_Ast, astInfo);
             SetChartTitle(A_Ast, "Annual - asset");
             A_Ast.CloseData(COD.Values);
             #endregion
@@ -408,8 +416,8 @@ namespace Investor
             //Plot Annual Liability
             #region A_Liab
             ChartInfo liabInfo = new ChartInfo();
-            A_Liab.OpenData(COD.Values, 8, 7);
-            liabInfo.nSeries = 8;
+            A_Liab.OpenData(COD.Values, 5, 7);
+            liabInfo.nSeries = 5;
             liabInfo.nvalues = 7;
             liabInfo.perend = "perend_y";
             liabInfo.colName[0] = "ap_y";
@@ -417,28 +425,56 @@ namespace Investor
             liabInfo.colName[2] = "ocl_y";
             liabInfo.colName[3] = "ltdebt_y";
             liabInfo.colName[4] = "oltl_y";
-            liabInfo.colName[5] = "pref_y";
-            liabInfo.colName[6] = "retearn_y";
-            liabInfo.colName[7] = "equity_y";
+            //liabInfo.colName[5] = "pref_y";
+            //liabInfo.colName[6] = "retearn_y";
+            //liabInfo.colName[7] = "equity_y";
             liabInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
             liabInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
             liabInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dot));
             liabInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
             liabInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
-            liabInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
-            liabInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
-            liabInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
+            //liabInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
+            //liabInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
+            //liabInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
             liabInfo.legend[0] = "accPy";
             liabInfo.legend[1] = "stDbt";
             liabInfo.legend[2] = "otCrLi";
             liabInfo.legend[3] = "ltDbt";
             liabInfo.legend[4] = "otLtLi";
-            liabInfo.legend[5] = "prefSt";
-            liabInfo.legend[6] = "retEa";
-            liabInfo.legend[7] = "csEq";
-            PlotChart(balanceRows, A_Liab, liabInfo);
+            //liabInfo.legend[5] = "prefSt";
+            //liabInfo.legend[6] = "retEa";
+            //liabInfo.legend[7] = "csEq";
+            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Liab, liabInfo));
             SetChartTitle(A_Liab, "Annual - Liability");
             A_Liab.CloseData(COD.Values);
+            #endregion
+
+
+            //Plot Annual Liability
+            #region A_Eqt
+            ChartInfo eqtInfo = new ChartInfo();
+            A_Eqt.OpenData(COD.Values, 4, 7);
+            eqtInfo.nSeries = 4;
+            eqtInfo.nvalues = 7;
+            eqtInfo.perend = "perend_y";
+            eqtInfo.colName[0] = "pref_y";
+            eqtInfo.colName[1] = "retearn_y";
+            eqtInfo.colName[2] = "equity_y"; 
+            eqtInfo.colName[3] = "minor_y";
+            eqtInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
+            eqtInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
+            eqtInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
+            eqtInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
+            //eqtInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
+            //eqtInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
+            //eqtInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
+            eqtInfo.legend[0] = "prefSt";
+            eqtInfo.legend[1] = "retEa";
+            eqtInfo.legend[2] = "csEq";
+            eqtInfo.legend[3] = "minor";
+            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Eqt, eqtInfo));
+            SetChartTitle(A_Eqt, "Annual - Equity");
+            A_Eqt.CloseData(COD.Values);
             #endregion
 
             //Plot Annual Book Value
@@ -451,7 +487,7 @@ namespace Investor
             aBookInfo.colName[0] = "bvps_y";
             aBookInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
             A_Book.LegendBox = false;
-            PlotChart(balanceRows, A_Book, aBookInfo);
+            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Book, aBookInfo));
             SetChartTitle(A_Book, "Annual - Book Value");
             A_Book.SerLegBox = false;
             A_Book.CloseData(COD.Values);
@@ -469,9 +505,9 @@ namespace Investor
                 ii = charttinfo.nvalues;
                 iii = charttinfo.nSeries;
                 j = 1;
-
-                //set x-axis labels
-                for (int i = ii; i >= 1; i += -1)
+            chart.BeginInvoke((MethodInvoker)delegate {
+            //set x-axis labels
+            for (int i = ii; i >= 1; i += -1)
                 {
                     item = selectedRows[0][charttinfo.perend + i.ToString()];
                     if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
@@ -501,7 +537,11 @@ namespace Investor
                         item = selectedRows[0][charttinfo.colName[j] + i.ToString()];
                         if (((!object.ReferenceEquals(item, DBNull.Value))))
                         {
+                            
+                        
+                            // Running on the UI thread
                             chart.Value[j, 0 + (ii - i)] = Convert.ToDouble(item);
+                        
                             //objwriter.Write(item);
                         }
                         else
@@ -515,8 +555,9 @@ namespace Investor
                     chart.Series[j].Legend = charttinfo.legend[j];
 
             }
+            });
 
-            }
+        }
 
         private void A_Stats_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
