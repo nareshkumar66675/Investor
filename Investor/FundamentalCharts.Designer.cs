@@ -33,14 +33,16 @@ namespace Investor
         [System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
         {
+            SoftwareFX.ChartFX.TitleDockable titleDockable1 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable2 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable5 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable6 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable7 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable8 = new SoftwareFX.ChartFX.TitleDockable();
             SoftwareFX.ChartFX.TitleDockable titleDockable9 = new SoftwareFX.ChartFX.TitleDockable();
             SoftwareFX.ChartFX.TitleDockable titleDockable10 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable11 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable12 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable13 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable14 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable15 = new SoftwareFX.ChartFX.TitleDockable();
-            SoftwareFX.ChartFX.TitleDockable titleDockable16 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable4 = new SoftwareFX.ChartFX.TitleDockable();
+            SoftwareFX.ChartFX.TitleDockable titleDockable3 = new SoftwareFX.ChartFX.TitleDockable();
             this.A_Stats = new System.Windows.Forms.DataGridView();
             this.A_Exp = new SoftwareFX.ChartFX.Chart();
             this.Q_Exp = new SoftwareFX.ChartFX.Chart();
@@ -51,6 +53,8 @@ namespace Investor
             this.Q_EPS = new SoftwareFX.ChartFX.Chart();
             this.A_EPS = new SoftwareFX.ChartFX.Chart();
             this.Annual_PL = new SoftwareFX.ChartFX.Chart();
+            this.Q_Ast = new SoftwareFX.ChartFX.Chart();
+            this.A_Ast = new SoftwareFX.ChartFX.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.A_Stats)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -65,38 +69,40 @@ namespace Investor
             this.A_Stats.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.A_Stats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.A_Stats.ColumnHeadersVisible = false;
-            this.A_Stats.Location = new System.Drawing.Point(287, 932);
+            this.A_Stats.Location = new System.Drawing.Point(287, 993);
             this.A_Stats.Name = "A_Stats";
             this.A_Stats.RowHeadersVisible = false;
             this.A_Stats.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.A_Stats.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.A_Stats.Size = new System.Drawing.Size(522, 72);
+            this.A_Stats.Size = new System.Drawing.Size(522, 11);
             this.A_Stats.TabIndex = 2;
+            this.A_Stats.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.A_Stats_CellContentClick);
             // 
             // A_Exp
             // 
             this.A_Exp.AxisY.LabelsFormat.Decimals = 0;
             this.A_Exp.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.A_Exp.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.A_Exp.Location = new System.Drawing.Point(0, 221);
+            this.A_Exp.LineWidth = 2;
+            this.A_Exp.Location = new System.Drawing.Point(0, 261);
             this.A_Exp.Margin = new System.Windows.Forms.Padding(0);
             this.A_Exp.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.A_Exp.Name = "A_Exp";
             this.A_Exp.NSeries = 3;
             this.A_Exp.NValues = 10;
             this.A_Exp.SerLegBox = true;
-            this.A_Exp.Size = new System.Drawing.Size(525, 218);
+            this.A_Exp.Size = new System.Drawing.Size(534, 260);
             this.A_Exp.TabIndex = 3;
-            this.A_Exp.LineWidth = 2;
             this.A_Exp.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable9});
+            titleDockable1});
             // 
             // Q_Exp
             // 
             this.Q_Exp.AxisY.LabelsFormat.Decimals = 0;
             this.Q_Exp.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.Q_Exp.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_Exp.Location = new System.Drawing.Point(528, 221);
+            this.Q_Exp.LineWidth = 2;
+            this.Q_Exp.Location = new System.Drawing.Point(534, 261);
             this.Q_Exp.Margin = new System.Windows.Forms.Padding(0);
             this.Q_Exp.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.Q_Exp.MarkerSize = ((short)(0));
@@ -104,17 +110,19 @@ namespace Investor
             this.Q_Exp.NSeries = 3;
             this.Q_Exp.NValues = 10;
             this.Q_Exp.SerLegBox = true;
-            this.Q_Exp.Size = new System.Drawing.Size(528, 218);
-            this.Q_Exp.LineWidth = 2;
+            this.Q_Exp.Size = new System.Drawing.Size(528, 260);
             this.Q_Exp.TabIndex = 5;
             this.Q_Exp.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable10});
+            titleDockable2});
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoScroll = true;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.A_Ast, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.Q_Ast, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.Q_PL, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.Q_CFL, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.A_CF, 0, 3);
@@ -125,21 +133,22 @@ namespace Investor
             this.tableLayoutPanel1.Controls.Add(this.A_Exp, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.34169F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.65831F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 246F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 236F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1056, 922);
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.62825F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.37175F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 282F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 264F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 395F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1069, 1467);
             this.tableLayoutPanel1.TabIndex = 8;
-            this.tableLayoutPanel1.AutoScroll = true;
             // 
             // Q_PL
             // 
             this.Q_PL.AxisY.LabelsFormat.Decimals = 0;
             this.Q_PL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.Q_PL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_PL.Location = new System.Drawing.Point(528, 0);
+            this.Q_PL.LineWidth = 2;
+            this.Q_PL.Location = new System.Drawing.Point(534, 0);
             this.Q_PL.Margin = new System.Windows.Forms.Padding(0);
             this.Q_PL.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.Q_PL.Name = "Q_PL";
@@ -148,86 +157,86 @@ namespace Investor
             this.Q_PL.RightGap = 7;
             this.Q_PL.SerLegBox = true;
             this.Q_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
-            this.Q_PL.Size = new System.Drawing.Size(528, 221);
+            this.Q_PL.Size = new System.Drawing.Size(517, 261);
             this.Q_PL.TabIndex = 9;
-            this.Q_PL.LineWidth = 2;
             this.Q_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable11});
+            titleDockable5});
             this.Q_PL.TopGap = 8;
             // 
             // Q_CFL
             // 
             this.Q_CFL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.Q_CFL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_CFL.Location = new System.Drawing.Point(528, 685);
+            this.Q_CFL.LineWidth = 2;
+            this.Q_CFL.Location = new System.Drawing.Point(534, 807);
             this.Q_CFL.Margin = new System.Windows.Forms.Padding(0);
             this.Q_CFL.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.Q_CFL.Name = "Q_CFL";
             this.Q_CFL.NSeries = 3;
             this.Q_CFL.NValues = 10;
             this.Q_CFL.SerLegBox = true;
-            this.Q_CFL.Size = new System.Drawing.Size(528, 237);
+            this.Q_CFL.Size = new System.Drawing.Size(528, 260);
             this.Q_CFL.TabIndex = 13;
-            this.Q_CFL.LineWidth = 2;
             this.Q_CFL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable12});
+            titleDockable6});
             // 
             // A_CF
             // 
             this.A_CF.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.A_CF.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.A_CF.Location = new System.Drawing.Point(0, 685);
+            this.A_CF.LineWidth = 2;
+            this.A_CF.Location = new System.Drawing.Point(0, 807);
             this.A_CF.Margin = new System.Windows.Forms.Padding(0);
             this.A_CF.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.A_CF.Name = "A_CF";
             this.A_CF.NSeries = 3;
             this.A_CF.NValues = 10;
             this.A_CF.SerLegBox = true;
-            this.A_CF.Size = new System.Drawing.Size(525, 237);
+            this.A_CF.Size = new System.Drawing.Size(531, 260);
             this.A_CF.TabIndex = 12;
-            this.A_CF.LineWidth = 2;
             this.A_CF.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable13});
+            titleDockable7});
             // 
             // Q_EPS
             // 
             this.Q_EPS.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.Q_EPS.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_EPS.Location = new System.Drawing.Point(528, 439);
+            this.Q_EPS.LineWidth = 2;
+            this.Q_EPS.Location = new System.Drawing.Point(534, 525);
             this.Q_EPS.Margin = new System.Windows.Forms.Padding(0);
             this.Q_EPS.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.Q_EPS.Name = "Q_EPS";
             this.Q_EPS.NSeries = 3;
             this.Q_EPS.NValues = 10;
             this.Q_EPS.SerLegBox = true;
-            this.Q_EPS.Size = new System.Drawing.Size(528, 246);
+            this.Q_EPS.Size = new System.Drawing.Size(528, 280);
             this.Q_EPS.TabIndex = 11;
-            this.Q_EPS.LineWidth = 2;
             this.Q_EPS.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable14});
+            titleDockable8});
             // 
             // A_EPS
             // 
             this.A_EPS.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.A_EPS.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.A_EPS.Location = new System.Drawing.Point(0, 439);
+            this.A_EPS.LineWidth = 2;
+            this.A_EPS.Location = new System.Drawing.Point(0, 525);
             this.A_EPS.Margin = new System.Windows.Forms.Padding(0);
             this.A_EPS.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.A_EPS.Name = "A_EPS";
             this.A_EPS.NSeries = 3;
             this.A_EPS.NValues = 10;
             this.A_EPS.SerLegBox = true;
-            this.A_EPS.Size = new System.Drawing.Size(525, 246);
+            this.A_EPS.Size = new System.Drawing.Size(531, 280);
             this.A_EPS.TabIndex = 10;
-            this.A_EPS.LineWidth = 2;
             this.A_EPS.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable15});
+            titleDockable9});
             // 
             // Annual_PL
             // 
             this.Annual_PL.AxisY.LabelsFormat.Decimals = 0;
             this.Annual_PL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
             this.Annual_PL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Annual_PL.LineWidth = 2;
             this.Annual_PL.Location = new System.Drawing.Point(3, 3);
             this.Annual_PL.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
             this.Annual_PL.Name = "Annual_PL";
@@ -235,16 +244,51 @@ namespace Investor
             this.Annual_PL.NValues = 10;
             this.Annual_PL.SerLegBox = true;
             this.Annual_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Spread;
-            this.Annual_PL.Size = new System.Drawing.Size(522, 215);
+            this.Annual_PL.Size = new System.Drawing.Size(528, 255);
             this.Annual_PL.TabIndex = 8;
-            this.Annual_PL.LineWidth = 2;
             this.Annual_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
-            titleDockable16});
+            titleDockable10});
+            // 
+            // Q_Ast
+            // 
+            this.Q_Ast.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.Q_Ast.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Q_Ast.LineWidth = 2;
+            this.Q_Ast.Location = new System.Drawing.Point(534, 1071);
+            this.Q_Ast.Margin = new System.Windows.Forms.Padding(0);
+            this.Q_Ast.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
+            this.Q_Ast.Name = "Q_Ast";
+            this.Q_Ast.NSeries = 3;
+            this.Q_Ast.NValues = 10;
+            this.Q_Ast.SerLegBox = true;
+            this.Q_Ast.Size = new System.Drawing.Size(531, 387);
+            this.Q_Ast.TabIndex = 14;
+            this.Q_Ast.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            titleDockable4});
+            // 
+            // A_Ast
+            // 
+            this.A_Ast.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.A_Ast.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.A_Ast.LineWidth = 2;
+            this.A_Ast.Location = new System.Drawing.Point(0, 1071);
+            this.A_Ast.Margin = new System.Windows.Forms.Padding(0);
+            this.A_Ast.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
+            this.A_Ast.Name = "A_Ast";
+            this.A_Ast.NSeries = 3;
+            this.A_Ast.NValues = 10;
+            this.A_Ast.SerLegBox = true;
+            this.A_Ast.Size = new System.Drawing.Size(531, 387);
+            this.A_Ast.TabIndex = 15;
+            this.A_Ast.LineWidth = 2;
+            this.A_Ast.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            titleDockable3});
             // 
             // FundamentalCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1074, 1005);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.A_Stats);
@@ -265,5 +309,7 @@ namespace Investor
         private SoftwareFX.ChartFX.Chart Q_EPS;
         private SoftwareFX.ChartFX.Chart Q_CFL;
         private SoftwareFX.ChartFX.Chart A_CF;
+        private Chart Q_Ast;
+        private Chart A_Ast;
     }
 }

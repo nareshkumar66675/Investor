@@ -79,11 +79,21 @@ namespace Investor
         {
             ChartInfo charttinfo = new ChartInfo();
 
-            var dataTable = Database.GetValuesByTicker(ticker);
+            // Gets data from database parallely
+            List<Task<DataTable>> tasks = new List<Task<DataTable>>();
+
+            tasks.Add(Task.Factory.StartNew(function: () => Database.GetValuesByTicker(ticker)));
+            tasks.Add(Task.Factory.StartNew(function: () => Database.GetBalanaceSheet(ticker)));
+
+            Task.WaitAll(tasks.ToArray());
+            var dataTable = tasks[0].Result;
+            var balanceData = tasks[1].Result;
+
 
             //create the chartview form
             //populate charts with data from the dataset
             DataRow[] selectedRows = null;
+            DataRow[] balanceRows = balanceData.Select();
             //array of rows which will hold the row(s) selected
             //to store value of column
 
@@ -227,7 +237,7 @@ namespace Investor
             //Plot Annual EPS
             #region A_EPS
             charttinfo = new ChartInfo();
-            A_Exp.OpenData(COD.Values, 7, 7);
+            A_EPS.OpenData(COD.Values, 7, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
             charttinfo.perend = "perend_y";
@@ -252,9 +262,9 @@ namespace Investor
             charttinfo.legend[4] = "espDN";
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, A_Exp, charttinfo);
-            SetChartTitle(A_Exp, "Annual - Expenses");
-            A_Exp.CloseData(COD.Values);
+            PlotChart(selectedRows, A_EPS, charttinfo);
+            SetChartTitle(A_EPS, "Annual - EPS");
+            A_EPS.CloseData(COD.Values);
             #endregion
 
             //Plot Quarterly EPS
@@ -353,7 +363,46 @@ namespace Investor
             charttinfo.legend[6] = "fcfps";
             PlotChart(selectedRows, Q_CFL, charttinfo);
             SetChartTitle(Q_CFL, "Quarterly - Cashflow");
-            Q_CFL.CloseData(COD.Values); 
+            Q_CFL.CloseData(COD.Values);
+            #endregion
+
+            //Plot Annual Assets
+            #region A_Ast
+            ChartInfo astInfo = new ChartInfo();
+            A_Ast.OpenData(COD.Values, 9, 7);
+            astInfo.nSeries = 9;
+            astInfo.nvalues = 7;
+            astInfo.perend = "perend_y";
+            astInfo.colName[0] = "cash_y";
+            astInfo.colName[1] = "stinv_y";
+            astInfo.colName[2] = "ar_y";
+            astInfo.colName[3] = "inv_y";
+            astInfo.colName[4] = "oca_y";
+            astInfo.colName[5] = "nppe_y";
+            astInfo.colName[6] = "ltinv_y";
+            astInfo.colName[7] = "gwi_y";
+            astInfo.colName[8] = "olta_y";
+            astInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
+            astInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
+            astInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dot));
+            astInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.DashDot));
+            astInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDotDot));
+            astInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
+            astInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#990000"), DashStyle.Dash));
+            astInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
+            astInfo.LineStyles.Insert(8, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
+            astInfo.legend[0] = "cash";
+            astInfo.legend[1] = "stInv";
+            astInfo.legend[2] = "AccRcv";
+            astInfo.legend[3] = "Inv";
+            astInfo.legend[4] = "curAst";
+            astInfo.legend[5] = "nppe";
+            astInfo.legend[6] = "longInv";
+            astInfo.legend[7] = "good";
+            astInfo.legend[8] = "longAst";
+            PlotChart(balanceRows, A_Ast, astInfo);
+            SetChartTitle(A_Ast, "Annual - asset");
+            A_Ast.CloseData(COD.Values);
             #endregion
         }
 
@@ -374,7 +423,8 @@ namespace Investor
                     item = selectedRows[0][charttinfo.perend + i.ToString()];
                     if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
                     {
-                        chart.AxisX.Label[0 + (ii - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
+                    chart.AxisX.Label[0 + (ii - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
+
                     }
                     else
                     {
@@ -413,6 +463,11 @@ namespace Investor
             }
 
             }
+
+        private void A_Stats_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
     }
 }

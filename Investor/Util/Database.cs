@@ -119,6 +119,30 @@ namespace Investor.Util
             return dataSet.Tables[0];
         }
 
+        public static DataTable GetBalanaceSheet(string ticker)
+        {
+            SqlConnection sqlConn;
+            SqlDataAdapter sqlAdapter;
+            DataSet dataSet;
+            string query = $@"select si_ci.company, 
+                    si_ci.ticker, si_date.perend_q1, si_date.perend_q2, si_date.perend_q3, si_date.perend_q4, si_date.perend_q5, si_date.perend_q6, si_date.perend_q7, 
+                    si_date.perend_q8, si_date.perend_y1, si_date.perend_y2, si_date.perend_y3, si_date.perend_y4, si_date.perend_y5, si_date.perend_y6, si_date.perend_y7, 
+                    si_bsa.*,si_bsq.* 
+                    from si_ci 
+                    inner join si_date on si_ci.company_id=si_date.company_id 
+                    inner join si_bsa on si_ci.company_id=si_bsa.company_id 
+                    inner join si_bsq on si_ci.company_id=si_bsq.company_id 
+                    where si_ci.ticker = '{ticker}'";
+            using (sqlConn = new SqlConnection(Const.ConnectionString))
+            {
+                sqlAdapter = new SqlDataAdapter(query, sqlConn);
+                dataSet = new DataSet();
+                sqlAdapter.Fill(dataSet);
+            }
+
+            return dataSet.Tables[0];
+        }
+
         public static DataTable GetTickers()
         {
             DataSet tickerDS;
