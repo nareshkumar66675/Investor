@@ -66,6 +66,20 @@ namespace WindowsFormsApp1
             string fileName;
             string tableName;
 
+
+            // initialize the dbf directory names
+            dbfDirs[0] = dbfDir + @"Static\";
+            dbfDirs[1] = dbfDir + @"Dbfs\";
+
+            // initialize the dbfToTableDict which holds an association between the dbf filename, table name, table primary key name, and SQL types for each column
+            dbfToTableDict = new Dictionary<string, string[]>();
+
+            foreach (var line in System.IO.File.ReadAllLines("overall-structure.txt"))
+            {
+                string[] cols = line.Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                dbfToTableDict.Add(cols[0], new List<string>(cols).GetRange(1, cols.Length - 1).ToArray());
+            }
+
             //Collection threads = new Collection();
 
             // disable buttons

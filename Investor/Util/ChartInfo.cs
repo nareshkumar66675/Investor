@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Util
 {
+    public class LineStyle
+    {
+        public Color LineColor { get; set; }
+        public DashStyle DashStyle { get; set; }
+
+        public LineStyle(Color lineColor, DashStyle dashStyle)
+        {
+            LineColor = lineColor;
+            DashStyle = dashStyle;
+        }
+    }
     public class ChartInfo
     {
         public int nSeries;
@@ -16,11 +28,14 @@ namespace WindowsFormsApp1.Util
         public int[] linewidth;
         public int[,] rgb;
         public string perend;
-        public List<Color> colors;
+        public List<LineStyle> LineStyles { get; set; }
 
         public ChartInfo()
         {
-            this.colors = new List<Color>();
+            colName = new string[12];
+            legend = new string[12];
+            rgb = new int[12, 4];
+            LineStyles = new List<LineStyle>();
         }
     }
 }
