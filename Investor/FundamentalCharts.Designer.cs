@@ -87,6 +87,7 @@ namespace Investor
             this.A_Exp.SerLegBox = true;
             this.A_Exp.Size = new System.Drawing.Size(525, 218);
             this.A_Exp.TabIndex = 3;
+            this.A_Exp.LineWidth = 2;
             this.A_Exp.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable9});
             // 
@@ -104,6 +105,7 @@ namespace Investor
             this.Q_Exp.NValues = 10;
             this.Q_Exp.SerLegBox = true;
             this.Q_Exp.Size = new System.Drawing.Size(528, 218);
+            this.Q_Exp.LineWidth = 2;
             this.Q_Exp.TabIndex = 5;
             this.Q_Exp.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable10});
@@ -130,6 +132,7 @@ namespace Investor
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 236F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1056, 922);
             this.tableLayoutPanel1.TabIndex = 8;
+            this.tableLayoutPanel1.AutoScroll = true;
             // 
             // Q_PL
             // 
@@ -147,6 +150,7 @@ namespace Investor
             this.Q_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Near;
             this.Q_PL.Size = new System.Drawing.Size(528, 221);
             this.Q_PL.TabIndex = 9;
+            this.Q_PL.LineWidth = 2;
             this.Q_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable11});
             this.Q_PL.TopGap = 8;
@@ -164,6 +168,7 @@ namespace Investor
             this.Q_CFL.SerLegBox = true;
             this.Q_CFL.Size = new System.Drawing.Size(528, 237);
             this.Q_CFL.TabIndex = 13;
+            this.Q_CFL.LineWidth = 2;
             this.Q_CFL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable12});
             // 
@@ -180,6 +185,7 @@ namespace Investor
             this.A_CF.SerLegBox = true;
             this.A_CF.Size = new System.Drawing.Size(525, 237);
             this.A_CF.TabIndex = 12;
+            this.A_CF.LineWidth = 2;
             this.A_CF.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable13});
             // 
@@ -196,6 +202,7 @@ namespace Investor
             this.Q_EPS.SerLegBox = true;
             this.Q_EPS.Size = new System.Drawing.Size(528, 246);
             this.Q_EPS.TabIndex = 11;
+            this.Q_EPS.LineWidth = 2;
             this.Q_EPS.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable14});
             // 
@@ -212,6 +219,7 @@ namespace Investor
             this.A_EPS.SerLegBox = true;
             this.A_EPS.Size = new System.Drawing.Size(525, 246);
             this.A_EPS.TabIndex = 10;
+            this.A_EPS.LineWidth = 2;
             this.A_EPS.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable15});
             // 
@@ -229,6 +237,7 @@ namespace Investor
             this.Annual_PL.SerLegBoxObj.Alignment = SoftwareFX.ChartFX.ToolAlignment.Spread;
             this.Annual_PL.Size = new System.Drawing.Size(522, 215);
             this.Annual_PL.TabIndex = 8;
+            this.Annual_PL.LineWidth = 2;
             this.Annual_PL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable16});
             // 
@@ -240,7 +249,7 @@ namespace Investor
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.A_Stats);
             this.Name = "FundamentalCharts";
-            this.Text = "Form1";
+            this.Text = "Investor";
             ((System.ComponentModel.ISupportInitialize)(this.A_Stats)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

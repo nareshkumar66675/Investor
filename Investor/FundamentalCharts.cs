@@ -103,12 +103,12 @@ namespace Investor
             charttinfo.perend = "perend_q";
             charttinfo.colName[0] = "sales_q";
             charttinfo.colName[1] = "cgs_q";
-            charttinfo.colName[2] = "totexp_q";
+            charttinfo.colName[2] = "opexp_q";
             charttinfo.colName[3] = "gopinc_q";
             charttinfo.colName[4] = "ebit_q";
             charttinfo.colName[5] = "nit_q";
             charttinfo.colName[6] = "netinc_q";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green,DashStyle.Solid));
+            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
             charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
             charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
             charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
@@ -135,7 +135,7 @@ namespace Investor
             charttinfo.perend = "perend_y";
             charttinfo.colName[0] = "sales_y";
             charttinfo.colName[1] = "cgs_y";
-            charttinfo.colName[2] = "totexp_y";
+            charttinfo.colName[2] = "opexp_y";
             charttinfo.colName[3] = "gopinc_y";
             charttinfo.colName[4] = "ebit_y";
             charttinfo.colName[5] = "nit_y";
@@ -172,13 +172,13 @@ namespace Investor
             charttinfo.colName[4] = "epsnd_y";
             charttinfo.colName[5] = "dps_y";
             charttinfo.colName[6] = "dpst_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
+            charttinfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Solid));
+            charttinfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dash));
+            charttinfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.Dot));
+            charttinfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDot));
+            charttinfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#60FF7A"), DashStyle.DashDotDot));
+            charttinfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#2F31FD"), DashStyle.Solid));
+            charttinfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#2FC8FD"), DashStyle.Dash));
             charttinfo.legend[0] = "eps";
             charttinfo.legend[1] = "epsC";
             charttinfo.legend[2] = "epsD";
@@ -227,7 +227,7 @@ namespace Investor
             //Plot Annual EPS
             #region A_EPS
             charttinfo = new ChartInfo();
-            A_EPS.OpenData(COD.Values, 7, 7);
+            A_Exp.OpenData(COD.Values, 7, 7);
             charttinfo.nSeries = 7;
             charttinfo.nvalues = 7;
             charttinfo.perend = "perend_y";
@@ -238,13 +238,13 @@ namespace Investor
             charttinfo.colName[4] = "epsnd_y";
             charttinfo.colName[5] = "dps_y";
             charttinfo.colName[6] = "dpst_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
+            charttinfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Solid));
+            charttinfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dash));
+            charttinfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.Dot));
+            charttinfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDot));
+            charttinfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#60FF7A"), DashStyle.DashDotDot));
+            charttinfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#2F31FD"), DashStyle.Solid));
+            charttinfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#2FC8FD"), DashStyle.Dash));
             charttinfo.legend[0] = "eps";
             charttinfo.legend[1] = "epsC";
             charttinfo.legend[2] = "epsD";
@@ -252,9 +252,9 @@ namespace Investor
             charttinfo.legend[4] = "espDN";
             charttinfo.legend[5] = "divT";
             charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, A_EPS, charttinfo);
-            SetChartTitle(A_EPS, "Annual - EPS");
-            A_EPS.CloseData(COD.Values);
+            PlotChart(selectedRows, A_Exp, charttinfo);
+            SetChartTitle(A_Exp, "Annual - Expenses");
+            A_Exp.CloseData(COD.Values);
             #endregion
 
             //Plot Quarterly EPS

@@ -13,7 +13,7 @@ namespace Investor.Util
     {
         public static DataTable GetValuesByTicker(string ticker)
         {
-            SqlConnection sqlConn ;
+            SqlConnection sqlConn;
             SqlDataAdapter sqlAdapter;
             DataSet dataSet;
             string qString;
@@ -82,8 +82,26 @@ namespace Investor.Util
                             + "gopinc_q1,gopinc_q2,gopinc_q3,gopinc_q4,gopinc_q5,gopinc_q6,gopinc_q7,gopinc_q8, "
                             + "nit_q1,nit_q2,nit_q3,nit_q4,nit_q5,nit_q6,nit_q7,nit_q8,"
                             + "gopinc_y1,gopinc_y2,gopinc_y3,gopinc_y4,gopinc_y5,gopinc_y6,gopinc_y7,"
-                            + "nit_y1,nit_y2,nit_y3,nit_y4,nit_y5,nit_y6,nit_y7 "
-                            + "from "
+                            + "nit_y1,nit_y2,nit_y3,nit_y4,nit_y5,nit_y6,nit_y7, "
+                            //PL Operating Expense = Tot Operating Expense - Cost of Goods Sold
+                            //Quartertly
+                            + "CAST(ISNULL(totexp_q1, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q1, 0) AS NUMERIC(22, 2)) as opexp_q1,"
+                            + "CAST(ISNULL(totexp_q2, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q2, 0) AS NUMERIC(22, 2)) as opexp_q2,"
+                            + "CAST(ISNULL(totexp_q3, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q3, 0) AS NUMERIC(22, 2)) as opexp_q3,"
+                            + "CAST(ISNULL(totexp_q4, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q4, 0) AS NUMERIC(22, 2)) as opexp_q4,"
+                            + "CAST(ISNULL(totexp_q5, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q5, 0) AS NUMERIC(22, 2)) as opexp_q5,"
+                            + "CAST(ISNULL(totexp_q6, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q6, 0) AS NUMERIC(22, 2)) as opexp_q6,"
+                            + "CAST(ISNULL(totexp_q7, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q7, 0) AS NUMERIC(22, 2)) as opexp_q7,"
+                            + "CAST(ISNULL(totexp_q8, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_q8, 0) AS NUMERIC(22, 2)) as opexp_q8,"
+                            //Yearly
+                            + "CAST(ISNULL(totexp_y1, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y1, 0) AS NUMERIC(22, 2)) as opexp_y1,"
+                            + "CAST(ISNULL(totexp_y2, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y2, 0) AS NUMERIC(22, 2)) as opexp_y2,"
+                            + "CAST(ISNULL(totexp_y3, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y3, 0) AS NUMERIC(22, 2)) as opexp_y3,"
+                            + "CAST(ISNULL(totexp_y4, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y4, 0) AS NUMERIC(22, 2)) as opexp_y4,"
+                            + "CAST(ISNULL(totexp_y5, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y5, 0) AS NUMERIC(22, 2)) as opexp_y5,"
+                            + "CAST(ISNULL(totexp_y6, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y6, 0) AS NUMERIC(22, 2)) as opexp_y6,"
+                            + "CAST(ISNULL(totexp_y7, 0) AS NUMERIC(22, 2)) - CAST(ISNULL(cgs_y7, 0) AS NUMERIC(22, 2)) as opexp_y7"
+                            + " from "
                             + "si_ci join si_isq on si_ci.company_id = si_isq.company_id join "
                             + "si_isa on si_isq.company_id = si_isa.company_id join "
                             + "si_date on si_isa.company_id = si_date.company_id "
