@@ -376,8 +376,8 @@ namespace Investor
             //Plot Annual Assets
             #region A_Ast
             ChartInfo astInfo = new ChartInfo();
-            A_Ast.OpenData(COD.Values, 9, 7);
-            astInfo.nSeries = 9;
+            A_Ast.OpenData(COD.Values, 5, 7);
+            astInfo.nSeries = 5;
             astInfo.nvalues = 7;
             astInfo.perend = "perend_y";
             astInfo.colName[0] = "cash_y";
@@ -385,32 +385,43 @@ namespace Investor
             astInfo.colName[2] = "ar_y";
             astInfo.colName[3] = "inv_y";
             astInfo.colName[4] = "oca_y";
-            astInfo.colName[5] = "nppe_y";
-            astInfo.colName[6] = "ltinv_y";
-            astInfo.colName[7] = "gwi_y";
-            astInfo.colName[8] = "olta_y";
-            astInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
-            astInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
-            astInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dot));
-            astInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.DashDot));
-            astInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDotDot));
-            astInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
-            astInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#990000"), DashStyle.Dash));
-            astInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
-            astInfo.LineStyles.Insert(8, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
+            astInfo.LineStyles.Insert(0, new LineStyle(Color.Black, DashStyle.Solid));
+            astInfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
+            astInfo.LineStyles.Insert(2, new LineStyle(Color.Green, DashStyle.Solid));
+            astInfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
+            astInfo.LineStyles.Insert(4, new LineStyle(Color.Orange, DashStyle.Solid));
             astInfo.legend[0] = "cash";
             astInfo.legend[1] = "stInv";
             astInfo.legend[2] = "AccRcv";
             astInfo.legend[3] = "Inv";
             astInfo.legend[4] = "curAst";
-            astInfo.legend[5] = "nppe";
-            astInfo.legend[6] = "longInv";
-            astInfo.legend[7] = "good";
-            astInfo.legend[8] = "longAst";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Ast, astInfo));
-            //PlotChart(balanceRows, A_Ast, astInfo);
-            SetChartTitle(A_Ast, "Annual - asset");
+            SetChartTitle(A_Ast, "Annual - Asset");
             A_Ast.CloseData(COD.Values);
+            #endregion
+
+            //Plot Annual Assets - Long term
+            #region A_LT
+            ChartInfo ltInfo = new ChartInfo();
+            A_LT.OpenData(COD.Values, 4, 7);
+            ltInfo.nSeries = 4;
+            ltInfo.nvalues = 7;
+            ltInfo.perend = "perend_y";
+            ltInfo.colName[0] = "nppe_y";
+            ltInfo.colName[1] = "ltinv_y";
+            ltInfo.colName[2] = "gwi_y";
+            ltInfo.colName[3] = "olta_y";
+            ltInfo.LineStyles.Insert(0, new LineStyle(Color.Black, DashStyle.Solid));
+            ltInfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
+            ltInfo.LineStyles.Insert(2, new LineStyle(Color.Green, DashStyle.Solid));
+            ltInfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
+            ltInfo.legend[0] = "nppe";
+            ltInfo.legend[1] = "longInv";
+            ltInfo.legend[2] = "good";
+            ltInfo.legend[3] = "longAst";
+            Task.Factory.StartNew(() => PlotChart(balanceRows, A_LT, ltInfo));
+            SetChartTitle(A_LT, "Annual - Asset(Long Term)");
+            A_LT.CloseData(COD.Values);
             #endregion
 
             //Plot Annual Liability
