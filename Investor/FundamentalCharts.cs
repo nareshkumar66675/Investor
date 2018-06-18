@@ -19,11 +19,10 @@ namespace Investor
     {
         public const int nYears = 7;
         public const int nQuarters = 8;
-        BackgroundWorker backgroundWorker = new BackgroundWorker();
         public FundamentalCharts()
         {
             InitializeComponent();
-            this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            
             DataTable dt = new DataTable();
             DataRow dr = null;
             string[,] info = new string[5, 3];
@@ -69,11 +68,6 @@ namespace Investor
             
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetChartTitle(Chart chart,string title)
         {
             chart.Titles.Add(new TitleDockable());
@@ -82,6 +76,37 @@ namespace Investor
             chart.Titles[0].Alignment = StringAlignment.Center;
         }
 
+        public string[] ChangeColNameToQuart(string [] colNames)
+        {
+            List<string> resultCols = new List<string>();
+            foreach (var col in colNames)
+            {
+                if(col != null)
+                resultCols.Add(col.Replace("_y", "_q"));
+            }
+            return resultCols.ToArray();
+        }
+        public ChartInfo GetQuartChartInfo(ChartInfo chartInfo)
+        {
+            ChartInfo resultInfo = new ChartInfo();
+            resultInfo.perend = "perend_q";
+            resultInfo.LineStyles.AddRange(chartInfo.LineStyles);
+            resultInfo.colName = ChangeColNameToQuart(chartInfo.colName);
+            resultInfo.legend = chartInfo.legend.ToArray();
+            resultInfo.nSeries = chartInfo.nSeries;
+            resultInfo.nvalues = 8;
+
+            return resultInfo;
+        }
+
+        public void ChartQuarterly(ChartInfo annualChartInfo, DataRow[] rows, Chart chart, string title)
+        {
+            var qChartInfo = GetQuartChartInfo(annualChartInfo);
+            chart.OpenData(COD.Values, qChartInfo.nSeries, 7);
+            Task.Factory.StartNew(() => PlotChart(rows, chart, qChartInfo));
+            SetChartTitle(chart, title);
+            chart.CloseData(COD.Values);
+        }
         public void ShowChart(string ticker)
         {
             ChartInfo charttinfo = new ChartInfo();
@@ -112,268 +137,180 @@ namespace Investor
             //set form title and label
             Text = ticker;
 
-            //Plot Quarterly
-            #region Q_PL
-            Q_PL.OpenData(COD.Values, 7, 8);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 8;
-            charttinfo.perend = "perend_q";
-            charttinfo.colName[0] = "sales_q";
-            charttinfo.colName[1] = "cgs_q";
-            charttinfo.colName[2] = "opexp_q";
-            charttinfo.colName[3] = "gopinc_q";
-            charttinfo.colName[4] = "ebit_q";
-            charttinfo.colName[5] = "nit_q";
-            charttinfo.colName[6] = "netinc_q";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "Sales";
-            charttinfo.legend[1] = "CGS";
-            charttinfo.legend[2] = "OpExp";
-            charttinfo.legend[3] = "OpInc";
-            charttinfo.legend[4] = "EBIT";
-            charttinfo.legend[5] = "NonRec";
-            charttinfo.legend[6] = "NetInc";
-            PlotChart(selectedRows, Q_PL, charttinfo);
-            SetChartTitle(Q_PL, "Quarterly - PL");
-            Q_PL.CloseData(COD.Values);
-            #endregion
-            //Plot Annual
-            #region Annual_PL
-            charttinfo = new ChartInfo();
+            //Plot PL 
+            #region PL
+            ChartInfo plInfo = new ChartInfo();
             Annual_PL.OpenData(COD.Values, 7, 7);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 7;
-            charttinfo.perend = "perend_y";
-            charttinfo.colName[0] = "sales_y";
-            charttinfo.colName[1] = "cgs_y";
-            charttinfo.colName[2] = "opexp_y";
-            charttinfo.colName[3] = "gopinc_y";
-            charttinfo.colName[4] = "ebit_y";
-            charttinfo.colName[5] = "nit_y";
-            charttinfo.colName[6] = "netinc_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.DarkBlue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.Blue, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "Sales";
-            charttinfo.legend[1] = "CGS";
-            charttinfo.legend[2] = "OpExp";
-            charttinfo.legend[3] = "OpInc";
-            charttinfo.legend[4] = "EBIT";
-            charttinfo.legend[5] = "NonRec";
-            charttinfo.legend[6] = "NetInc";
-            PlotChart(selectedRows, Annual_PL, charttinfo);
+            plInfo.nSeries = 7;
+            plInfo.nvalues = 7;
+            plInfo.perend = "perend_y";
+            plInfo.colName[0] = "sales_y";
+            plInfo.colName[1] = "cgs_y";
+            plInfo.colName[2] = "opexp_y";
+            plInfo.colName[3] = "gopinc_y";
+            plInfo.colName[4] = "ebit_y";
+            plInfo.colName[5] = "nit_y";
+            plInfo.colName[6] = "netinc_y";
+            plInfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
+            plInfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
+            plInfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
+            plInfo.LineStyles.Insert(3, new LineStyle(Color.DarkBlue, DashStyle.Solid));
+            plInfo.LineStyles.Insert(4, new LineStyle(Color.Blue, DashStyle.DashDot));
+            plInfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
+            plInfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
+            plInfo.legend[0] = "Sales";
+            plInfo.legend[1] = "CGS";
+            plInfo.legend[2] = "OpExp";
+            plInfo.legend[3] = "OpInc";
+            plInfo.legend[4] = "EBIT";
+            plInfo.legend[5] = "NonRec";
+            plInfo.legend[6] = "NetInc";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, Annual_PL, plInfo));
             SetChartTitle(Annual_PL, "Annual - PL");
+
+            ChartQuarterly(plInfo, selectedRows, Q_PL, "Quarterly - PL");
             #endregion
 
-            //Plot Annual Expenses
-            #region A_EXP
-            charttinfo = new ChartInfo();
+            //Plot Expenses
+            #region EXP
+            ChartInfo expInfo = new ChartInfo();
             A_Exp.OpenData(COD.Values, 7, 7);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 7;
-            charttinfo.perend = "perend_y";
-            charttinfo.colName[0] = "dep_y";
-            charttinfo.colName[1] = "rd_y";
-            charttinfo.colName[2] = "int_y";
-            charttinfo.colName[3] = "uninc_y";
-            charttinfo.colName[4] = "othinc_y";
-            charttinfo.colName[5] = "intno_y";
-            charttinfo.colName[6] = "adjust_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#990000"), DashStyle.Dash));
-            charttinfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
-            charttinfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
-            charttinfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
-            charttinfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Solid));
-            charttinfo.legend[0] = "dep";
-            charttinfo.legend[1] = "rd";
-            charttinfo.legend[2] = "intExp";
-            charttinfo.legend[3] = "unExp";
-            charttinfo.legend[4] = "otExp";
-            charttinfo.legend[5] = "intNo";
-            charttinfo.legend[6] = "adj";
-            PlotChart(selectedRows, A_Exp, charttinfo);
+            expInfo.nSeries = 7;
+            expInfo.nvalues = 7;
+            expInfo.perend = "perend_y";
+            expInfo.colName[0] = "dep_y";
+            expInfo.colName[1] = "rd_y";
+            expInfo.colName[2] = "int_y";
+            expInfo.colName[3] = "uninc_y";
+            expInfo.colName[4] = "othinc_y";
+            expInfo.colName[5] = "intno_y";
+            expInfo.colName[6] = "adjust_y";
+            expInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
+            expInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#990000"), DashStyle.Dash));
+            expInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
+            expInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
+            expInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
+            expInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
+            expInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Solid));
+            expInfo.legend[0] = "dep";
+            expInfo.legend[1] = "rd";
+            expInfo.legend[2] = "intExp";
+            expInfo.legend[3] = "unExp";
+            expInfo.legend[4] = "otExp";
+            expInfo.legend[5] = "intNo";
+            expInfo.legend[6] = "adj";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, A_Exp, expInfo));
             SetChartTitle(A_Exp, "Annual - Expenses");
             A_Exp.CloseData(COD.Values);
+
+            ChartQuarterly(expInfo, selectedRows, Q_Exp, "Quarterly - Expenses");
             #endregion
 
-            //Plot Quarterly Expenses
-            #region Q_EXP
-            charttinfo = new ChartInfo();
-            Q_Exp.OpenData(COD.Values, 7, 8);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 8;
-            charttinfo.perend = "perend_q";
-            charttinfo.colName[0] = "eps_q";
-            charttinfo.colName[1] = "epscon_q";
-            charttinfo.colName[2] = "epsd_q";
-            charttinfo.colName[3] = "epsdc_q";
-            charttinfo.colName[4] = "epsnd_q";
-            charttinfo.colName[5] = "dps_q";
-            charttinfo.colName[6] = "dpst_q";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "eps";
-            charttinfo.legend[1] = "epsC";
-            charttinfo.legend[2] = "epsD";
-            charttinfo.legend[3] = "espDC";
-            charttinfo.legend[4] = "espDN";
-            charttinfo.legend[5] = "divT";
-            charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, Q_Exp, charttinfo);
-            SetChartTitle(Q_Exp, "Quarterly - Expenses");
-            Q_Exp.CloseData(COD.Values);
-            #endregion
-
-            //Plot Annual EPS
-            #region A_EPS
-            charttinfo = new ChartInfo();
+            //Plot EPS
+            #region EPS
+            ChartInfo epsInfo = new ChartInfo();
             A_EPS.OpenData(COD.Values, 7, 7);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 7;
-            charttinfo.perend = "perend_y";
-            charttinfo.colName[0] = "eps_y";
-            charttinfo.colName[1] = "epscon_y";
-            charttinfo.colName[2] = "epsd_y";
-            charttinfo.colName[3] = "epsdc_y";
-            charttinfo.colName[4] = "epsnd_y";
-            charttinfo.colName[5] = "dps_y";
-            charttinfo.colName[6] = "dpst_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dash));
-            charttinfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.Dot));
-            charttinfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#60FF7A"), DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#2F31FD"), DashStyle.Solid));
-            charttinfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#2FC8FD"), DashStyle.Dash));
-            charttinfo.legend[0] = "eps";
-            charttinfo.legend[1] = "epsC";
-            charttinfo.legend[2] = "epsD";
-            charttinfo.legend[3] = "espDC";
-            charttinfo.legend[4] = "espDN";
-            charttinfo.legend[5] = "divT";
-            charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, A_EPS, charttinfo);
+            epsInfo.nSeries = 7;
+            epsInfo.nvalues = 7;
+            epsInfo.perend = "perend_y";
+            epsInfo.colName[0] = "eps_y";
+            epsInfo.colName[1] = "epscon_y";
+            epsInfo.colName[2] = "epsd_y";
+            epsInfo.colName[3] = "epsdc_y";
+            epsInfo.colName[4] = "epsnd_y";
+            epsInfo.colName[5] = "dps_y";
+            epsInfo.colName[6] = "dpst_y";
+            epsInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Solid));
+            epsInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dash));
+            epsInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#46C24C"), DashStyle.Dot));
+            epsInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#51DF58"), DashStyle.DashDot));
+            epsInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#60FF7A"), DashStyle.DashDotDot));
+            epsInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#2F31FD"), DashStyle.Solid));
+            epsInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#2FC8FD"), DashStyle.Dash));
+            epsInfo.legend[0] = "eps";
+            epsInfo.legend[1] = "epsC";
+            epsInfo.legend[2] = "epsD";
+            epsInfo.legend[3] = "espDC";
+            epsInfo.legend[4] = "espDN";
+            epsInfo.legend[5] = "divT";
+            epsInfo.legend[6] = "divNS";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, A_EPS, epsInfo));
             SetChartTitle(A_EPS, "Annual - EPS");
             A_EPS.CloseData(COD.Values);
+
+            ChartQuarterly(epsInfo, selectedRows, Q_EPS, "Quarterly - EPS");
             #endregion
 
-            //Plot Quarterly EPS
-            #region Q_EPS
-            charttinfo = new ChartInfo();
-            Q_EPS.OpenData(COD.Values, 7, 8);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 8;
-            charttinfo.perend = "perend_Q";
-            charttinfo.colName[0] = "eps_q";
-            charttinfo.colName[1] = "epscon_q";
-            charttinfo.colName[2] = "epsd_q";
-            charttinfo.colName[3] = "epsdc_q";
-            charttinfo.colName[4] = "epsnd_q";
-            charttinfo.colName[5] = "dps_q";
-            charttinfo.colName[6] = "dpst_q";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "eps";
-            charttinfo.legend[1] = "epsC";
-            charttinfo.legend[2] = "epsD";
-            charttinfo.legend[3] = "espDC";
-            charttinfo.legend[4] = "espDN";
-            charttinfo.legend[5] = "divT";
-            charttinfo.legend[6] = "divNS";
-            PlotChart(selectedRows, Q_EPS, charttinfo);
-            SetChartTitle(Q_EPS, "Quarterly - EPS");
-            Q_EPS.CloseData(COD.Values);
-            #endregion
-
-            //Plot annual CFL
-            #region A_CF
-            charttinfo = new ChartInfo();
-            A_CF.OpenData(COD.Values, 7, 7);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 7;
-            charttinfo.perend = "perend_y";
-            charttinfo.colName[0] = "tco_y";
-            charttinfo.colName[1] = "tci_y";
-            charttinfo.colName[2] = "tcf_y";
-            charttinfo.colName[3] = "dep_cf_y";
-            charttinfo.colName[4] = "ce_y";
-            charttinfo.colName[5] = "cfps_y";
-            charttinfo.colName[6] = "fcfps_y";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "tco";
-            charttinfo.legend[1] = "tci";
-            charttinfo.legend[2] = "tcf";
-            charttinfo.legend[3] = "dep";
-            charttinfo.legend[4] = "ce";
-            charttinfo.legend[5] = "cfps";
-            charttinfo.legend[6] = "fcfps";
-            PlotChart(selectedRows, A_CF, charttinfo);
+            //Plot CFL
+            #region CF
+            ChartInfo cfInfo = new ChartInfo();
+            A_CF.OpenData(COD.Values, 3, 7);
+            cfInfo.nSeries = 3;
+            cfInfo.nvalues = 7;
+            cfInfo.perend = "perend_y";
+            cfInfo.colName[0] = "tco_y";
+            cfInfo.colName[1] = "tci_y";
+            cfInfo.colName[2] = "tcf_y";
+            cfInfo.LineStyles.Insert(0, new LineStyle(Color.Black, DashStyle.Solid));
+            cfInfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
+            cfInfo.LineStyles.Insert(2, new LineStyle(Color.Green, DashStyle.Solid));
+            cfInfo.legend[0] = "tco";
+            cfInfo.legend[1] = "tci";
+            cfInfo.legend[2] = "tcf";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF, cfInfo));
             SetChartTitle(A_CF, "Annual - Cashflow");
             A_CF.CloseData(COD.Values);
+
+            ChartQuarterly(cfInfo, selectedRows, Q_CFL, "Quarterly - Cashflow");
             #endregion
 
-            //Plot Quarterly CFL
-            #region Q_CFL
-            charttinfo = new ChartInfo();
-            Q_CFL.OpenData(COD.Values, 7, 8);
-            charttinfo.nSeries = 7;
-            charttinfo.nvalues = 8;
-            charttinfo.perend = "perend_Q";
-            charttinfo.colName[0] = "tco_q";
-            charttinfo.colName[1] = "tci_q";
-            charttinfo.colName[2] = "tcf_q";
-            charttinfo.colName[3] = "dep_cf_q";
-            charttinfo.colName[4] = "ce_q";
-            charttinfo.colName[5] = "cfps_q";
-            charttinfo.colName[6] = "fcfps_q";
-            charttinfo.LineStyles.Insert(0, new LineStyle(Color.Green, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(2, new LineStyle(Color.IndianRed, DashStyle.Dash));
-            charttinfo.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
-            charttinfo.LineStyles.Insert(4, new LineStyle(Color.OrangeRed, DashStyle.DashDot));
-            charttinfo.LineStyles.Insert(5, new LineStyle(Color.Maroon, DashStyle.DashDotDot));
-            charttinfo.LineStyles.Insert(6, new LineStyle(Color.Blue, DashStyle.Dash));
-            charttinfo.legend[0] = "tco";
-            charttinfo.legend[1] = "tci";
-            charttinfo.legend[2] = "tcf";
-            charttinfo.legend[3] = "dep";
-            charttinfo.legend[4] = "ce";
-            charttinfo.legend[5] = "cfps";
-            charttinfo.legend[6] = "fcfps";
-            PlotChart(selectedRows, Q_CFL, charttinfo);
-            SetChartTitle(Q_CFL, "Quarterly - Cashflow");
-            Q_CFL.CloseData(COD.Values);
+            //Plot CFL 2
+            #region CF2
+            ChartInfo cf2Info = new ChartInfo();
+            A_CF2.OpenData(COD.Values, 4, 7);
+            cf2Info.nSeries = 4;
+            cf2Info.nvalues = 7;
+            cf2Info.perend = "perend_y";
+            cf2Info.colName[0] = "dep_cf_y";
+            cf2Info.colName[1] = "ce_y";
+            cf2Info.colName[2] = "divpaid_y";
+            cf2Info.colName[3] = "ere_y";
+            cf2Info.LineStyles.Insert(0, new LineStyle(Color.Black, DashStyle.Solid));
+            cf2Info.LineStyles.Insert(1, new LineStyle(Color.Red, DashStyle.Solid));
+            cf2Info.LineStyles.Insert(2, new LineStyle(Color.Green, DashStyle.Solid));
+            cf2Info.LineStyles.Insert(3, new LineStyle(Color.Blue, DashStyle.Solid));
+            cf2Info.legend[0] = "dep";
+            cf2Info.legend[1] = "ce";
+            cf2Info.legend[2] = "div";
+            cf2Info.legend[3] = "ere";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF2, cf2Info));
+            SetChartTitle(A_CF2, "Annual - Cashflow 2");
+            A_CF2.CloseData(COD.Values);
+
+            ChartQuarterly(cf2Info, selectedRows, Q_CF2, "Quarterly - Cashflow 2");
             #endregion
 
-            //Plot Annual Assets
+            //Plot CFL 3
+            #region CF3
+            ChartInfo cf3Info = new ChartInfo();
+            A_CF3.OpenData(COD.Values, 2, 7);
+            cf3Info.nSeries = 2;
+            cf3Info.nvalues = 7;
+            cf3Info.perend = "perend_y";
+            cf3Info.colName[0] = "cfps_y";
+            cf3Info.colName[1] = "fcfps_y";
+            cf3Info.LineStyles.Insert(0, new LineStyle(Color.Blue, DashStyle.Solid));
+            cf3Info.LineStyles.Insert(1, new LineStyle(Color.Green, DashStyle.Solid));
+            cf3Info.legend[0] = "cfps";
+            cf3Info.legend[1] = "fcfps";
+            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF3, cf3Info));
+            SetChartTitle(A_CF3, "Annual - Cashflow 3");
+            A_CF3.CloseData(COD.Values);
+
+            ChartQuarterly(cf3Info, selectedRows, Q_CF3, "Quarterly - Cashflow 3");
+            #endregion
+
+            //Plot Assets
             #region A_Ast
             ChartInfo astInfo = new ChartInfo();
             A_Ast.OpenData(COD.Values, 5, 7);
@@ -398,7 +335,10 @@ namespace Investor
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Ast, astInfo));
             SetChartTitle(A_Ast, "Annual - Asset");
             A_Ast.CloseData(COD.Values);
+
+            ChartQuarterly(astInfo, balanceRows, Q_Ast, "Quarterly - Asset");
             #endregion
+
 
             //Plot Annual Assets - Long term
             #region A_LT
@@ -422,6 +362,8 @@ namespace Investor
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_LT, ltInfo));
             SetChartTitle(A_LT, "Annual - Asset(Long Term)");
             A_LT.CloseData(COD.Values);
+
+            ChartQuarterly(ltInfo, balanceRows, Q_LT, "Quarterly - Asset(Long Term)");
             #endregion
 
             //Plot Annual Liability
@@ -436,28 +378,21 @@ namespace Investor
             liabInfo.colName[2] = "ocl_y";
             liabInfo.colName[3] = "ltdebt_y";
             liabInfo.colName[4] = "oltl_y";
-            //liabInfo.colName[5] = "pref_y";
-            //liabInfo.colName[6] = "retearn_y";
-            //liabInfo.colName[7] = "equity_y";
             liabInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
             liabInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#236526"), DashStyle.Dash));
             liabInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#37963C"), DashStyle.Dot));
             liabInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
             liabInfo.LineStyles.Insert(4, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
-            //liabInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
-            //liabInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
-            //liabInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
             liabInfo.legend[0] = "accPy";
             liabInfo.legend[1] = "stDbt";
             liabInfo.legend[2] = "otCrLi";
             liabInfo.legend[3] = "ltDbt";
             liabInfo.legend[4] = "otLtLi";
-            //liabInfo.legend[5] = "prefSt";
-            //liabInfo.legend[6] = "retEa";
-            //liabInfo.legend[7] = "csEq";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Liab, liabInfo));
             SetChartTitle(A_Liab, "Annual - Liability");
             A_Liab.CloseData(COD.Values);
+
+            ChartQuarterly(liabInfo, balanceRows, Q_Liab, "Quarterly - Liability");
             #endregion
 
 
@@ -476,9 +411,6 @@ namespace Investor
             eqtInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
             eqtInfo.LineStyles.Insert(2, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dot));
             eqtInfo.LineStyles.Insert(3, new LineStyle(ColorTranslator.FromHtml("#ff3333"), DashStyle.DashDot));
-            //eqtInfo.LineStyles.Insert(5, new LineStyle(ColorTranslator.FromHtml("#002080"), DashStyle.Solid));
-            //eqtInfo.LineStyles.Insert(6, new LineStyle(ColorTranslator.FromHtml("#0033cc"), DashStyle.Dash));
-            //eqtInfo.LineStyles.Insert(7, new LineStyle(ColorTranslator.FromHtml("#1a53ff"), DashStyle.Dot));
             eqtInfo.legend[0] = "prefSt";
             eqtInfo.legend[1] = "retEa";
             eqtInfo.legend[2] = "csEq";
@@ -486,6 +418,8 @@ namespace Investor
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Eqt, eqtInfo));
             SetChartTitle(A_Eqt, "Annual - Equity");
             A_Eqt.CloseData(COD.Values);
+
+            ChartQuarterly(eqtInfo, balanceRows, Q_Eqt, "Quarterly - Equity");
             #endregion
 
             //Plot Annual Book Value
@@ -502,6 +436,8 @@ namespace Investor
             SetChartTitle(A_Book, "Annual - Book Value");
             A_Book.SerLegBox = false;
             A_Book.CloseData(COD.Values);
+
+            ChartQuarterly(aBookInfo, balanceRows, Q_Book, "Quarterly - Book Value");
             #endregion
 
         }
@@ -571,6 +507,11 @@ namespace Investor
         }
 
         private void A_Stats_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void chart1_Load(object sender, EventArgs e)
         {
 
         }

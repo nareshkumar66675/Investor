@@ -70,6 +70,8 @@ namespace Investor.Util
                             + ",dep_cf_q1,dep_cf_q2,dep_cf_q3,dep_cf_q4,dep_cf_q5,dep_cf_q6,dep_cf_q7,dep_cf_q8 "
                             + ",cfps_q1,cfps_q2,cfps_q3,cfps_q4,cfps_q5,cfps_q6,cfps_q7,cfps_q8 "
                             + ",fcfps_q1,fcfps_q2,fcfps_q3,fcfps_q4,fcfps_q5,fcfps_q6,fcfps_q7,fcfps_q8 "
+                            + ",divpaid_q1,divpaid_q2,divpaid_q3,divpaid_q4,divpaid_q5,divpaid_q6,divpaid_q7,divpaid_q8 "
+                            + ",ere_q1,ere_q2,ere_q3,ere_q4,ere_q5,ere_q6 ,ere_q7,ere_q8"
                             // Cashflow Annual
                             + ",tco_y1, tco_y2, tco_y3, tco_y4, tco_y5, tco_y6, tco_y7 "
                             + ", ce_y1, ce_y2, ce_y3, ce_y4, ce_y5, ce_y6, ce_y7 "
@@ -77,7 +79,9 @@ namespace Investor.Util
                             + ",tcf_y1,tcf_y2,tcf_y3,tcf_y4,tcf_y5,tcf_y6,tcf_y7 "
                             + ",dep_cf_y1, dep_cf_y2, dep_cf_y3, dep_cf_y4, dep_cf_y5, dep_cf_y6, dep_cf_y7 "
                             + ", cfps_y1, cfps_y2, cfps_y3, cfps_y4, cfps_y5, cfps_y6, cfps_y7 "
-                            + ", fcfps_y1, fcfps_y2, fcfps_y3, fcfps_y4, fcfps_y5, fcfps_y6,fcfps_y7, "
+                            + ", fcfps_y1, fcfps_y2, fcfps_y3, fcfps_y4, fcfps_y5, fcfps_y6,fcfps_y7 "
+                            + ",divpaid_y1,divpaid_y2,divpaid_y3,divpaid_y4,divpaid_y5,divpaid_y6,divpaid_y7 "
+                            + ",ere_y1,ere_y2,ere_y3,ere_y4,ere_y5,ere_y6 ,ere_y7,"
                             // PL - Continued
                             + "gopinc_q1,gopinc_q2,gopinc_q3,gopinc_q4,gopinc_q5,gopinc_q6,gopinc_q7,gopinc_q8, "
                             + "nit_q1,nit_q2,nit_q3,nit_q4,nit_q5,nit_q6,nit_q7,nit_q8,"
