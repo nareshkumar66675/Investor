@@ -10,8 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1;
-using WindowsFormsApp1.Util;
 
 namespace Investor
 {
@@ -104,7 +102,7 @@ namespace Investor
             var qChartInfo = GetQuartChartInfo(annualChartInfo);
             chart.OpenData(COD.Values, qChartInfo.nSeries, 7);
             Task.Factory.StartNew(() => PlotChart(rows, chart, qChartInfo));
-            SetChartTitle(chart, title);
+            //SetChartTitle(chart, title);
             chart.CloseData(COD.Values);
         }
         public void ShowChart(string ticker)
@@ -166,7 +164,7 @@ namespace Investor
             plInfo.legend[5] = "NonRec";
             plInfo.legend[6] = "NetInc";
             Task.Factory.StartNew(() => PlotChart(selectedRows, Annual_PL, plInfo));
-            SetChartTitle(Annual_PL, "Annual - PL");
+            //SetChartTitle(Annual_PL, "Annual - PL");
 
             ChartQuarterly(plInfo, selectedRows, Q_PL, "Quarterly - PL");
             #endregion
@@ -200,7 +198,7 @@ namespace Investor
             expInfo.legend[5] = "intNo";
             expInfo.legend[6] = "adj";
             Task.Factory.StartNew(() => PlotChart(selectedRows, A_Exp, expInfo));
-            SetChartTitle(A_Exp, "Annual - Expenses");
+            //SetChartTitle(A_Exp, "Annual - Expenses");
             A_Exp.CloseData(COD.Values);
 
             ChartQuarterly(expInfo, selectedRows, Q_Exp, "Quarterly - Expenses");
@@ -235,7 +233,7 @@ namespace Investor
             epsInfo.legend[5] = "divT";
             epsInfo.legend[6] = "divNS";
             Task.Factory.StartNew(() => PlotChart(selectedRows, A_EPS, epsInfo));
-            SetChartTitle(A_EPS, "Annual - EPS");
+            //SetChartTitle(A_EPS, "Annual - EPS");
             A_EPS.CloseData(COD.Values);
 
             ChartQuarterly(epsInfo, selectedRows, Q_EPS, "Quarterly - EPS");
@@ -258,7 +256,7 @@ namespace Investor
             cfInfo.legend[1] = "tci";
             cfInfo.legend[2] = "tcf";
             Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF, cfInfo));
-            SetChartTitle(A_CF, "Annual - Cashflow");
+            //SetChartTitle(A_CF, "Annual - Cashflow");
             A_CF.CloseData(COD.Values);
 
             ChartQuarterly(cfInfo, selectedRows, Q_CFL, "Quarterly - Cashflow");
@@ -284,7 +282,7 @@ namespace Investor
             cf2Info.legend[2] = "div";
             cf2Info.legend[3] = "ere";
             Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF2, cf2Info));
-            SetChartTitle(A_CF2, "Annual - Cashflow 2");
+            //SetChartTitle(A_CF2, "Annual - Cashflow 2");
             A_CF2.CloseData(COD.Values);
 
             ChartQuarterly(cf2Info, selectedRows, Q_CF2, "Quarterly - Cashflow 2");
@@ -304,7 +302,7 @@ namespace Investor
             cf3Info.legend[0] = "cfps";
             cf3Info.legend[1] = "fcfps";
             Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF3, cf3Info));
-            SetChartTitle(A_CF3, "Annual - Cashflow 3");
+            //SetChartTitle(A_CF3, "Annual - Cashflow 3");
             A_CF3.CloseData(COD.Values);
 
             ChartQuarterly(cf3Info, selectedRows, Q_CF3, "Quarterly - Cashflow 3");
@@ -333,7 +331,7 @@ namespace Investor
             astInfo.legend[3] = "Inv";
             astInfo.legend[4] = "curAst";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Ast, astInfo));
-            SetChartTitle(A_Ast, "Annual - Asset");
+            //SetChartTitle(A_Ast, "Annual - Asset");
             A_Ast.CloseData(COD.Values);
 
             ChartQuarterly(astInfo, balanceRows, Q_Ast, "Quarterly - Asset");
@@ -360,7 +358,7 @@ namespace Investor
             ltInfo.legend[2] = "good";
             ltInfo.legend[3] = "longAst";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_LT, ltInfo));
-            SetChartTitle(A_LT, "Annual - Asset(Long Term)");
+            //SetChartTitle(A_LT, "Annual - Asset(Long Term)");
             A_LT.CloseData(COD.Values);
 
             ChartQuarterly(ltInfo, balanceRows, Q_LT, "Quarterly - Asset(Long Term)");
@@ -389,7 +387,7 @@ namespace Investor
             liabInfo.legend[3] = "ltDbt";
             liabInfo.legend[4] = "otLtLi";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Liab, liabInfo));
-            SetChartTitle(A_Liab, "Annual - Liability");
+            //SetChartTitle(A_Liab, "Annual - Liability");
             A_Liab.CloseData(COD.Values);
 
             ChartQuarterly(liabInfo, balanceRows, Q_Liab, "Quarterly - Liability");
@@ -416,7 +414,7 @@ namespace Investor
             eqtInfo.legend[2] = "csEq";
             eqtInfo.legend[3] = "minor";
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Eqt, eqtInfo));
-            SetChartTitle(A_Eqt, "Annual - Equity");
+            //SetChartTitle(A_Eqt, "Annual - Equity");
             A_Eqt.CloseData(COD.Values);
 
             ChartQuarterly(eqtInfo, balanceRows, Q_Eqt, "Quarterly - Equity");
@@ -433,10 +431,11 @@ namespace Investor
             aBookInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
             A_Book.LegendBox = false;
             Task.Factory.StartNew(() => PlotChart(balanceRows, A_Book, aBookInfo));
-            SetChartTitle(A_Book, "Annual - Book Value");
+            //SetChartTitle(A_Book, "Annual - Book Value");
             A_Book.SerLegBox = false;
             A_Book.CloseData(COD.Values);
 
+            Q_Book.SerLegBox = false;
             ChartQuarterly(aBookInfo, balanceRows, Q_Book, "Quarterly - Book Value");
             #endregion
 
@@ -503,16 +502,6 @@ namespace Investor
 
             }
             });
-
-        }
-
-        private void A_Stats_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void chart1_Load(object sender, EventArgs e)
-        {
 
         }
 

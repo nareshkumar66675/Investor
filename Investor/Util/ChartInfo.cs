@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApp1.Util
+namespace Investor.Util
 {
     public class LineStyle
     {
