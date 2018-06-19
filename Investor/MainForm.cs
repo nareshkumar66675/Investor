@@ -1,4 +1,5 @@
 ﻿using Investor;
+using Investor.Database;
 using Investor.Util;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,11 @@ namespace Investor
             // initialize sql db connection
             sqlConnStr = "Data Source=" + Environment.MachineName + @"\SQLEXPRESS;Initial Catalog=Investor;Integrated Security=True";
 
-            var tickers = Database.GetTickers();
+            //DBOperation.GetTableFromDbf("");
+            DBConstruct constg = new DBConstruct();
+            constg.Initialize();
+
+            var tickers = DBOperation.GetTickers();
             tickerComboBox.DataSource = tickers;
             tickerComboBox.ValueMember = "ticker";
             tickerComboBox.DisplayMember = "ticker";
@@ -74,7 +79,7 @@ namespace Investor
             // initialize the dbfToTableDict which holds an association between the dbf filename, table name, table primary key name, and SQL types for each column
             dbfToTableDict = new Dictionary<string, string[]>();
 
-            foreach (var line in System.IO.File.ReadAllLines("overall-structure.txt"))
+            foreach (var line in System.IO.File.ReadAllLines(@"C:\Naresh\Projects\investor-2015\Investor\overall-structure.txt"))
             {
                 string[] cols = line.Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 dbfToTableDict.Add(cols[0], new List<string>(cols).GetRange(1, cols.Length - 1).ToArray());

@@ -112,8 +112,8 @@ namespace Investor
             // Gets data from database parallely
             List<Task<DataTable>> tasks = new List<Task<DataTable>>();
 
-            tasks.Add(Task.Factory.StartNew(function: () => Database.GetValuesByTicker(ticker)));
-            tasks.Add(Task.Factory.StartNew(function: () => Database.GetBalanaceSheet(ticker)));
+            tasks.Add(Task.Factory.StartNew(function: () => DBOperation.GetValuesByTicker(ticker)));
+            tasks.Add(Task.Factory.StartNew(function: () => DBOperation.GetBalanaceSheet(ticker)));
 
             Task.WaitAll(tasks.ToArray());
             var dataTable = tasks[0].Result;
