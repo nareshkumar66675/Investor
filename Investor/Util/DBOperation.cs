@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -162,31 +163,40 @@ namespace Investor.Util
             return tickerDS.Tables[0];
         }
 
-        public static DataTable GetTableFromDbf(string fileName)
+        public static DataTable GetTableFromDbf(string tableName)
         {
-            fileName = @"C:\Users\tiraz\Downloads\";
-            string constr = $"Provider=VFPOLEDB;Data Source={fileName};"; //Extended Properties=dBASE IV;User ID=Admin;Password=;
+            string dbfDirectory = GetDBFDirectory(tableName);
+            string constr = $"Provider=VFPOLEDB;Data Source={dbfDirectory};"; //Extended Properties=dBASE IV;User ID=Admin;Password=;
             using (OleDbConnection con = new OleDbConnection(constr))
             {
-                var sql = "select * from si_bsa";// + fileName;
-                OleDbCommand cmd = new OleDbCommand(sql, con);
+                string sqlQuery = $"select * from {tableName}";// + fileName;
+                OleDbCommand cmd = new OleDbCommand(sqlQuery, con);
                 con.Open();
-                DataSet ds = new DataSet(); ;
+                DataSet ds = new DataSet();
                 OleDbDataAdapter da = new OleDbDataAdapter(cmd);
                 da.Fill(ds);
                 var tab = ds.Tables[0];
 
-                DataTable schemaInfo = con.GetSchema(); // available schemas
-                foreach (DataRow row in schemaInfo.Rows)
-                {
-                    string schema = (string)row[0];
+                //DataTable schemaInfo = con.GetSchema(); // available schemas
+                //foreach (DataRow row in schemaInfo.Rows)
+                //{
+                //    string schema = (string)row[0];
 
-                    DataTable t = con.GetSchema(schema);
+                //    DataTable t = con.GetSchema(schema);
 
-                }
-                con.Close();
+                //}
                 return tab;
             }
+        }
+
+        private static string GetDBFDirectory(string tableName)
+        {
+            foreach (var dbfPath in Const.DBFPaths)
+            {
+                if (File.Exists(Path.Combine(dbfPath, tableName + ".dbf")))
+                    return dbfPath;
+            }
+            return null;
         }
     }
 }

@@ -59,7 +59,10 @@
     <Compile Include="ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database\Consumer.cs" />
     <Compile Include="Database\DBConstruct.cs" />
+    <Compile Include="Database\Producer.cs" />
+    <Compile Include="Database\Queue.cs" />
     <Compile Include="Database\TableSpec.cs" />
     <Compile Include="FundamentalCharts.cs">
       <SubType>Form</SubType>

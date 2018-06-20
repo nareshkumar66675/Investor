@@ -10,5 +10,9 @@ namespace Investor.Util
     public static class Const
     {
         public static string ConnectionString => string.Format(ConfigurationManager.ConnectionStrings["Investor"].ConnectionString, Environment.MachineName);
+
+        public static List<string> DBFPaths => ConfigurationManager.AppSettings["DBFPaths"].Split(';').ToList();
+
+        public static List<string> TableNames => ConfigurationManager.AppSettings["TableNames"].Split(',').ToList();
     }
 }

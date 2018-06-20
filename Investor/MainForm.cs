@@ -48,6 +48,7 @@ namespace Investor
             //DBOperation.GetTableFromDbf("");
             DBConstruct constg = new DBConstruct();
             constg.Initialize();
+            constg.StartDBUpdate();
 
             var tickers = DBOperation.GetTickers();
             tickerComboBox.DataSource = tickers;
