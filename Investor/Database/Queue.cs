@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Investor.Util;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
@@ -21,9 +22,14 @@ namespace Investor.Database
     {
         static Queue()
         {
-            Collection = new BlockingCollection<TableData>(5);
+            Collection = new BlockingCollection<TableData>(Const.QueueSize);
         }
-        public static BlockingCollection<TableData> Collection { get; set; } 
+        public static BlockingCollection<TableData> Collection { get; set; }
+
+        public static void Clear()
+        {
+            Collection = new BlockingCollection<TableData>(Const.QueueSize);
+        }
     }
 
     public class TableData

@@ -126,7 +126,7 @@ namespace Investor.Util
             return dataSet.Tables[0];
         }
 
-        internal static void BulkInsert(TableData tableData)
+        public static void BulkInsert(TableData tableData)
         {
             using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
             {

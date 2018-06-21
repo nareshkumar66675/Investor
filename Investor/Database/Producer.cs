@@ -8,17 +8,31 @@ using System.Threading.Tasks;
 
 namespace Investor.Database
 {
+    /// <summary>
+    /// Creates DB Objects
+    /// Based on the TableSpec produces table data
+    ///    i) Creates Drop & Insert Script
+    ///   ii) Reads Data from Dbf files 
+    /// </summary>
     public class Producer
     {
+        /// <summary>
+        /// Starts the Process
+        /// </summary>
+        /// <param name="tableSpecs">Table Specification</param>
+        /// <returns></returns>
         public async Task Start(List<TableSpec> tableSpecs)
         {
             foreach (var tableSpec in tableSpecs)
             {
+                // Wait untill the data is ready
                 var result = await ProduceData(tableSpec);
 
+                // Add the data to the Queue for further processing
                 Queue.Collection.TryAdd(result);
             }
 
+            // Mark Queue as Complete - No more adding
             Queue.Collection.CompleteAdding();
         }
 
@@ -26,15 +40,20 @@ namespace Investor.Database
         {
             TableData tableData = new TableData();
 
+            //Asynchronous Task
             Action action = () =>
                {
-                   var createScript = Task.Factory.StartNew(() => CreateInsertScript(tableSpec));
+                   // Create Insert Script Asynchronously
+                   var createScript = Task.Factory.StartNew(() => CreateTableScript(tableSpec));
 
+                   // Read data from dbf Asynchronously
                    var getData = Task.Factory.StartNew(() => GetDataFromDBF(tableSpec));
 
+                   // Wait for all tasks to complete
                    createScript.Wait();
                    getData.Wait();
 
+                   // Store the data 
                    tableData.TableSpec = tableSpec;
                    tableData.CreateTableScript = createScript.Result;
                    tableData.Data = getData.Result;
@@ -46,7 +65,13 @@ namespace Investor.Database
             return tableData;
         }
 
-        private string CreateInsertScript(TableSpec tableSpec)
+        /// <summary>
+        /// Create Drop & Create Script
+        /// Based on the columns provided
+        /// </summary>
+        /// <param name="tableSpec">Table Specification</param>
+        /// <returns>SQL Script</returns>
+        private string CreateTableScript(TableSpec tableSpec)
         {
             StringBuilder script = new StringBuilder();
 
@@ -63,6 +88,11 @@ namespace Investor.Database
             return script.ToString();
         }
 
+        /// <summary>
+        /// Get Data From DBF
+        /// </summary>
+        /// <param name="tableSpec">Table Specification</param>
+        /// <returns>Data</returns>
         private DataTable GetDataFromDBF(TableSpec tableSpec)
         {
             return DBOperation.GetTableFromDbf(tableSpec.TableName);
