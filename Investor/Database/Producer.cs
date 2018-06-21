@@ -35,6 +35,7 @@ namespace Investor.Database
                    createScript.Wait();
                    getData.Wait();
 
+                   tableData.TableSpec = tableSpec;
                    tableData.CreateTableScript = createScript.Result;
                    tableData.Data = getData.Result;
                    tableData.Status = Status.RetrievedData;

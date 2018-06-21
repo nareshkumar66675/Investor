@@ -21,7 +21,7 @@ namespace Investor.Database
     {
         static Queue()
         {
-            Collection = new BlockingCollection<TableData>();
+            Collection = new BlockingCollection<TableData>(5);
         }
         public static BlockingCollection<TableData> Collection { get; set; } 
     }
@@ -29,6 +29,8 @@ namespace Investor.Database
     public class TableData
     {
         public TableData() => Status = Status.NotStarted;
+
+        public TableSpec TableSpec { get; set; } 
 
         public Status Status { get; set; }
 

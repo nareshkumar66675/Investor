@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,10 +40,21 @@ namespace Investor.Database
 
         public void StartDBUpdate()
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             Producer producer = new Producer();
-            var tables = Specs.Where(t => Const.TableNames.Any(x => x == t.TableName)).ToList();
+            Consumer consumer = new Consumer();
+            var tables = Specs; //Specs.Where(t => Const.TableNames.Any(x => x == t.TableName)).ToList();
 
-            Task.Factory.StartNew(async () => await producer.Start(tables));
+            var produceTask = Task.Factory.StartNew(async () => await producer.Start(tables));
+
+            var consumeTask = Task.Factory.StartNew(() => consumer.Start());
+
+            produceTask.Wait();
+            consumeTask.Wait();
+            sw.Stop();
+
+            Console.WriteLine($"Elapsed : {sw.ElapsedMilliseconds}");
         }
 
 

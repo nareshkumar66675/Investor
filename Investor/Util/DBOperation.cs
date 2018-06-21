@@ -1,4 +1,5 @@
-﻿using Investor.Util;
+﻿using Investor.Database;
+using Investor.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -125,6 +126,39 @@ namespace Investor.Util
             return dataSet.Tables[0];
         }
 
+        internal static void BulkInsert(TableData tableData)
+        {
+            using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
+            {
+                sqlConn.Open();
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(sqlConn))
+                {
+                    bulkCopy.DestinationTableName = tableData.TableSpec.TableName;
+
+                    try
+                    {
+                        if(tableData.Data.Columns.Count != tableData.TableSpec.Columns.Count)
+                        {
+                            foreach (var tableColumn in tableData.TableSpec.Columns)
+                            {
+                                if(tableData.Data.Columns.Contains(tableColumn))
+                                {
+                                    bulkCopy.ColumnMappings.Add(tableColumn, tableColumn);
+                                }
+                            }
+                        }
+                        bulkCopy.BatchSize = 2500;
+                        bulkCopy.WriteToServer(tableData.Data);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+        }
+
         public static DataTable GetBalanaceSheet(string ticker)
         {
             SqlConnection sqlConn;
@@ -161,6 +195,20 @@ namespace Investor.Util
             }
 
             return tickerDS.Tables[0];
+        }
+
+        public static bool ExecuteNonQuery(string sqlQuery)
+        {
+            using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
+            {
+                sqlConn.Open();
+                using (SqlCommand sqlCmnd = new SqlCommand(sqlQuery, sqlConn))
+                {
+                    sqlCmnd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
         }
 
         public static DataTable GetTableFromDbf(string tableName)
