@@ -39,15 +39,13 @@
             this.processLabel = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
             this.conjunction2 = new System.Windows.Forms.GroupBox();
-            this.tableProgress = new System.Windows.Forms.ProgressBar();
-            this.overallProgress = new System.Windows.Forms.ProgressBar();
             this.queryText2 = new System.Windows.Forms.TextBox();
             this.conjunction1 = new System.Windows.Forms.GroupBox();
-            this.tableLabel = new System.Windows.Forms.Label();
-            this.overallLabel = new System.Windows.Forms.Label();
             this.queryText1 = new System.Windows.Forms.TextBox();
             this.descriptionQueryGroup = new System.Windows.Forms.GroupBox();
             this.updateTableGroup = new System.Windows.Forms.GroupBox();
+            this.updateProgressBar = new System.Windows.Forms.ProgressBar();
+            this.updateStatus = new System.Windows.Forms.Label();
             this.conjunction2.SuspendLayout();
             this.conjunction1.SuspendLayout();
             this.descriptionQueryGroup.SuspendLayout();
@@ -144,7 +142,7 @@
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(153, 48);
+            this.updateButton.Location = new System.Drawing.Point(150, 33);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(100, 23);
             this.updateButton.TabIndex = 1;
@@ -162,24 +160,6 @@
             this.conjunction2.TabIndex = 2;
             this.conjunction2.TabStop = false;
             // 
-            // tableProgress
-            // 
-            this.tableProgress.Location = new System.Drawing.Point(114, 96);
-            this.tableProgress.Name = "tableProgress";
-            this.tableProgress.Size = new System.Drawing.Size(177, 13);
-            this.tableProgress.Step = 1;
-            this.tableProgress.TabIndex = 4;
-            this.tableProgress.Visible = false;
-            // 
-            // overallProgress
-            // 
-            this.overallProgress.Location = new System.Drawing.Point(114, 77);
-            this.overallProgress.Name = "overallProgress";
-            this.overallProgress.Size = new System.Drawing.Size(177, 13);
-            this.overallProgress.Step = 1;
-            this.overallProgress.TabIndex = 3;
-            this.overallProgress.Visible = false;
-            // 
             // queryText2
             // 
             this.queryText2.Location = new System.Drawing.Point(238, 55);
@@ -196,26 +176,6 @@
             this.conjunction1.Size = new System.Drawing.Size(75, 55);
             this.conjunction1.TabIndex = 1;
             this.conjunction1.TabStop = false;
-            // 
-            // tableLabel
-            // 
-            this.tableLabel.AutoSize = true;
-            this.tableLabel.Location = new System.Drawing.Point(65, 96);
-            this.tableLabel.Name = "tableLabel";
-            this.tableLabel.Size = new System.Drawing.Size(37, 13);
-            this.tableLabel.TabIndex = 6;
-            this.tableLabel.Text = "Table:";
-            this.tableLabel.Visible = false;
-            // 
-            // overallLabel
-            // 
-            this.overallLabel.AutoSize = true;
-            this.overallLabel.Location = new System.Drawing.Point(65, 77);
-            this.overallLabel.Name = "overallLabel";
-            this.overallLabel.Size = new System.Drawing.Size(43, 13);
-            this.overallLabel.TabIndex = 5;
-            this.overallLabel.Text = "Overall:";
-            this.overallLabel.Visible = false;
             // 
             // queryText1
             // 
@@ -241,17 +201,32 @@
             // 
             // updateTableGroup
             // 
-            this.updateTableGroup.Controls.Add(this.tableLabel);
-            this.updateTableGroup.Controls.Add(this.overallLabel);
-            this.updateTableGroup.Controls.Add(this.tableProgress);
-            this.updateTableGroup.Controls.Add(this.overallProgress);
+            this.updateTableGroup.Controls.Add(this.updateStatus);
+            this.updateTableGroup.Controls.Add(this.updateProgressBar);
             this.updateTableGroup.Controls.Add(this.processLabel);
             this.updateTableGroup.Controls.Add(this.updateButton);
-            this.updateTableGroup.Location = new System.Drawing.Point(143, 16);
+            this.updateTableGroup.Location = new System.Drawing.Point(145, 36);
             this.updateTableGroup.Name = "updateTableGroup";
-            this.updateTableGroup.Size = new System.Drawing.Size(398, 165);
+            this.updateTableGroup.Size = new System.Drawing.Size(398, 142);
             this.updateTableGroup.TabIndex = 4;
             this.updateTableGroup.TabStop = false;
+            // 
+            // updateProgressBar
+            // 
+            this.updateProgressBar.Location = new System.Drawing.Point(6, 75);
+            this.updateProgressBar.Name = "updateProgressBar";
+            this.updateProgressBar.Size = new System.Drawing.Size(386, 23);
+            this.updateProgressBar.Step = 1;
+            this.updateProgressBar.TabIndex = 3;
+            // 
+            // updateStatus
+            // 
+            this.updateStatus.AutoSize = true;
+            this.updateStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateStatus.Location = new System.Drawing.Point(153, 111);
+            this.updateStatus.Name = "updateStatus";
+            this.updateStatus.Size = new System.Drawing.Size(0, 16);
+            this.updateStatus.TabIndex = 4;
             // 
             // MainForm
             // 
@@ -289,14 +264,12 @@
         internal System.Windows.Forms.Label processLabel;
         internal System.Windows.Forms.Button updateButton;
         internal System.Windows.Forms.GroupBox conjunction2;
-        internal System.Windows.Forms.ProgressBar tableProgress;
-        internal System.Windows.Forms.ProgressBar overallProgress;
         internal System.Windows.Forms.TextBox queryText2;
         internal System.Windows.Forms.GroupBox conjunction1;
-        internal System.Windows.Forms.Label tableLabel;
-        internal System.Windows.Forms.Label overallLabel;
         internal System.Windows.Forms.TextBox queryText1;
         internal System.Windows.Forms.GroupBox descriptionQueryGroup;
         internal System.Windows.Forms.GroupBox updateTableGroup;
+        private System.Windows.Forms.ProgressBar updateProgressBar;
+        private System.Windows.Forms.Label updateStatus;
     }
 }

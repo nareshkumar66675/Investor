@@ -38,7 +38,7 @@ namespace Investor.Database
             }
         }
 
-        public void StartDBUpdate()
+        public void StartDBUpdate(IProgress<int> progress)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -48,7 +48,7 @@ namespace Investor.Database
 
             var produceTask = Task.Factory.StartNew(async () => await producer.Start(tables));
 
-            var consumeTask = Task.Factory.StartNew(() => consumer.Start());
+            var consumeTask = Task.Factory.StartNew(() => consumer.Start(progress));
 
             produceTask.Wait();
             consumeTask.Wait();

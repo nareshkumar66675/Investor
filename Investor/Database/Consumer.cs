@@ -15,8 +15,9 @@ namespace Investor.Database
         /// <summary>
         /// Starts a Process which consumes the data
         /// </summary>
-        public void Start()
+        public void Start(IProgress<int> progress)
         {
+            int completedCount = 0;
             // Iterate until Queue is empty
             while(!Queue.Collection.IsCompleted)
             {
@@ -28,11 +29,13 @@ namespace Investor.Database
                 if(tableData !=null)
                 {
                     ConsumeData(tableData);
+                    completedCount++;
+                    progress?.Report(completedCount);
                 }
-
-                // Clears the Queue
-                Queue.Clear();
             }
+
+            // Clears the Queue
+            Queue.Clear();
 
         }
 
