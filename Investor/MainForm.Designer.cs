@@ -44,8 +44,8 @@
             this.queryText1 = new System.Windows.Forms.TextBox();
             this.descriptionQueryGroup = new System.Windows.Forms.GroupBox();
             this.updateTableGroup = new System.Windows.Forms.GroupBox();
-            this.updateProgressBar = new System.Windows.Forms.ProgressBar();
             this.updateStatus = new System.Windows.Forms.Label();
+            this.updateProgressBar = new System.Windows.Forms.ProgressBar();
             this.conjunction2.SuspendLayout();
             this.conjunction1.SuspendLayout();
             this.descriptionQueryGroup.SuspendLayout();
@@ -60,7 +60,7 @@
             this.viewChartButton.TabIndex = 7;
             this.viewChartButton.Text = "View Chart";
             this.viewChartButton.UseVisualStyleBackColor = true;
-            this.viewChartButton.Click += new System.EventHandler(this.viewChartButton_Click);
+            this.viewChartButton.Click += new System.EventHandler(this.ViewChartButton_Click);
             // 
             // orOption1
             // 
@@ -123,7 +123,7 @@
             this.searchButton.TabIndex = 4;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // queryText3
             // 
@@ -148,7 +148,7 @@
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "Update Tables";
             this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // conjunction2
             // 
@@ -211,14 +211,6 @@
             this.updateTableGroup.TabIndex = 4;
             this.updateTableGroup.TabStop = false;
             // 
-            // updateProgressBar
-            // 
-            this.updateProgressBar.Location = new System.Drawing.Point(6, 75);
-            this.updateProgressBar.Name = "updateProgressBar";
-            this.updateProgressBar.Size = new System.Drawing.Size(386, 23);
-            this.updateProgressBar.Step = 1;
-            this.updateProgressBar.TabIndex = 3;
-            // 
             // updateStatus
             // 
             this.updateStatus.AutoSize = true;
@@ -227,6 +219,14 @@
             this.updateStatus.Name = "updateStatus";
             this.updateStatus.Size = new System.Drawing.Size(0, 16);
             this.updateStatus.TabIndex = 4;
+            // 
+            // updateProgressBar
+            // 
+            this.updateProgressBar.Location = new System.Drawing.Point(6, 75);
+            this.updateProgressBar.Name = "updateProgressBar";
+            this.updateProgressBar.Size = new System.Drawing.Size(386, 23);
+            this.updateProgressBar.Step = 1;
+            this.updateProgressBar.TabIndex = 3;
             // 
             // MainForm
             // 
@@ -238,7 +238,7 @@
             this.Controls.Add(this.descriptionQueryGroup);
             this.Controls.Add(this.updateTableGroup);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Investor";
             this.conjunction2.ResumeLayout(false);
             this.conjunction2.PerformLayout();
             this.conjunction1.ResumeLayout(false);

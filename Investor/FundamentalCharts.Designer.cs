@@ -3,12 +3,11 @@ using System;
 
 namespace Investor
 {
-    [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     partial class FundamentalCharts : System.Windows.Forms.Form
     {
+        private System.ComponentModel.IContainer components = null;
 
         //Form overrides dispose to clean up the component list.
-        [System.Diagnostics.DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)
         {
             try
@@ -26,11 +25,9 @@ namespace Investor
 
         //Required by the Windows Form Designer
 
-        private System.ComponentModel.IContainer components;
         //NOTE: The following procedure is required by the Windows Form Designer
         //It can be modified using the Windows Form Designer.  
         //Do not modify it using the code editor.
-        [System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
         {
             SoftwareFX.ChartFX.TitleDockable titleDockable1 = new SoftwareFX.ChartFX.TitleDockable();
@@ -70,7 +67,7 @@ namespace Investor
             this.A_Liab = new SoftwareFX.ChartFX.Chart();
             this.Q_Liab = new SoftwareFX.ChartFX.Chart();
             this.Q_PL = new SoftwareFX.ChartFX.Chart();
-            this.Q_CFL = new SoftwareFX.ChartFX.Chart();
+            this.Q_CF = new SoftwareFX.ChartFX.Chart();
             this.A_CF = new SoftwareFX.ChartFX.Chart();
             this.Q_EPS = new SoftwareFX.ChartFX.Chart();
             this.A_EPS = new SoftwareFX.ChartFX.Chart();
@@ -157,7 +154,7 @@ namespace Investor
             this.tableLayoutPanel1.Controls.Add(this.A_Liab, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.Q_Liab, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.Q_PL, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.Q_CFL, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.Q_CF, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.A_CF, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.Q_EPS, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.A_EPS, 0, 2);
@@ -397,21 +394,21 @@ namespace Investor
             // 
             // Q_CFL
             // 
-            this.Q_CFL.AxisY.LabelsFormat.Decimals = 0;
-            this.Q_CFL.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
-            this.Q_CFL.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
-            this.Q_CFL.LineWidth = 2;
-            this.Q_CFL.Location = new System.Drawing.Point(523, 799);
-            this.Q_CFL.Margin = new System.Windows.Forms.Padding(0);
-            this.Q_CFL.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
-            this.Q_CFL.Name = "Q_CFL";
-            this.Q_CFL.NSeries = 3;
-            this.Q_CFL.NValues = 10;
-            this.Q_CFL.SerLegBox = true;
-            this.Q_CFL.Size = new System.Drawing.Size(523, 260);
-            this.Q_CFL.TabIndex = 13;
+            this.Q_CF.AxisY.LabelsFormat.Decimals = 0;
+            this.Q_CF.DesignTimeData = "C:\\Program Files (x86)\\ChartFX for .NET 6.2\\Wizard\\MulltiSeries.txt";
+            this.Q_CF.Gallery = SoftwareFX.ChartFX.Gallery.Lines;
+            this.Q_CF.LineWidth = 2;
+            this.Q_CF.Location = new System.Drawing.Point(523, 799);
+            this.Q_CF.Margin = new System.Windows.Forms.Padding(0);
+            this.Q_CF.MarkerShape = SoftwareFX.ChartFX.MarkerShape.None;
+            this.Q_CF.Name = "Q_CFL";
+            this.Q_CF.NSeries = 3;
+            this.Q_CF.NValues = 10;
+            this.Q_CF.SerLegBox = true;
+            this.Q_CF.Size = new System.Drawing.Size(523, 260);
+            this.Q_CF.TabIndex = 13;
             titleDockable14.Text = "Quarterly - Cashflow";
-            this.Q_CFL.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
+            this.Q_CF.Titles.AddRange(new SoftwareFX.ChartFX.TitleDockable[] {
             titleDockable14});
             // 
             // A_CF
@@ -590,7 +587,7 @@ namespace Investor
         private SoftwareFX.ChartFX.Chart Q_PL;
         private SoftwareFX.ChartFX.Chart A_EPS;
         private SoftwareFX.ChartFX.Chart Q_EPS;
-        private SoftwareFX.ChartFX.Chart Q_CFL;
+        private SoftwareFX.ChartFX.Chart Q_CF;
         private SoftwareFX.ChartFX.Chart A_CF;
         private Chart Q_Ast;
         private Chart A_Liab;

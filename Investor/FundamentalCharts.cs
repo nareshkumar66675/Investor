@@ -15,96 +15,65 @@ namespace Investor
 {
     public partial class FundamentalCharts : Form
     {
-        public const int nYears = 7;
-        public const int nQuarters = 8;
         public FundamentalCharts()
         {
             InitializeComponent();
-            
-            DataTable dt = new DataTable();
-            DataRow dr = null;
-            string[,] info = new string[5, 3];
 
-            for (int i = 0; i <= 3; i++)
-            {
-                dt.Columns.Add("");
-            }
-
-            info[0, 0] = "mktcap";
-            info[0, 1] = "1234";
-            info[1, 0] = "prcSales";
-            info[1, 1] = "1234";
-            info[2, 0] = "eps";
-            info[2, 1] = "1234";
-            info[3, 0] = "outshares";
-            info[3, 1] = "1234";
-
-            dr = dt.NewRow();
-            dr[0] = info[0, 0];
-            dr[1] = info[0, 1];
-            dr[2] = info[3, 0];
-            dr[3] = info[3, 1];
-
-            dt.Rows.Add(dr);
-
-            dr = dt.NewRow();
-            dr[0] = info[1, 0];
-            dr[1] = info[1, 1];
-
-            dt.Rows.Add(dr);
-
-            dr = dt.NewRow();
-            dr[0] = info[2, 0];
-            dr[1] = info[2, 1];
-
-            dt.Rows.Add(dr);
-
-            A_Stats.DataSource = dt;
-
-            A_Stats.Width = dt.Columns.Count * A_Stats.Columns[0].Width;
-            A_Stats.Height = dt.Rows.Count * A_Stats.Rows[0].Height;
-            
         }
 
-        public void SetChartTitle(Chart chart,string title)
-        {
-            chart.Titles.Add(new TitleDockable());
-            chart.Titles[0].Text = title;
-            chart.Titles[0].Font = new Font("Arial", 10);
-            chart.Titles[0].Alignment = StringAlignment.Center;
-        }
-
-        public string[] ChangeColNameToQuart(string [] colNames)
+        /// <summary>
+        /// Converts annual Column name to Quarterly
+        /// </summary>
+        /// <param name="colNames">Annual Column Names</param>
+        /// <returns>Quarterly Column Names</returns>
+        public string[] ChangeColNameToQuart(string[] colNames)
         {
             List<string> resultCols = new List<string>();
             foreach (var col in colNames)
             {
-                if(col != null)
-                resultCols.Add(col.Replace("_y", "_q"));
+                if (col != null)
+                    resultCols.Add(col.Replace("_y", "_q"));
             }
             return resultCols.ToArray();
         }
+        /// <summary>
+        /// Converts Annual Data to Quarterly Data
+        /// </summary>
+        /// <param name="chartInfo">Annual Chart Info</param>
+        /// <returns>Quarterly Chart Info</returns>
         public ChartInfo GetQuartChartInfo(ChartInfo chartInfo)
         {
             ChartInfo resultInfo = new ChartInfo();
-            resultInfo.perend = "perend_q";
+            resultInfo.Perend = "perend_q";
             resultInfo.LineStyles.AddRange(chartInfo.LineStyles);
             resultInfo.colName = ChangeColNameToQuart(chartInfo.colName);
             resultInfo.legend = chartInfo.legend.ToArray();
-            resultInfo.nSeries = chartInfo.nSeries;
-            resultInfo.nvalues = 8;
+            resultInfo.NSeries = chartInfo.NSeries;
+            resultInfo.Nvalues = Const.QuarterlyCount;
 
             return resultInfo;
         }
 
-        public void ChartQuarterly(ChartInfo annualChartInfo, DataRow[] rows, Chart chart, string title)
+        /// <summary>
+        /// Uses Annual Chart Info to create Quarterly chart
+        /// </summary>
+        /// <param name="annualChartInfo"></param>
+        /// <param name="row"></param>
+        /// <param name="chart"></param>
+        /// <param name="title"></param>
+        public void ChartQuarterly(ChartInfo annualChartInfo, DataRow row, Chart chart, string title)
         {
             var qChartInfo = GetQuartChartInfo(annualChartInfo);
-            chart.OpenData(COD.Values, qChartInfo.nSeries, 7);
-            Task.Factory.StartNew(() => PlotChart(rows, chart, qChartInfo));
+            chart.OpenData(COD.Values, qChartInfo.NSeries, Const.QuarterlyCount);
+            Task.Factory.StartNew(() => PlotChart(row, chart, qChartInfo));
             //SetChartTitle(chart, title);
             chart.CloseData(COD.Values);
         }
+        /// <summary>
+        /// Get data needed for plotting
+        /// Sets metadata of charts
+        /// </summary>
+        /// <param name="ticker">Ticker Value</param>
         public void ShowChart(string ticker)
         {
             ChartInfo charttinfo = new ChartInfo();
@@ -122,13 +91,8 @@ namespace Investor
 
             //create the chartview form
             //populate charts with data from the dataset
-            DataRow[] selectedRows = null;
-            DataRow[] balanceRows = balanceData.Select();
-            //array of rows which will hold the row(s) selected
-            //to store value of column
-
-            //get the dataset row with the given ticker
-            selectedRows = dataTable.Select();
+            DataRow selectedRow = selectedRow = dataTable.Rows[0];
+            DataRow balanceRow = balanceData.Rows[0];
 
             //   Start ChartForm ------------------------------------------------------------------------------------
 
@@ -138,10 +102,10 @@ namespace Investor
             //Plot PL 
             #region PL
             ChartInfo plInfo = new ChartInfo();
-            Annual_PL.OpenData(COD.Values, 7, 7);
-            plInfo.nSeries = 7;
-            plInfo.nvalues = 7;
-            plInfo.perend = "perend_y";
+            Annual_PL.OpenData(COD.Values, 7, Const.AnnualCount);
+            plInfo.NSeries = 7;
+            plInfo.Nvalues = Const.AnnualCount;
+            plInfo.Perend = "perend_y";
             plInfo.colName[0] = "sales_y";
             plInfo.colName[1] = "cgs_y";
             plInfo.colName[2] = "opexp_y";
@@ -163,19 +127,19 @@ namespace Investor
             plInfo.legend[4] = "EBIT";
             plInfo.legend[5] = "NonRec";
             plInfo.legend[6] = "NetInc";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, Annual_PL, plInfo));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, Annual_PL, plInfo));
             //SetChartTitle(Annual_PL, "Annual - PL");
 
-            ChartQuarterly(plInfo, selectedRows, Q_PL, "Quarterly - PL");
+            ChartQuarterly(plInfo, selectedRow, Q_PL, "Quarterly - PL");
             #endregion
 
             //Plot Expenses
             #region EXP
             ChartInfo expInfo = new ChartInfo();
-            A_Exp.OpenData(COD.Values, 7, 7);
-            expInfo.nSeries = 7;
-            expInfo.nvalues = 7;
-            expInfo.perend = "perend_y";
+            A_Exp.OpenData(COD.Values, 7, Const.AnnualCount);
+            expInfo.NSeries = 7;
+            expInfo.Nvalues = Const.AnnualCount;
+            expInfo.Perend = "perend_y";
             expInfo.colName[0] = "dep_y";
             expInfo.colName[1] = "rd_y";
             expInfo.colName[2] = "int_y";
@@ -197,20 +161,20 @@ namespace Investor
             expInfo.legend[4] = "otExp";
             expInfo.legend[5] = "intNo";
             expInfo.legend[6] = "adj";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, A_Exp, expInfo));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, A_Exp, expInfo));
             //SetChartTitle(A_Exp, "Annual - Expenses");
             A_Exp.CloseData(COD.Values);
 
-            ChartQuarterly(expInfo, selectedRows, Q_Exp, "Quarterly - Expenses");
+            ChartQuarterly(expInfo, selectedRow, Q_Exp, "Quarterly - Expenses");
             #endregion
 
             //Plot EPS
             #region EPS
             ChartInfo epsInfo = new ChartInfo();
-            A_EPS.OpenData(COD.Values, 7, 7);
-            epsInfo.nSeries = 7;
-            epsInfo.nvalues = 7;
-            epsInfo.perend = "perend_y";
+            A_EPS.OpenData(COD.Values, 7, Const.AnnualCount);
+            epsInfo.NSeries = 7;
+            epsInfo.Nvalues = Const.AnnualCount;
+            epsInfo.Perend = "perend_y";
             epsInfo.colName[0] = "eps_y";
             epsInfo.colName[1] = "epscon_y";
             epsInfo.colName[2] = "epsd_y";
@@ -232,20 +196,20 @@ namespace Investor
             epsInfo.legend[4] = "espDN";
             epsInfo.legend[5] = "divT";
             epsInfo.legend[6] = "divNS";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, A_EPS, epsInfo));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, A_EPS, epsInfo));
             //SetChartTitle(A_EPS, "Annual - EPS");
             A_EPS.CloseData(COD.Values);
 
-            ChartQuarterly(epsInfo, selectedRows, Q_EPS, "Quarterly - EPS");
+            ChartQuarterly(epsInfo, selectedRow, Q_EPS, "Quarterly - EPS");
             #endregion
 
             //Plot CFL
             #region CF
             ChartInfo cfInfo = new ChartInfo();
-            A_CF.OpenData(COD.Values, 3, 7);
-            cfInfo.nSeries = 3;
-            cfInfo.nvalues = 7;
-            cfInfo.perend = "perend_y";
+            A_CF.OpenData(COD.Values, 3, Const.AnnualCount);
+            cfInfo.NSeries = 3;
+            cfInfo.Nvalues = Const.AnnualCount;
+            cfInfo.Perend = "perend_y";
             cfInfo.colName[0] = "tco_y";
             cfInfo.colName[1] = "tci_y";
             cfInfo.colName[2] = "tcf_y";
@@ -255,20 +219,20 @@ namespace Investor
             cfInfo.legend[0] = "tco";
             cfInfo.legend[1] = "tci";
             cfInfo.legend[2] = "tcf";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF, cfInfo));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, A_CF, cfInfo));
             //SetChartTitle(A_CF, "Annual - Cashflow");
             A_CF.CloseData(COD.Values);
 
-            ChartQuarterly(cfInfo, selectedRows, Q_CFL, "Quarterly - Cashflow");
+            ChartQuarterly(cfInfo, selectedRow, Q_CF, "Quarterly - Cashflow");
             #endregion
 
             //Plot CFL 2
             #region CF2
             ChartInfo cf2Info = new ChartInfo();
-            A_CF2.OpenData(COD.Values, 4, 7);
-            cf2Info.nSeries = 4;
-            cf2Info.nvalues = 7;
-            cf2Info.perend = "perend_y";
+            A_CF2.OpenData(COD.Values, 4, Const.AnnualCount);
+            cf2Info.NSeries = 4;
+            cf2Info.Nvalues = Const.AnnualCount;
+            cf2Info.Perend = "perend_y";
             cf2Info.colName[0] = "dep_cf_y";
             cf2Info.colName[1] = "ce_y";
             cf2Info.colName[2] = "divpaid_y";
@@ -281,40 +245,40 @@ namespace Investor
             cf2Info.legend[1] = "ce";
             cf2Info.legend[2] = "div";
             cf2Info.legend[3] = "ere";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF2, cf2Info));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, A_CF2, cf2Info));
             //SetChartTitle(A_CF2, "Annual - Cashflow 2");
             A_CF2.CloseData(COD.Values);
 
-            ChartQuarterly(cf2Info, selectedRows, Q_CF2, "Quarterly - Cashflow 2");
+            ChartQuarterly(cf2Info, selectedRow, Q_CF2, "Quarterly - Cashflow 2");
             #endregion
 
             //Plot CFL 3
             #region CF3
             ChartInfo cf3Info = new ChartInfo();
-            A_CF3.OpenData(COD.Values, 2, 7);
-            cf3Info.nSeries = 2;
-            cf3Info.nvalues = 7;
-            cf3Info.perend = "perend_y";
+            A_CF3.OpenData(COD.Values, 2, Const.AnnualCount);
+            cf3Info.NSeries = 2;
+            cf3Info.Nvalues = Const.AnnualCount;
+            cf3Info.Perend = "perend_y";
             cf3Info.colName[0] = "cfps_y";
             cf3Info.colName[1] = "fcfps_y";
             cf3Info.LineStyles.Insert(0, new LineStyle(Color.Blue, DashStyle.Solid));
             cf3Info.LineStyles.Insert(1, new LineStyle(Color.Green, DashStyle.Solid));
             cf3Info.legend[0] = "cfps";
             cf3Info.legend[1] = "fcfps";
-            Task.Factory.StartNew(() => PlotChart(selectedRows, A_CF3, cf3Info));
+            Task.Factory.StartNew(() => PlotChart(selectedRow, A_CF3, cf3Info));
             //SetChartTitle(A_CF3, "Annual - Cashflow 3");
             A_CF3.CloseData(COD.Values);
 
-            ChartQuarterly(cf3Info, selectedRows, Q_CF3, "Quarterly - Cashflow 3");
+            ChartQuarterly(cf3Info, selectedRow, Q_CF3, "Quarterly - Cashflow 3");
             #endregion
 
             //Plot Assets
             #region A_Ast
             ChartInfo astInfo = new ChartInfo();
-            A_Ast.OpenData(COD.Values, 5, 7);
-            astInfo.nSeries = 5;
-            astInfo.nvalues = 7;
-            astInfo.perend = "perend_y";
+            A_Ast.OpenData(COD.Values, 5, Const.AnnualCount);
+            astInfo.NSeries = 5;
+            astInfo.Nvalues = Const.AnnualCount;
+            astInfo.Perend = "perend_y";
             astInfo.colName[0] = "cash_y";
             astInfo.colName[1] = "stinv_y";
             astInfo.colName[2] = "ar_y";
@@ -330,21 +294,21 @@ namespace Investor
             astInfo.legend[2] = "AccRcv";
             astInfo.legend[3] = "Inv";
             astInfo.legend[4] = "curAst";
-            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Ast, astInfo));
+            Task.Factory.StartNew(() => PlotChart(balanceRow, A_Ast, astInfo));
             //SetChartTitle(A_Ast, "Annual - Asset");
             A_Ast.CloseData(COD.Values);
 
-            ChartQuarterly(astInfo, balanceRows, Q_Ast, "Quarterly - Asset");
+            ChartQuarterly(astInfo, balanceRow, Q_Ast, "Quarterly - Asset");
             #endregion
 
 
             //Plot Annual Assets - Long term
             #region A_LT
             ChartInfo ltInfo = new ChartInfo();
-            A_LT.OpenData(COD.Values, 4, 7);
-            ltInfo.nSeries = 4;
-            ltInfo.nvalues = 7;
-            ltInfo.perend = "perend_y";
+            A_LT.OpenData(COD.Values, 4, Const.AnnualCount);
+            ltInfo.NSeries = 4;
+            ltInfo.Nvalues = Const.AnnualCount;
+            ltInfo.Perend = "perend_y";
             ltInfo.colName[0] = "nppe_y";
             ltInfo.colName[1] = "ltinv_y";
             ltInfo.colName[2] = "gwi_y";
@@ -357,20 +321,20 @@ namespace Investor
             ltInfo.legend[1] = "longInv";
             ltInfo.legend[2] = "good";
             ltInfo.legend[3] = "longAst";
-            Task.Factory.StartNew(() => PlotChart(balanceRows, A_LT, ltInfo));
+            Task.Factory.StartNew(() => PlotChart(balanceRow, A_LT, ltInfo));
             //SetChartTitle(A_LT, "Annual - Asset(Long Term)");
             A_LT.CloseData(COD.Values);
 
-            ChartQuarterly(ltInfo, balanceRows, Q_LT, "Quarterly - Asset(Long Term)");
+            ChartQuarterly(ltInfo, balanceRow, Q_LT, "Quarterly - Asset(Long Term)");
             #endregion
 
             //Plot Annual Liability
             #region A_Liab
             ChartInfo liabInfo = new ChartInfo();
-            A_Liab.OpenData(COD.Values, 5, 7);
-            liabInfo.nSeries = 5;
-            liabInfo.nvalues = 7;
-            liabInfo.perend = "perend_y";
+            A_Liab.OpenData(COD.Values, 5, Const.AnnualCount);
+            liabInfo.NSeries = 5;
+            liabInfo.Nvalues = Const.AnnualCount;
+            liabInfo.Perend = "perend_y";
             liabInfo.colName[0] = "ap_y";
             liabInfo.colName[1] = "stdebt_y";
             liabInfo.colName[2] = "ocl_y";
@@ -386,24 +350,24 @@ namespace Investor
             liabInfo.legend[2] = "otCrLi";
             liabInfo.legend[3] = "ltDbt";
             liabInfo.legend[4] = "otLtLi";
-            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Liab, liabInfo));
+            Task.Factory.StartNew(() => PlotChart(balanceRow, A_Liab, liabInfo));
             //SetChartTitle(A_Liab, "Annual - Liability");
             A_Liab.CloseData(COD.Values);
 
-            ChartQuarterly(liabInfo, balanceRows, Q_Liab, "Quarterly - Liability");
+            ChartQuarterly(liabInfo, balanceRow, Q_Liab, "Quarterly - Liability");
             #endregion
 
 
             //Plot Annual Liability
             #region A_Eqt
             ChartInfo eqtInfo = new ChartInfo();
-            A_Eqt.OpenData(COD.Values, 4, 7);
-            eqtInfo.nSeries = 4;
-            eqtInfo.nvalues = 7;
-            eqtInfo.perend = "perend_y";
+            A_Eqt.OpenData(COD.Values, 4, Const.AnnualCount);
+            eqtInfo.NSeries = 4;
+            eqtInfo.Nvalues = Const.AnnualCount;
+            eqtInfo.Perend = "perend_y";
             eqtInfo.colName[0] = "pref_y";
             eqtInfo.colName[1] = "retearn_y";
-            eqtInfo.colName[2] = "equity_y"; 
+            eqtInfo.colName[2] = "equity_y";
             eqtInfo.colName[3] = "minor_y";
             eqtInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#ff0000"), DashStyle.Solid));
             eqtInfo.LineStyles.Insert(1, new LineStyle(ColorTranslator.FromHtml("#e60000"), DashStyle.Dash));
@@ -413,57 +377,58 @@ namespace Investor
             eqtInfo.legend[1] = "retEa";
             eqtInfo.legend[2] = "csEq";
             eqtInfo.legend[3] = "minor";
-            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Eqt, eqtInfo));
+            Task.Factory.StartNew(() => PlotChart(balanceRow, A_Eqt, eqtInfo));
             //SetChartTitle(A_Eqt, "Annual - Equity");
             A_Eqt.CloseData(COD.Values);
 
-            ChartQuarterly(eqtInfo, balanceRows, Q_Eqt, "Quarterly - Equity");
+            ChartQuarterly(eqtInfo, balanceRow, Q_Eqt, "Quarterly - Equity");
             #endregion
 
             //Plot Annual Book Value
             #region A_Book
             ChartInfo aBookInfo = new ChartInfo();
-            A_Book.OpenData(COD.Values, 1, 7);
-            aBookInfo.nSeries = 1;
-            aBookInfo.nvalues = 7;
-            aBookInfo.perend = "perend_y";
+            A_Book.OpenData(COD.Values, 1, Const.AnnualCount);
+            aBookInfo.NSeries = 1;
+            aBookInfo.Nvalues = Const.AnnualCount;
+            aBookInfo.Perend = "perend_y";
             aBookInfo.colName[0] = "bvps_y";
             aBookInfo.LineStyles.Insert(0, new LineStyle(ColorTranslator.FromHtml("#1b4b1c"), DashStyle.Solid));
             A_Book.LegendBox = false;
-            Task.Factory.StartNew(() => PlotChart(balanceRows, A_Book, aBookInfo));
+            Task.Factory.StartNew(() => PlotChart(balanceRow, A_Book, aBookInfo));
             //SetChartTitle(A_Book, "Annual - Book Value");
             A_Book.SerLegBox = false;
             A_Book.CloseData(COD.Values);
 
             Q_Book.SerLegBox = false;
-            ChartQuarterly(aBookInfo, balanceRows, Q_Book, "Quarterly - Book Value");
+            ChartQuarterly(aBookInfo, balanceRow, Q_Book, "Quarterly - Book Value");
             #endregion
 
         }
 
-        private void PlotChart(DataRow[] selectedRows, Chart chart, ChartInfo charttinfo)
+        private void PlotChart(DataRow selectedRow, Chart chart, ChartInfo charttinfo)
         {
             object item = null;
-            int ii = 0;
-            int iii = 0;
+            int nValue = 0;
+            int nSeries = 0;
             int j = 0;
-            
-                ii = charttinfo.nvalues;
-                iii = charttinfo.nSeries;
-                j = 1;
-            chart.BeginInvoke((MethodInvoker)delegate {
-            //set x-axis labels
-            for (int i = ii; i >= 1; i += -1)
+
+            nValue = charttinfo.Nvalues;
+            nSeries = charttinfo.NSeries;
+            j = 1;
+            chart.BeginInvoke((MethodInvoker)delegate
+            {
+                //set x-axis labels
+                for (int i = nValue; i >= 1; i += -1)
                 {
-                    item = selectedRows[0][charttinfo.perend + i.ToString()];
+                    item = selectedRow[charttinfo.Perend + i.ToString()];
                     if (((!object.ReferenceEquals(item, DBNull.Value)) && (!(i % 2 == 0))))
                     {
-                    chart.AxisX.Label[0 + (ii - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
+                        chart.AxisX.Label[0 + (nValue - i)] = System.DateTime.Parse(item.ToString()).ToString("MM/yy");
 
                     }
                     else
                     {
-                        chart.AxisX.Label[0 + (ii - i)] = "";
+                        chart.AxisX.Label[0 + (nValue - i)] = "";
                     }
                 }
                 chart.AxisY.ForceZero = false;
@@ -471,39 +436,38 @@ namespace Investor
                 chart.AxisX.TickMark = TickMark.Outside;
                 chart.AxisX.LabelAngle = 0;
 
-
-
                 //charttinfo.nSeries Step -1 'charttinfo.nSeries - 1  ' 2 To 2  '1 To charttinfo.nSeries
-                for (j = 0; j <= (iii - 1); j++)
+                for (j = 0; j <= (nSeries - 1); j++)
                 {
                     //quarterly totextp
-                    for (int i = ii; i >= 1; i += -1)
+                    for (int i = nValue; i >= 1; i += -1)
                     {
-                        //stringg = charttinfo.colName(j)
-                        item = selectedRows[0][charttinfo.colName[j] + i.ToString()];
+                        item = selectedRow[charttinfo.colName[j] + i.ToString()];
                         if (((!object.ReferenceEquals(item, DBNull.Value))))
                         {
-                            
-                        
                             // Running on the UI thread
-                            chart.Value[j, 0 + (ii - i)] = Convert.ToDouble(item);
-                        
-                            //objwriter.Write(item);
+                            chart.Value[j, 0 + (nValue - i)] = Convert.ToDouble(item);
                         }
                         else
                         {
                             //chart.Value[j, 0 + (ii - i)] =  null;
-                        
+
                         }
                     }
                     chart.Series[j].Color = charttinfo.LineStyles[j].LineColor;
                     chart.Series[j].LineStyle = charttinfo.LineStyles[j].DashStyle;
                     chart.Series[j].Legend = charttinfo.legend[j];
 
-            }
+                }
             });
 
         }
-
+        public void SetChartTitle(Chart chart, string title)
+        {
+            chart.Titles.Add(new TitleDockable());
+            chart.Titles[0].Text = title;
+            chart.Titles[0].Font = new Font("Arial", 10);
+            chart.Titles[0].Alignment = StringAlignment.Center;
+        }
     }
 }

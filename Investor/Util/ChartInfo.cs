@@ -21,20 +21,17 @@ namespace Investor.Util
     }
     public class ChartInfo
     {
-        public int nSeries;
-        public int nvalues; // # of values in easch series
+        public int NSeries { get; set; }
+        public int Nvalues { get; set; } // # of values in easch series
         public string[] colName;
         public string[] legend;
-        public int[] linewidth;
-        public int[,] rgb;
-        public string perend;
+        public string Perend { get; set; }
         public List<LineStyle> LineStyles { get; set; }
 
         public ChartInfo()
         {
             colName = new string[12];
             legend = new string[12];
-            rgb = new int[12, 4];
             LineStyles = new List<LineStyle>();
         }
     }

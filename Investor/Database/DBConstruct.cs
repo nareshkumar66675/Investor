@@ -38,10 +38,10 @@ namespace Investor.Database
             }
         }
 
+        // Starts the DB Update Asynchronously
         public void StartDBUpdate(IProgress<int> progress)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
+
             Producer producer = new Producer();
             Consumer consumer = new Consumer();
             var tables = Specs; //Specs.Where(t => Const.TableNames.Any(x => x == t.TableName)).ToList();
@@ -52,9 +52,7 @@ namespace Investor.Database
 
             produceTask.Wait();
             consumeTask.Wait();
-            sw.Stop();
 
-            Console.WriteLine($"Elapsed : {sw.ElapsedMilliseconds}");
         }
 
 
