@@ -46,5 +46,12 @@ namespace Portfolio
             });
 
         }
+
+        private void AddNewPrtfBtn_Click(object sender, EventArgs e)
+        {
+            AddPortfolio addPortfolio = new AddPortfolio();
+            addPortfolio.Owner = this;
+            addPortfolio.Show();
+        }
     }
 }

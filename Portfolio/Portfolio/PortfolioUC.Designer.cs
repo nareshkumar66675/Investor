@@ -52,19 +52,21 @@
             // OtherDtl
             // 
             this.OtherDtl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.OtherDtl.Font = new System.Drawing.Font("Calibri", 6.792453F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OtherDtl.ForeColor = System.Drawing.SystemColors.ControlText;
             this.OtherDtl.Location = new System.Drawing.Point(179, 53);
             this.OtherDtl.Name = "OtherDtl";
             this.OtherDtl.Size = new System.Drawing.Size(112, 111);
             this.OtherDtl.TabIndex = 2;
             this.OtherDtl.Text = "Sample Space";
+            this.OtherDtl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TickerListView
             // 
             this.TickerListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TickerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Tickers});
-            this.TickerListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.22642F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TickerListView.Font = new System.Drawing.Font("Calibri", 12.22642F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TickerListView.ForeColor = System.Drawing.Color.Gray;
             this.TickerListView.Location = new System.Drawing.Point(13, 53);
             this.TickerListView.Name = "TickerListView";
@@ -76,7 +78,7 @@
             // PortfolioNameLbl
             // 
             this.PortfolioNameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.PortfolioNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PortfolioNameLbl.Font = new System.Drawing.Font("Calibri", 12.22642F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PortfolioNameLbl.Location = new System.Drawing.Point(13, 10);
             this.PortfolioNameLbl.Name = "PortfolioNameLbl";
             this.PortfolioNameLbl.Size = new System.Drawing.Size(278, 28);
