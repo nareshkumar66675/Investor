@@ -28,12 +28,38 @@ namespace Portfolio.Portfolio
             });
 
             TickerListView.Refresh();
+
+            if (HasChildren)
+                AddOnMouseClickHandlerRecursive(Controls);
+        }
+
+        private void AddOnMouseClickHandlerRecursive(ControlCollection controls)
+        {
+            foreach (Control control in controls)
+            {
+                control.MouseClick += PortfolioUC_MouseClick;
+
+                if (control.HasChildren)
+                    AddOnMouseClickHandlerRecursive(control.Controls);
+            }
+        }
+
+        private void PortfolioUC_MouseClick(object sender, MouseEventArgs e)
+        {
+            PortfolioForm portfolioForm = new PortfolioForm();
+            portfolioForm.Show();
         }
     }
     public class PortfolioUCModel
     {
+        public int PortfolioId { get; set; }
         public string PortfolioName { get; set; }
         public List<string> Tickers { get; set; }
+
+        public PortfolioUCModel()
+        {
+
+        }
 
         public PortfolioUCModel(string portfolioName, List<string> tickers)
         {

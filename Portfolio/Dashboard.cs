@@ -1,4 +1,6 @@
-﻿using Portfolio.Portfolio;
+﻿using Portfolio.Database.Portfolio;
+using Portfolio.Portfolio;
+using Portfolio.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,22 +19,32 @@ namespace Portfolio
         {
             InitializeComponent();
 
-            List<string> tickers = new List<string>(new string[] { "fvv", "vfv" });
+            InitializeDashboard();
 
-            PortfolioUCModel portfolioUCModel = new PortfolioUCModel("Portfolio Name", tickers);
+        }
 
-            //for (int i = 0; i < 6; i++)
+        private void InitializeDashboard()
+        {
+            var prtfData = PortfolioAccess.GetPortfolioDataForDashboard();
+
+            var prtfDataList = prtfData.AsEnumerable()
+                               .GroupBy(x => new { ID= x.Field<int>("PortfolioID"),PortfolionName= x.Field<string>("PortfolioName") })
+                               .Select(grp => new PortfolioUCModel
+                               {
+                                   PortfolioId = grp.Key.ID,
+                                   PortfolioName = grp.Key.PortfolionName,
+                                   Tickers = grp.Select(ticker => ticker.Field<string>("Ticker")).ToList()
+                                }).ToList();
+
+            // Set Table Size
+            DashboardTblLyt.ColumnCount = Constant.DashboardColumnCount;
+            DashboardTblLyt.RowCount = (prtfDataList.Count + Constant.DashboardColumnCount - 1) / Constant.DashboardColumnCount;
+
+            prtfDataList.ForEach(prtf =>
             {
-                DashboardTblLyt.ColumnCount = 3;
-                DashboardTblLyt.RowCount = 2;
+                DashboardTblLyt.Controls.Add(new PortfolioUC(prtf));
+            });
 
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 0, 0);
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 1, 0);
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 2, 0);
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 0, 1);
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 1, 1);
-                DashboardTblLyt.Controls.Add(new PortfolioUC(portfolioUCModel), 2, 1);
-            }
         }
     }
 }
