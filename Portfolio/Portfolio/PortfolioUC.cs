@@ -13,7 +13,7 @@ namespace Portfolio.Portfolio
 
     public partial class PortfolioUC : UserControl
     {
-
+        public PortfolioUCModel PortfolioData { get; set; }
         public PortfolioUC(PortfolioUCModel portfolioUCModel)
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Portfolio.Portfolio
             });
 
             TickerListView.Refresh();
-
+            PortfolioData = portfolioUCModel;
             if (HasChildren)
                 AddOnMouseClickHandlerRecursive(Controls);
         }
@@ -46,7 +46,7 @@ namespace Portfolio.Portfolio
 
         private void PortfolioUC_MouseClick(object sender, MouseEventArgs e)
         {
-            PortfolioForm portfolioForm = new PortfolioForm();
+            PortfolioForm portfolioForm = new PortfolioForm(PortfolioData.PortfolioId);
             portfolioForm.Show();
         }
     }

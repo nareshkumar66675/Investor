@@ -43,9 +43,8 @@
             this.DashboardTblLyt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.DashboardTblLyt.Location = new System.Drawing.Point(12, 12);
             this.DashboardTblLyt.Name = "DashboardTblLyt";
-            this.DashboardTblLyt.RowCount = 2;
-            this.DashboardTblLyt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.DashboardTblLyt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.DashboardTblLyt.RowCount = 1;
+            this.DashboardTblLyt.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.DashboardTblLyt.Size = new System.Drawing.Size(1106, 548);
             this.DashboardTblLyt.TabIndex = 0;
             // 

@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PortfolioGV = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PrtfNameLbl = new System.Windows.Forms.Label();
             this.prtfTextBox = new System.Windows.Forms.TextBox();
+            this.PrtfNameLbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
+            this.Ticker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PortfolioGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +48,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.PortfolioGV, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
@@ -59,14 +61,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(810, 548);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // dataGridView1
+            // PortfolioGV
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 2);
-            this.dataGridView1.Location = new System.Drawing.Point(3, 73);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(804, 418);
-            this.dataGridView1.TabIndex = 0;
+            this.PortfolioGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PortfolioGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Ticker,
+            this.CompanyName});
+            this.tableLayoutPanel1.SetColumnSpan(this.PortfolioGV, 2);
+            this.PortfolioGV.Location = new System.Drawing.Point(3, 73);
+            this.PortfolioGV.Name = "PortfolioGV";
+            this.PortfolioGV.Size = new System.Drawing.Size(804, 418);
+            this.PortfolioGV.TabIndex = 0;
             // 
             // panel1
             // 
@@ -78,16 +83,6 @@
             this.panel1.Size = new System.Drawing.Size(804, 64);
             this.panel1.TabIndex = 1;
             // 
-            // PrtfNameLbl
-            // 
-            this.PrtfNameLbl.AutoSize = true;
-            this.PrtfNameLbl.Font = new System.Drawing.Font("Calibri", 10.86792F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrtfNameLbl.Location = new System.Drawing.Point(14, 21);
-            this.PrtfNameLbl.Name = "PrtfNameLbl";
-            this.PrtfNameLbl.Size = new System.Drawing.Size(117, 21);
-            this.PrtfNameLbl.TabIndex = 0;
-            this.PrtfNameLbl.Text = "Portfolio Name";
-            // 
             // prtfTextBox
             // 
             this.prtfTextBox.Font = new System.Drawing.Font("Calibri", 10.18868F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -96,23 +91,47 @@
             this.prtfTextBox.Size = new System.Drawing.Size(361, 26);
             this.prtfTextBox.TabIndex = 1;
             // 
+            // PrtfNameLbl
+            // 
+            this.PrtfNameLbl.AutoSize = true;
+            this.PrtfNameLbl.Font = new System.Drawing.Font("Calibri", 10.86792F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrtfNameLbl.Location = new System.Drawing.Point(14, 21);
+            this.PrtfNameLbl.Name = "PrtfNameLbl";
+            this.PrtfNameLbl.Size = new System.Drawing.Size(113, 19);
+            this.PrtfNameLbl.TabIndex = 0;
+            this.PrtfNameLbl.Text = "Portfolio Name";
+            // 
             // panel2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.SaveBtn);
             this.panel2.Location = new System.Drawing.Point(3, 497);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(804, 48);
             this.panel2.TabIndex = 2;
             // 
-            // button1
+            // SaveBtn
             // 
-            this.button1.Location = new System.Drawing.Point(327, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.SaveBtn.Location = new System.Drawing.Point(327, 3);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(130, 36);
+            this.SaveBtn.TabIndex = 0;
+            this.SaveBtn.Text = "Save";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // Ticker
+            // 
+            this.Ticker.HeaderText = "Ticker";
+            this.Ticker.MinimumWidth = 25;
+            this.Ticker.Name = "Ticker";
+            // 
+            // CompanyName
+            // 
+            this.CompanyName.HeaderText = "Company Name";
+            this.CompanyName.MinimumWidth = 25;
+            this.CompanyName.Name = "CompanyName";
+            this.CompanyName.Width = 150;
             // 
             // AddPortfolio
             // 
@@ -123,7 +142,7 @@
             this.Name = "AddPortfolio";
             this.Text = "AddPortfolio";
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PortfolioGV)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -134,11 +153,13 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView PortfolioGV;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox prtfTextBox;
         private System.Windows.Forms.Label PrtfNameLbl;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ticker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyName;
     }
 }

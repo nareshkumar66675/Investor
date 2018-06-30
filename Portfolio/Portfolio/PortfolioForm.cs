@@ -12,7 +12,7 @@ namespace Portfolio.Portfolio
 {
     public partial class PortfolioForm : Form
     {
-        public PortfolioForm()
+        public PortfolioForm(int PortfolioID)
         {
             InitializeComponent();
         }
