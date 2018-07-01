@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Portfolio.Database.Portfolio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,34 @@ namespace Portfolio.Portfolio
 {
     public partial class PortfolioForm : Form
     {
-        public PortfolioForm(int PortfolioID)
+        public PortfolioFormModel PortfolioFormData { get; set; }
+        public PortfolioForm(PortfolioFormModel portfolioFormModel)
         {
             InitializeComponent();
+
+            PortfolioFormData = portfolioFormModel;
+            this.Text = PortfolioFormData.PortfolioName;
+            PrtfNameLbl.Text = PortfolioFormData.PortfolioName;
         }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            var result = PortfolioAccess.DeletePortfolio(PortfolioFormData.PortfolioID);
+
+            if (result)
+            {
+                MessageBox.Show(this,"Portfolio Deleted","Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+                MessageBox.Show(this, "Portfolio Deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+    }
+
+    public class PortfolioFormModel
+    {
+        public int PortfolioID { get; set; }
+        public string PortfolioName { get; set; }
     }
 }

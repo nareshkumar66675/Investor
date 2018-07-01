@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,41 @@ namespace Portfolio.Database.Portfolio
             return dataTable;
         }
 
+        public static bool DeletePortfolio(int portfolioID)
+        {
+            using (SqlConnection conn = new SqlConnection(Constant.ConnectionString))
+            {
+                conn.Open();
+                var trans = conn.BeginTransaction("DeletePortfolio");
+                try
+                {
+                    string deleteTickers = $"Delete from Tickers where PortfolioID=@prtfID";
+                    using (SqlCommand cmd = new SqlCommand(deleteTickers, conn))
+                    {
+                        cmd.Transaction = trans;
+                        cmd.Parameters.AddWithValue("@prtfID", portfolioID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    string deletePrtf = $"Delete from Portfolio where PortfolioID=@prtfID";
+                    using (SqlCommand cmd = new SqlCommand(deletePrtf, conn))
+                    {
+                        cmd.Transaction = trans;
+                        cmd.Parameters.AddWithValue("@prtfID", portfolioID);
+                        cmd.ExecuteNonQuery();
+                    }
+                    trans.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback("DeletePortfolio");
+                    //EventLog.WriteEntry("Investor","Delete Portfolio - " + ex.Message, EventLogEntryType.Error);
+                    return false;
+                }
+            }
+        }
+
         public static void CreatePortfolio(string PortfolioName, DataTable portfolioDT)
         {
             using (SqlConnection conn = new SqlConnection(Constant.ConnectionString))
@@ -68,6 +104,7 @@ namespace Portfolio.Database.Portfolio
                 catch (Exception ex)
                 {
                     trans.Rollback("CreatePortfolio");
+                    //EventLog.WriteEntry("Investor", "Create Portfolio - " + ex.Message, EventLogEntryType.Error);
                     throw ex;
                 }
             }

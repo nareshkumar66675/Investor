@@ -36,6 +36,8 @@ namespace Portfolio
                                    Tickers = grp.Select(ticker => ticker.Field<string>("Ticker")).ToList()
                                 }).ToList();
 
+            DashboardTblLyt.Controls.Clear();
+
             // Set Table Size
             DashboardTblLyt.ColumnCount = Constant.DashboardColumnCount;
             DashboardTblLyt.RowCount = (prtfDataList.Count + Constant.DashboardColumnCount - 1) / Constant.DashboardColumnCount;
@@ -52,6 +54,11 @@ namespace Portfolio
             AddPortfolio addPortfolio = new AddPortfolio();
             addPortfolio.Owner = this;
             addPortfolio.Show();
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            InitializeDashboard();
         }
     }
 }

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Portfolio.Util;
 
 namespace Portfolio.Portfolio
 {
 
     public partial class PortfolioUC : UserControl
     {
-        public PortfolioUCModel PortfolioData { get; set; }
+        public PortfolioUCModel PortfolioUCData { get; set; }
         public PortfolioUC(PortfolioUCModel portfolioUCModel)
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Portfolio.Portfolio
             });
 
             TickerListView.Refresh();
-            PortfolioData = portfolioUCModel;
+            PortfolioUCData = portfolioUCModel;
             if (HasChildren)
                 AddOnMouseClickHandlerRecursive(Controls);
         }
@@ -46,7 +47,8 @@ namespace Portfolio.Portfolio
 
         private void PortfolioUC_MouseClick(object sender, MouseEventArgs e)
         {
-            PortfolioForm portfolioForm = new PortfolioForm(PortfolioData.PortfolioId);
+            var portfolioFormData = PortfolioUCData.PortfolioFormToUC();
+            PortfolioForm portfolioForm = new PortfolioForm(portfolioFormData);
             portfolioForm.Show();
         }
     }
