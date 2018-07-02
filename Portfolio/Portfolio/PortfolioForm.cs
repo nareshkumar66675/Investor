@@ -21,6 +21,15 @@ namespace Portfolio.Portfolio
             PortfolioFormData = portfolioFormModel;
             this.Text = PortfolioFormData.PortfolioName;
             PrtfNameLbl.Text = PortfolioFormData.PortfolioName;
+
+            InitializePortfolio();
+        }
+
+        private void InitializePortfolio()
+        {
+            var prtfData = PortfolioAccess.GetPortfolioData(PortfolioFormData.PortfolioID);
+
+            PortfolioGV.DataSource = prtfData;
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)

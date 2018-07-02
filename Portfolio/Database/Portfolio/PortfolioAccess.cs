@@ -33,6 +33,34 @@ namespace Portfolio.Database.Portfolio
                     conn.Close();
                     da.Dispose();
                 }
+                conn.Close();
+            }
+
+            return dataTable;
+        }
+
+        public static DataTable GetPortfolioData(int prtfID)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = $@"select 
+                            Ticker,CompanyName 
+                            from Portfolio prtf
+                            LEFT JOIN Tickers tkr on prtf.PortfolioID=tkr.PortfolioID
+                            WHERE prtf.PortfolioID = {prtfID}
+                            ORDER BY prtf.PortfolioID";
+
+            using (SqlConnection conn = new SqlConnection(Constant.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dataTable);
+                    conn.Close();
+                    da.Dispose();
+                }
+                conn.Close();
             }
 
             return dataTable;
@@ -70,6 +98,10 @@ namespace Portfolio.Database.Portfolio
                     //EventLog.WriteEntry("Investor","Delete Portfolio - " + ex.Message, EventLogEntryType.Error);
                     throw ex;
                 }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -106,6 +138,10 @@ namespace Portfolio.Database.Portfolio
                     trans.Rollback("CreatePortfolio");
                     //EventLog.WriteEntry("Investor", "Create Portfolio - " + ex.Message, EventLogEntryType.Error);
                     throw ex;
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }
