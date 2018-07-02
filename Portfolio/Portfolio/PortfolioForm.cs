@@ -25,16 +25,20 @@ namespace Portfolio.Portfolio
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            var result = PortfolioAccess.DeletePortfolio(PortfolioFormData.PortfolioID);
-
-            if (result)
+            try
             {
-                MessageBox.Show(this,"Portfolio Deleted","Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                this.Close();
-            }
-            else
-                MessageBox.Show(this, "Portfolio Deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var result = PortfolioAccess.DeletePortfolio(PortfolioFormData.PortfolioID);
 
+                if (result)
+                {
+                    MessageBox.Show(this, "Portfolio Deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Portfolio Deletion Failed: "+ ex.Message, "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 

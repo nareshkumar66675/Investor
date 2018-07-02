@@ -68,7 +68,7 @@ namespace Portfolio.Database.Portfolio
                 {
                     trans.Rollback("DeletePortfolio");
                     //EventLog.WriteEntry("Investor","Delete Portfolio - " + ex.Message, EventLogEntryType.Error);
-                    return false;
+                    throw ex;
                 }
             }
         }

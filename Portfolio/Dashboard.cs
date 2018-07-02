@@ -34,7 +34,7 @@ namespace Portfolio
                                    PortfolioId = grp.Key.ID,
                                    PortfolioName = grp.Key.PortfolionName,
                                    Tickers = grp.Select(ticker => ticker.Field<string>("Ticker")).ToList()
-                                }).ToList();
+                                }).OrderBy(t=>t.PortfolioName).ToList();
 
             DashboardTblLyt.Controls.Clear();
 

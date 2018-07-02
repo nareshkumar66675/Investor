@@ -112,5 +112,9 @@
   <ItemGroup>
     <Folder Include="Criteria\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Portfolio.sql" />
+    <Content Include="Scripts\Tickers.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

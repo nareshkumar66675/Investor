@@ -20,7 +20,9 @@ namespace Portfolio.Portfolio
             InitializeComponent();
 
             PortfolioNameLbl.Text = portfolioUCModel.PortfolioName;
-
+            TickerListView.Scrollable = true;
+            TickerListView.View = View.Details;
+            TickerListView.HeaderStyle = ColumnHeaderStyle.None;
             portfolioUCModel.Tickers.ForEach(ticker =>
             {
                 ListViewItem item = new ListViewItem(ticker);

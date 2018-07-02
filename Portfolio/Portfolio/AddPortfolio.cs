@@ -27,17 +27,25 @@ namespace Portfolio.Portfolio
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(prtfTextBox.Text))
+            try
             {
-                MessageBox.Show("Enter Portfolio Name");
-                return;
-            }
-            var portDT = GVToDataTable();
-            portDT.Columns.Add("TickerId").SetOrdinal(0);
-            portDT.Columns.Add("PortfolioID",typeof(int));
+                if (string.IsNullOrWhiteSpace(prtfTextBox.Text))
+                {
+                    MessageBox.Show("Enter Portfolio Name");
+                    return;
+                }
+                var portDT = GVToDataTable();
+                portDT.Columns.Add("TickerId").SetOrdinal(0);
+                portDT.Columns.Add("PortfolioID", typeof(int));
 
-            PortfolioAccess.CreatePortfolio(prtfTextBox.Text, portDT);
-            this.Close();
+                PortfolioAccess.CreatePortfolio(prtfTextBox.Text, portDT);
+                MessageBox.Show(this, "Portfolio Created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Portfolio Creation Failed"+ ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public DataTable GVToDataTable()
