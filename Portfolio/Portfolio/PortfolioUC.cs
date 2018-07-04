@@ -20,7 +20,7 @@ namespace Portfolio.Portfolio
             InitializeComponent();
 
             PortfolioNameLbl.Text = portfolioUCModel.PortfolioName;
-            PortfolioUCPanel.BackColor = ColorTranslator.FromHtml(portfolioUCModel.CategoryColor);
+            PortfolioNameLbl.BackColor = ColorTranslator.FromHtml(portfolioUCModel.CategoryColor);
             //tickerlistview.scrollable = true;
             //tickerlistview.view = view.details;
             //tickerlistview.headerstyle = columnheaderstyle.none;
@@ -57,6 +57,11 @@ namespace Portfolio.Portfolio
             var portfolioFormData = PortfolioUCData.PortfolioFormToUC();
             PortfolioForm portfolioForm = new PortfolioForm(portfolioFormData);
             portfolioForm.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

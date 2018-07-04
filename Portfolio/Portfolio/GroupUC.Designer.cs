@@ -42,7 +42,7 @@
             this.GrpBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GrpBox.Location = new System.Drawing.Point(0, 0);
             this.GrpBox.Name = "GrpBox";
-            this.GrpBox.Size = new System.Drawing.Size(858, 143);
+            this.GrpBox.Size = new System.Drawing.Size(6, 26);
             this.GrpBox.TabIndex = 0;
             this.GrpBox.TabStop = false;
             this.GrpBox.Text = "groupBox";
@@ -59,7 +59,7 @@
             this.GrpTblLyt.Name = "GrpTblLyt";
             this.GrpTblLyt.RowCount = 1;
             this.GrpTblLyt.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.GrpTblLyt.Size = new System.Drawing.Size(852, 117);
+            this.GrpTblLyt.Size = new System.Drawing.Size(0, 0);
             this.GrpTblLyt.TabIndex = 0;
             // 
             // GroupUC
@@ -69,9 +69,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.GrpBox);
-            this.MinimumSize = new System.Drawing.Size(858, 143);
             this.Name = "GroupUC";
-            this.Size = new System.Drawing.Size(858, 143);
+            this.Size = new System.Drawing.Size(6, 26);
             this.GrpBox.ResumeLayout(false);
             this.GrpBox.PerformLayout();
             this.ResumeLayout(false);

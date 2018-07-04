@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Portfolio.FinanceFeed
 {
+    /// <summary>
+    /// A News Item - Holds Information about the News
+    /// </summary>
     public class NewsItem
     {
         public string Title { get; set; }

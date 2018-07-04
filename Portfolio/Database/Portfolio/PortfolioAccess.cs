@@ -12,7 +12,10 @@ namespace Portfolio.Database.Portfolio
 {
     public class PortfolioAccess
     {
-
+        /// <summary>
+        /// Get Group Data for Portfolio
+        /// </summary>
+        /// <returns>Group & Portfolio Data</returns>
         public static DataTable GetGroupDataForDashboard()
         {
             DataTable dataTable = new DataTable();
