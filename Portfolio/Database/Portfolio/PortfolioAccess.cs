@@ -12,6 +12,35 @@ namespace Portfolio.Database.Portfolio
 {
     public class PortfolioAccess
     {
+
+        public static DataTable GetGroupDataForDashboard()
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = @"SELECT grp.GroupID, grp.Name as [GroupName],
+                            prtf.Id as [PortfolioID],
+                            prtf.Name as [PortfolioName],
+                            ctgry.CategoryID, ctgry.Color
+                        FROM Portfolio.[Group] grp
+                        LEFT JOIN Portfolio.Portfolio prtf on grp.GroupID = prtf.GroupID
+                        LEFT JOIN Portfolio.Category ctgry on ctgry.CategoryId = prtf.CategoryId";
+
+            using (SqlConnection conn = new SqlConnection(Constant.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dataTable);
+                    conn.Close();
+                    da.Dispose();
+                }
+                conn.Close();
+            }
+
+            return dataTable;
+        }
+
         public static DataTable GetPortfolioDataForDashboard()
         {
             DataTable dataTable = new DataTable();

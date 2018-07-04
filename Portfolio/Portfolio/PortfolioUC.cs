@@ -20,17 +20,18 @@ namespace Portfolio.Portfolio
             InitializeComponent();
 
             PortfolioNameLbl.Text = portfolioUCModel.PortfolioName;
-            TickerListView.Scrollable = true;
-            TickerListView.View = View.Details;
-            TickerListView.HeaderStyle = ColumnHeaderStyle.None;
-            portfolioUCModel.Tickers.ForEach(ticker =>
-            {
-                ListViewItem item = new ListViewItem(ticker);
-                TickerListView.Items.Add(ticker);
-                //TickerListView.Items.Add(item);
-            });
+            PortfolioUCPanel.BackColor = ColorTranslator.FromHtml(portfolioUCModel.CategoryColor);
+            //tickerlistview.scrollable = true;
+            //tickerlistview.view = view.details;
+            //tickerlistview.headerstyle = columnheaderstyle.none;
+            //portfolioucmodel.tickers.foreach (ticker =>
+            // {
+            //     listviewitem item = new listviewitem(ticker);
+            //     tickerlistview.items.add(ticker);
+            //     tickerlistview.items.add(item);
+            // }) ;
 
-            TickerListView.Refresh();
+            //tickerlistview.refresh();
             PortfolioUCData = portfolioUCModel;
             if (HasChildren)
                 AddOnMouseClickHandlerRecursive(Controls);
@@ -53,22 +54,25 @@ namespace Portfolio.Portfolio
             PortfolioForm portfolioForm = new PortfolioForm(portfolioFormData);
             portfolioForm.Show();
         }
+
+        private void PortfolioNameLbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PortfolioUCPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
     public class PortfolioUCModel
     {
         public int PortfolioId { get; set; }
         public string PortfolioName { get; set; }
-        public List<string> Tickers { get; set; }
 
-        public PortfolioUCModel()
-        {
+        public int CategoryID { get; set; }
 
-        }
+        public string CategoryColor { get; set; }
 
-        public PortfolioUCModel(string portfolioName, List<string> tickers)
-        {
-            this.PortfolioName = portfolioName;
-            this.Tickers = tickers;
-        }
     }
 }

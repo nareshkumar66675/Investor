@@ -48,18 +48,6 @@
     <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +73,12 @@
     <Compile Include="Portfolio\AddPortfolio.Designer.cs">
       <DependentUpon>AddPortfolio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Portfolio\GroupUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Portfolio\GroupUC.Designer.cs">
+      <DependentUpon>GroupUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Portfolio\PortfolioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Portfolio\AddPortfolio.resx">
       <DependentUpon>AddPortfolio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Portfolio\GroupUC.resx">
+      <DependentUpon>GroupUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Portfolio\PortfolioForm.resx">
       <DependentUpon>PortfolioForm.cs</DependentUpon>

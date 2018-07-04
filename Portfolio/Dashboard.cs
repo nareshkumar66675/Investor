@@ -30,26 +30,38 @@ namespace Portfolio
 
         private void InitializeDashboard()
         {
-            var prtfData = PortfolioAccess.GetPortfolioDataForDashboard();
+            var groupData = PortfolioAccess.GetGroupDataForDashboard();
 
-            var prtfDataList = prtfData.AsEnumerable()
-                               .GroupBy(x => new { ID= x.Field<int>("PortfolioID"),PortfolionName= x.Field<string>("PortfolioName") })
-                               .Select(grp => new PortfolioUCModel
+            var groupDataList = groupData.AsEnumerable()
+                               .GroupBy(x => new { ID = x.Field<int>("GroupID"), PortfolionName = x.Field<string>("GroupName") })
+                               .Select(grp => new GroupUCModel
                                {
-                                   PortfolioId = grp.Key.ID,
-                                   PortfolioName = grp.Key.PortfolionName,
-                                   Tickers = grp.Select(ticker => ticker.Field<string>("Ticker")).ToList()
-                                }).OrderBy(t=>t.PortfolioName).ToList();
+                                   GroupID = grp.Key.ID,
+                                   GroupName = grp.Key.PortfolionName,
+                                   Portfolios = grp.Where(t=> t.Field<int?>("PortfolioID") != null)
+                                   .Select(prtf => new PortfolioUCModel
+                                   {
+                                       PortfolioId = prtf.Field<int>("PortfolioID"),
+                                       PortfolioName = prtf.Field<string>("PortfolioName"),
+                                       CategoryID = prtf.Field<int>("CategoryID"),
+                                       CategoryColor = prtf.Field<string>("Color"),
+                                   }).ToList()
+                                }).OrderBy(t=>t.GroupID).ToList();
 
             DashboardTblLyt.Controls.Clear();
 
             // Set Table Size
-            DashboardTblLyt.ColumnCount = Constant.DashboardColumnCount;
-            DashboardTblLyt.RowCount = (prtfDataList.Count + Constant.DashboardColumnCount - 1) / Constant.DashboardColumnCount;
+            //DashboardTblLyt.ColumnCount = Constant.DashboardColumnCount;
+            //DashboardTblLyt.RowCount = (prtfDataList.Count + Constant.DashboardColumnCount - 1) / Constant.DashboardColumnCount;
 
-            prtfDataList.ForEach(prtf =>
+            DashboardTblLyt.ColumnCount = 1;
+            DashboardTblLyt.RowCount = groupDataList.Count;
+
+            groupDataList.ForEach(grp =>
             {
-                DashboardTblLyt.Controls.Add(new PortfolioUC(prtf));
+                GroupUC grpUC = new GroupUC(grp);
+                grpUC.Dock = DockStyle.Fill;
+                DashboardTblLyt.Controls.Add(grpUC);
             });
 
         }
