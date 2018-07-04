@@ -37,6 +37,10 @@ namespace Portfolio.Portfolio
                 AddOnMouseClickHandlerRecursive(Controls);
         }
 
+        /// <summary>
+        /// On Click handler for all components present inside the User Control
+        /// </summary>
+        /// <param name="controls"></param>
         private void AddOnMouseClickHandlerRecursive(ControlCollection controls)
         {
             foreach (Control control in controls)
@@ -54,20 +58,15 @@ namespace Portfolio.Portfolio
             PortfolioForm portfolioForm = new PortfolioForm(portfolioFormData);
             portfolioForm.Show();
         }
-
-        private void PortfolioNameLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PortfolioUCPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
+
+    /// <summary>
+    /// Portfolio Model - used to send data from GroupUC to PortfolioUC
+    /// </summary>
     public class PortfolioUCModel
     {
         public int PortfolioId { get; set; }
+
         public string PortfolioName { get; set; }
 
         public int CategoryID { get; set; }

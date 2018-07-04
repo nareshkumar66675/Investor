@@ -32,25 +32,40 @@ namespace Portfolio.Portfolio
         {
             GrpBox.Text = grpModel.GroupName;
             
-
+            // Set Row & Column Count
             GrpTblLyt.ColumnCount = Constant.PortfolioColumnCount;
+            // Row count is set based on the number of portfolios
             GrpTblLyt.RowCount = (grpModel.Portfolios.Count + Constant.PortfolioColumnCount - 1) / Constant.PortfolioColumnCount;
 
             grpModel.Portfolios.ForEach(prtf =>
             {
+                // Create a new Portfolio User Control and add it to GroupUserControl
                 PortfolioUC portfolioUC = new PortfolioUC(prtf);
-                portfolioUC.Dock = DockStyle.Fill;
+                //portfolioUC.Dock = DockStyle.Fill;
                 GrpTblLyt.Controls.Add(portfolioUC);
             });
         }
     }
 
+    /// <summary>
+    /// Group UserControl Model
+    /// Used to send data to this UserControl from Dashboard
+    /// </summary>
     public class GroupUCModel
     {
+        /// <summary>
+        /// Group Id
+        /// </summary>
         public int GroupID { get; set; }
 
+        /// <summary>
+        /// GroupName
+        /// </summary>
         public string GroupName { get; set; }
 
+        /// <summary>
+        /// List of Portfolios
+        /// </summary>
         public List<PortfolioUCModel> Portfolios { get; set; }
     }
 }

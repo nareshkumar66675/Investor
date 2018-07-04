@@ -22,7 +22,7 @@ namespace Portfolio.Portfolio
             this.Text = PortfolioFormData.PortfolioName;
             PrtfNameLbl.Text = PortfolioFormData.PortfolioName;
 
-            InitializePortfolio();
+            //InitializePortfolio();
         }
 
         private void InitializePortfolio()
