@@ -1,4 +1,5 @@
 ﻿using Portfolio.Database.Portfolio;
+using Portfolio.FinanceFeed;
 using Portfolio.Portfolio;
 using Portfolio.Util;
 using System;
@@ -20,6 +21,10 @@ namespace Portfolio
             InitializeComponent();
 
             InitializeDashboard();
+
+            WebRequest webRequest = new WebRequest();
+
+            var news = webRequest.GetNewsByTicker("A");
 
         }
 

@@ -36,7 +36,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.Ticker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyNme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PortfolioGV)).BeginInit();
             this.panel1.SuspendLayout();
@@ -66,7 +66,7 @@
             this.PortfolioGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PortfolioGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Ticker,
-            this.CompanyName});
+            this.CompanyNme});
             this.tableLayoutPanel1.SetColumnSpan(this.PortfolioGV, 2);
             this.PortfolioGV.Location = new System.Drawing.Point(3, 73);
             this.PortfolioGV.Name = "PortfolioGV";
@@ -128,10 +128,10 @@
             // 
             // CompanyName
             // 
-            this.CompanyName.HeaderText = "Company Name";
-            this.CompanyName.MinimumWidth = 25;
-            this.CompanyName.Name = "CompanyName";
-            this.CompanyName.Width = 150;
+            this.CompanyNme.HeaderText = "Company Name";
+            this.CompanyNme.MinimumWidth = 25;
+            this.CompanyNme.Name = "CompanyName";
+            this.CompanyNme.Width = 150;
             // 
             // AddPortfolio
             // 
@@ -160,6 +160,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ticker;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNme;
     }
 }

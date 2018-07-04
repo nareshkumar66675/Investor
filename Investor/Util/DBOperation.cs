@@ -185,16 +185,24 @@ namespace Investor.Util
 
         public static DataTable GetTickers()
         {
-            DataSet tickerDS;
-            using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
+            try
             {
-                string tickerQuery = "select LTRIM(RTRIM(ticker)) as ticker from si_ci order by ticker";
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(tickerQuery, sqlConn);
-                tickerDS = new DataSet();
-                sqlAdapter.Fill(tickerDS);
-            }
+                DataSet tickerDS;
+                using (SqlConnection sqlConn = new SqlConnection(Const.ConnectionString))
+                {
+                    string tickerQuery = "select LTRIM(RTRIM(ticker)) as ticker from si_ci order by ticker";
+                    SqlDataAdapter sqlAdapter = new SqlDataAdapter(tickerQuery, sqlConn);
+                    tickerDS = new DataSet();
+                    sqlAdapter.Fill(tickerDS);
+                }
 
-            return tickerDS.Tables[0];
+                return tickerDS.Tables[0];
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public static bool ExecuteNonQuery(string sqlQuery)

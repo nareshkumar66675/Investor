@@ -11,5 +11,7 @@ namespace Portfolio.Util
     {
         public static string ConnectionString = string.Format(ConfigurationManager.ConnectionStrings["Investor"].ConnectionString, Environment.MachineName);
         public const int DashboardColumnCount = 3;
+        public const string FeedURL = "https://feeds.finance.yahoo.com/rss/2.0/headline";
+        public const string FeedParameter = "?s={0}";
     }
 }
